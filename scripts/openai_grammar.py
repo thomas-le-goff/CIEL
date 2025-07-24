@@ -4,61 +4,85 @@ import tempfile
 import argparse
 import datetime
 
-from pygit2 import init_repository, Signature
-from pygit2.enums import MergeFavor, MergeFlag
+from pygit2 import init_repository, Signature, Patch
+from pygit2.enums import MergeFavor, MergeFlag, CheckoutStrategy
 
 from openai import OpenAI
 
-def apply_patch(repo_path, patch_content):
-    with tempfile.NamedTemporaryFile(mode='a', delete=False, encoding='utf-8') as tmp:
-        tmp.write(patch_content)
-        tmp.write("\n\n")
-    
-    subprocess.run(["git", "apply", "--3way", tmp.name], cwd=repo_path, check=False)
-    subprocess.run(["git", "checkout", "--theirs", "--", "."], check=True)
+class Git():
 
-if __name__ == "__main__":
-    parser=argparse.ArgumentParser(description="")
-    parser.add_argument("from_ref", type=str)
-    parser.add_argument("to_ref", type=str)
-    parser.add_argument("--dry-run", action='store_true', default=False)
+    def __init__(self, repo_path: str, source_ref: str, target_ref: str) -> None:
+        self._repo_path = repo_path
+        self._repo = init_repository(repo_path)
 
-    args = parser.parse_args()
+        # Commits to generate diff from 
+        self._source_commit, _ = self._repo.resolve_refish(source_ref)
+        self._target_commit, _ = self._repo.resolve_refish(target_ref)
+        
+        # Branch that will received the fix
+        fixed_branch_ref = f"{target_ref}-fixed"
+        if fixed_branch_ref in self._repo.branches:
+            self._repo.branches.delete(fixed_branch_ref) 
+ 
+        self._fixed_branch = self._repo.branches.local.create(fixed_branch_ref, self._target_commit)
 
-    from_ref = args.from_ref
-    to_ref = args.to_ref
-    dry_run = args.dry_run
-    
-    repo_path = os.path.join(".")
-    repo = init_repository(repo_path)
+    def get_diff_patch(self) -> str | None:
+        diff = self._repo.diff(self._source_commit, self._target_commit)
 
-    fixed_branch = f"{to_ref}-fixed"
+        if type(diff) is Patch:
+            return None
 
-    from_ref_branch = repo.lookup_branch(from_ref)
-    from_ref_commit = from_ref_branch.peel()
+        return diff.patch #type: ignore
 
-    to_ref_branch = repo.lookup_branch(to_ref)
-    to_ref_commit = to_ref_branch.peel()
+    def apply_patch(self, patch_content):
+        with tempfile.NamedTemporaryFile(mode='a', delete=False, encoding='utf-8') as tmp:
+            tmp.write(patch_content)
+            tmp.write("\n\n")
+        
+        subprocess.run(["git", "apply", "--3way", tmp.name], cwd=self._repo_path, check=False)
+        subprocess.run(["git", "checkout", "--theirs", "--", "."], check=True)
 
-    # Move to source branch
-    repo.set_head(f"refs/heads/{from_ref}")
-    repo.checkout_tree(from_ref_commit)
+    def _checkout_branch(self, branch_name: str, force: bool = False):
+        self._repo.set_head(f"refs/heads/{branch_name}")
+        self._repo.checkout(f"refs/heads/{branch_name}", strategy=CheckoutStrategy.FORCE if force else CheckoutStrategy.SAFE)
 
-    # Create branch to received the fix
-    if fixed_branch in repo.branches:
-        repo.branches.delete(fixed_branch) # In case of the branch already exists
+    def commit(self):
+        initial_head = self._repo.head
+        
+        self._checkout_branch(self._fixed_branch.branch_name)
 
-    repo.branches.local.create(fixed_branch, from_ref_commit)
+        self._repo.index.add_all()
+        self._repo.index.write()
+        tree = self._repo.index.write_tree()
 
-    # Get the patch we want to apply
-    diff = repo.diff(from_ref, to_ref)
-    patch = diff.patch
+        author = self._repo.default_signature
 
-    if patch == None or patch.strip() == "":
-        print("No change")
-        exit()
+        try:
+            parents = [self._repo.revparse_single("HEAD").id]
+        except KeyError:
+            parents = []
 
-    openai_request = [
+        self._repo.create_commit(
+            "HEAD",
+            author,
+            author,
+            "fix: spelling correction",
+            tree,
+            parents # type: ignore
+        )
+        
+        self._repo.state_cleanup()
+
+        self._checkout_branch(initial_head.shorthand, True)
+
+class OpenAiPatchFixer():
+
+    def __init__(self) -> None:
+        pass
+        self._client = OpenAI()
+
+    def fix_patch(self, patch_content: str) -> str:
+        openai_request: list = [
             {
                 "role": "user",
                 "content": [
@@ -66,12 +90,13 @@ if __name__ == "__main__":
                         "type": "input_text",
                         "text": 
                         """
-                            Tu es un correcteur orthographique spécialisé dans les fichiers Markdown (`.md`).
-                            Je vais te fournir un patch Git. 
-                            Ton role est de corriger les fautes de francais dans le patch git. 
-                            Attention tu ne dois pas modifier la structure du patch et tu ne dois pas ajouter de ligne (corrige uniquement les fautes dans les mots).
-                            Répond en fournissant uniquement le patch pour qu'il soit directement enregistrable dans un fichier (sans utiliser de caractères d'échappements).
-                            Fait attention de ne pas toucher la structure du patch : les caractères en fin de fichier notamment.
+                            You're a spellchecker specialising in Markdown files (`.md`).
+                            I'm going to provide you with a Git patch. 
+                            Your role is to correct the spelling mistakes in the git patch.
+                            You have to adapt to the original language.
+                            Please note that you must not modify the structure of the patch and you must not add any lines (only correct the errors in the words).
+                            Answer by providing only the patch so that it can be saved directly to a file (without using escape characters).
+                            Be careful not to touch the structure of the patch: the characters at the end of the file in particular.
                         """
                     },
                     {
@@ -82,47 +107,28 @@ if __name__ == "__main__":
             }
         ]
 
-    client = OpenAI()
+        response = self._client.responses.create(model="gpt-4.1", input=openai_request)
+        return response.output_text
+        
 
-    response = client.responses.create(model="gpt-4.1", input=openai_request)
+if __name__ == "__main__":
+    parser=argparse.ArgumentParser(description="")
+    parser.add_argument("from_ref", type=str)
+    parser.add_argument("to_ref", type=str)
 
-    if dry_run == False:
-        # Apply patch and write commit on fixed branch
-        repo.set_head(f"refs/heads/{fixed_branch}")
+    args = parser.parse_args()
+    
+    git = Git(os.path.join("."), args.from_ref, args.to_ref)
 
-        apply_patch(repo_path, response.output_text)
+    patch = git.get_diff_patch()
 
-        repo.index.add_all()
+    if patch == None or patch.strip() == "":
+        exit()
 
-        repo.index.write()
+    patch_fixer = OpenAiPatchFixer()
 
-        tree = repo.index.write_tree()
+    fixed_patch = patch_fixer.fix_patch(patch)
 
-        author = Signature("Thomas Le Goff", "thomaslegoff56@laposte.net", int(datetime.datetime.now().timestamp()), 0)
+    git.apply_patch(fixed_patch)
 
-        try:
-            parents = [repo.revparse_single("HEAD").id]
-        except KeyError:
-            parents = []
-
-        commit_oid = repo.create_commit(
-            "HEAD",
-            author,
-            author,
-            "fix: spelling correction",
-            tree,
-            parents
-        )
-
-        # git merge -s ours base --no-edit
-        repo.merge(to_ref_commit.id, favor=MergeFavor.OURS)
-
-        tree = repo.index.write_tree()
-
-        repo.create_commit('HEAD', author, author, "Merge commit", tree, [repo.head.target, to_ref_commit.id])
-
-        repo.state_cleanup()
-
-        # Todo: push branch to github and open PR
-    else:
-        print(response.output_text)
+    git.commit()

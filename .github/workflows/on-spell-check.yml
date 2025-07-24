@@ -1,0 +1,43 @@
+name: Spell Check Automation
+
+on:
+  push:
+    tags:
+      - 'spell-check'
+
+jobs:
+  run-spell-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - run: pip install -r requirements.txt
+
+      - run: python scripts/openai_grammar.py last-spell-check spell-check
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - run: |
+          branch=$(git branch --show-current)
+          git push origin "$branch"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.push-branch.outputs.branch }}
+          title: "fix: spelling correction"
+          body: "Correction orthographique automatique via le tag `spell-check`"
