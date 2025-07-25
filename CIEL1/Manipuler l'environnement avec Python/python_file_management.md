@@ -1,3 +1,3 @@
-Fair un cours sûr la gestion des fichier 
+Faire un cours sur la gestion des fichiers 
 
-avec notamment le mo cle with
+avec notamment le mot clé with
