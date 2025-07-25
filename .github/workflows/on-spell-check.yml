@@ -40,8 +40,7 @@ jobs:
 
       - run: git push origin spell-check-fixed --force
 
-      - run: | 
-          gh pr create --reviewer thewrath --title "fix: spelling correction" --body "" --base master --head spell-check-fixed
+      - run: gh pr create --reviewer thewrath --base master --head spell-check-fixed
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
