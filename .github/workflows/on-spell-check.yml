@@ -1,0 +1,55 @@
+name: Spell Check Automation
+
+on:
+  push:
+    tags:
+      - 'spell-check'
+
+jobs:
+  run-spell-check:
+    runs-on: ubuntu-latest
+    environment: Development
+    permissions:
+      contents: write
+      pull-requests: write
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - run: pip install -r scripts/requirements.txt
+
+      - run: python scripts/openai_grammar.py last-spell-check spell-check spell-check-fixed 
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - run: git push origin spell-check-fixed --force
+
+      - run: | 
+          gh pr create --reviewer thewrath --title "fix: spelling correction" --body "" --base master --head spell-check-fixed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - run: |
+          git tag -d last-spell-check || true
+          git tag last-spell-check
+
+          git push origin last-spell-check --force
+
+          git tag -d spell-check || true
+          git push origin :refs/tags/spell-check
