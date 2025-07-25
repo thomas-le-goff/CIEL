@@ -47,10 +47,10 @@ _BTS CIEL_
 
 ## Le paradigme objet
 
-La programmation orienté objet est un **paradigme de programmation** càd une manière de formaliser une solution logique
+La programmation orientée objet est un **paradigme de programmation** càd une manière de formaliser une solution logique
 dans un programme informatique.
 
-Les principaux langages orienté objet (par ordre d'apparition):
+Les principaux langages orientés objet (par ordre d'apparition):
 
 - Simula (1967)
 - Smalltalk (1972)
@@ -60,7 +60,7 @@ Les principaux langages orienté objet (par ordre d'apparition):
 - C#, Swift, Kotlin etc. (> 2000)
 
 > Ce paradigme est devenu un standard de l'industrie.
-> Attention cependant, aujourd'hui beaucoup de langage sont multi-paradigme.
+> Attention cependant, aujourd'hui beaucoup de langages sont multi-paradigme.
 
 ---
 
@@ -153,12 +153,12 @@ with open("exemple.txt", "r", encoding="utf-8") as fichier:
 
 ## Classe et instance
 
-- La **classe** peut-être vu comme **un schéma / une recette**.
+- La **classe** peut-être vue comme **un schéma / une recette**.
 
 - L'**instance** est **une version / réalisation** de ce schéma.
 
 - La classe permet d'isoler dans un même endroit les données et le traitement (comportement) associé tout en évitant
-  qu'ils soient perturbé par d'autre éléments du programme (principe d'encapsulation).
+  qu'ils soient perturbés par d'autres éléments du programme (principe d'encapsulation).
 
 ![w:400 center](./img/python_oop_schema.png)
 
@@ -273,7 +273,7 @@ fichier4 = Fichier("cours_reseau", "pdf", 1048576)
 
 ## Classe et instance
 
-### Élements d'une classe
+### Éléments d'une classe
 
 | Élément                   | Description                                     | Exemple                                    |
 |---------------------------|-------------------------------------------------|--------------------------------------------|
@@ -291,7 +291,7 @@ fichier4 = Fichier("cours_reseau", "pdf", 1048576)
 
 ## Classe et instance
 
-### Élements d'une classe : attributs et méthodes d'instance (objet)
+### Éléments d'une classe : attributs et méthodes d'instance (objet)
 
 ```python
 class Compteur:
@@ -320,7 +320,7 @@ class Compteur:
 
 ### Classe et instance
 
-### Elements d'une classe (suite)
+### Éléments d'une classe (suite)
 
 | Élément                 | Description                                                          | Exemple                                     |
 |-------------------------|----------------------------------------------------------------------|---------------------------------------------|
