@@ -1,5 +1,3 @@
-name: Spell Check Automation
-
 on:
   push:
     tags:
@@ -13,21 +11,17 @@ jobs:
       contents: write
       pull-requests: write
 
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: master
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
+      - run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-      - name: Set up Python 3.13
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
           cache: 'pip'
@@ -47,7 +41,7 @@ jobs:
       
       - run: |
           git tag -d last-spell-check || true
-          git tag last-spell-check
+          git tag last-spell-check spell-check-fixed
 
           git push origin last-spell-check --force
 

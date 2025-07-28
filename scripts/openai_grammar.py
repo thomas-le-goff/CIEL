@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+
+## Language spellchecker script (run in CI).
+##
+## It takes the patch between two git references (two commits) submits it to OpenAI spelling correction.
+## Then the corrected patch is applied to a new branch submitted via a Github PR (see associated Github Action workflows).
+## To reduce the number of tokens sent to the API, only markdown files (.md) are submitted and fixed.
+
 import os
 import subprocess
 import tempfile
@@ -9,16 +17,14 @@ from pygit2.enums import CheckoutStrategy
 from openai import OpenAI
 
 class Git():
-
+    
     def __init__(self, repo_path: str, source_ref: str, target_ref: str, fix_branch: str) -> None:
         self._repo_path = repo_path
         self._repo = init_repository(repo_path)
 
-        # Commits to generate diff from 
         self._source_commit, _ = self._repo.resolve_refish(source_ref)
         self._target_commit, _ = self._repo.resolve_refish(target_ref)
         
-        # Branch that will received the fix
         fixed_branch_ref = fix_branch
         if fixed_branch_ref in self._repo.branches:
             self._repo.branches.delete(fixed_branch_ref)
