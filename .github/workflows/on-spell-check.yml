@@ -6,7 +6,6 @@ on:
 jobs:
   run-spell-check:
     runs-on: ubuntu-latest
-    environment: Development
     permissions:
       contents: write
       pull-requests: write
