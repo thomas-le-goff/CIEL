@@ -103,7 +103,7 @@ class OpenAiPatchFixer():
                         "type": "input_text",
                         "text": 
                         """
-                            You're a spellchecker specialising in Markdown files (`.md`).
+                            You're a spellchecker specialising in Markdown files (`.md` or `.ipynb`).
                             I'm going to provide you with a Git patch. 
                             Your role is to correct the spelling mistakes in the git patch.
                             You have to adapt to the original language.
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     
     git = Git(os.path.join("."), args.from_ref, args.to_ref, args.fix_branch)
 
-    patch = git.get_diff_patch()
+    patch = git.get_diff_patch(extensions=["md", "ipynb"])
 
     if patch == None or patch.strip() == "":
         exit()
