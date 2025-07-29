@@ -52,9 +52,9 @@ _BTS CIEL_
 
 ### Définition
 
-En programmation, une exception est un **événement inattendu** (non-souhaité) qui a lieu lors de l'execution d'une instruction.
+En programmation, une exception est un **événement inattendu** (non-souhaité) qui a lieu lors de l'exécution d'une instruction.
 
-Lorsqu'une exception à lieu, il est généralement préférable de stopper l'execution du programme, mais, dans certains cas il est possible de proposer une alternative est de faire fonctionner l'opération autrement.
+Lorsqu'une exception a lieu, il est généralement préférable de stopper l'exécution du programme, mais, dans certains cas il est possible de proposer une alternative et de faire fonctionner l'opération autrement.
 
 ---
 
@@ -64,11 +64,11 @@ Lorsqu'une exception à lieu, il est généralement préférable de stopper l'ex
 
 Lié au code lui-même :
 
-- Manque de validation (ensemble incorrecte)
+- Manque de validation (ensemble incorrect)
 - Mauvais usage d'une méthode / fonction
 - Opération impossible (division par zéro etc.)
 
-Lié à l'environnement d'execution :
+Lié à l'environnement d'exécution :
 
 - Parser un fichier dans un format incorrect (JSON par exemple)
 - Essayer d'écrire dans un fichier alors que le disque est plein
@@ -90,7 +90,7 @@ Python propose l'utilisation de l'instruction `try` / `except`.
 
 ## Qu'est-ce qu'une exception ?
 
-D'autres langages ont une philosophie différente : Il parfois préférable de laisser le programme planter que de créer un problème plus complèxe.
+D'autres langages ont une philosophie différente : Il est parfois préférable de laisser le programme planter que de créer un problème plus complexe.
 
 > Voir philosophie **Erlang** "Let It Crash" : https://wiki.c2.com/?DontCatchExceptions
 
@@ -103,7 +103,7 @@ Une exception est une instance de la classe `BaseException`.
 Les exceptions qui héritent de `BaseException` sont divisées en deux familles (héritage):
 
 - `Exception` faites pour être gérées (catch)
-- les autres comme (qui héritent directement de `BaseException`) comme `KeyboardInterrupt` qui ne sont pas faites pour être gérées
+- les autres (qui héritent directement de `BaseException`) comme `KeyboardInterrupt` qui ne sont pas faites pour être gérées
 
 ---
 
@@ -113,7 +113,7 @@ Les exceptions qui héritent de `BaseException` sont divisées en deux familles 
 
 Le mot clé `raise` permet de lever une exception.
 
-En levant (emettant) une exception le programme bascule en mode exception jusqu'à ce que l'exception soit "attrapée".
+En levant (émettant) une exception le programme bascule en mode exception jusqu'à ce que l'exception soit "attrapée".
 
 Si l'exception n'est pas attrapée, le programme est terminé en erreur.
 
@@ -125,7 +125,7 @@ Si l'exception n'est pas attrapée, le programme est terminé en erreur.
 
 Le mot clé `raise` est utilisable depuis n'importe quel endroit du programme.
 
-Il est utilisé pour indiquer que l'opération ne se passe pas comme prévue.
+Il est utilisé pour indiquer que l'opération ne se passe pas comme prévu.
 
 ```python
 raise Exception("voilà une exception")
@@ -137,7 +137,7 @@ Dans une méthode/fonction :
 def est_positif(n: str):
     if n.isnumeric():
         return n > 0
-    raise Exception("N doit être un numérique.")
+    raise Exception("N doit être numérique.")
 ```
 
 ---
@@ -151,7 +151,7 @@ def est_positif(n: str):
     if n.isnumeric():
         return n > 0
     else:
-        raise Exception("N doit être un numérique.")
+        raise Exception("N doit être numérique.")
 
 if __name__ == "__main__":
 	est_positif("t")
@@ -259,7 +259,7 @@ if __name__ == "__main__":
     print(f"Résultat : {result}")
 ```
 
-> Il est souvent préférable de laisser l'exception s'échapper pour ne pas alterer d'autre éléments du programme qui appelerait une fonction. Si on ne sait pas vraiment quoi faire d'une erreur c'est qu'il n'y a surement rien à faire !
+> Il est souvent préférable de laisser l'exception s'échapper pour ne pas altérer d'autres éléments du programme qui appelleraient une fonction. Si on ne sait pas vraiment quoi faire d'une erreur c'est qu'il n'y a sûrement rien à faire !
 
 ---
 
@@ -297,4 +297,4 @@ except Exception as err:
 - Est-ce qu'un pattern `with` standard est associé avec l'objet / méthode que j'utilise ?
 - Est-ce que la méthode/fonction appelée est susceptible de générer des exceptions (voir la documentation) ?
 - Suis-je capable de traiter le cas d'exception ? 
-- Est-ce nécessaire de donner plus d'information à l'utilisateur (faut-il spécialiser l'exception)  
+- Est-ce nécessaire de donner plus d'informations à l'utilisateur (faut-il spécialiser l'exception)  
