@@ -1,2 +1,2 @@
 TODO:
-    - Installation des outils nécessaire en TPs
+    - Installation des outils nécessaires en TPs
