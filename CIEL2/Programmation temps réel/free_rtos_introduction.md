@@ -43,7 +43,7 @@ _BTS CIEL_
 
 ## Programmation et système temps réel
 
-La programmation temps réelle est un moyen de garantir le respect du temps d'éxecution d'une tâche.
+La programmation temps réel est un moyen de garantir le respect du temps d'exécution d'une tâche.
 
 Ce type de programmation est nécessaire dans certains secteurs : 
 - l'industrie de production
@@ -62,7 +62,7 @@ Ce type de programmation est nécessaire dans certains secteurs :
 
 Les "Real-Time Operating System" (RTOS) sont des OS spécialisés offrant un environnement simple et **déterministe**.
 
-Ils intégrent **moins de fonctionnalités** (beaucoup moins !) que les OS généralistes (GPOS), mais, garentissent le respect des priorités des différentes tâches que doit réaliser le système.
+Ils intègrent **moins de fonctionnalités** (beaucoup moins !) que les OS généralistes (GPOS), mais, garentissent le respect des priorités des différentes tâches que doit réaliser le système.
 
 > ℹ️ Un **système déterministe** est un système qui réagit toujours de la même façon à un événement
 
@@ -80,8 +80,8 @@ Deux niveaux de temps réel :
     - IHM (attention un bouton d'arrêt d'urgence correspond à la catégorie strict)
     - latence réseaux
 
-> ⚠️ la programmation temps réelle n'est pas une solution miracle. Il s'agit d'un ensemble d'outil est de pratique permettant de rendre déterministe le temps d'execution d'un programme. 
-Les spécifications doivent rester raisonables et cohérentes.
+> ⚠️ la programmation temps réelle n'est pas une solution miracle. Il s'agit d'un ensemble d'outils et de pratiques permettant de rendre déterministe le temps d'exécution d'un programme. 
+Les spécifications doivent rester raisonnables et cohérentes.
 
 ---
 
@@ -89,8 +89,8 @@ Les spécifications doivent rester raisonables et cohérentes.
 
 Concrètement : 
 
-- On défini la liste des tâches que doit faire le système
-- On défini la priorité de chaque tâche
+- On définit la liste des tâches que doit faire le système
+- On définit la priorité de chaque tâche
 - On partage le temps (time-slicing) que doit accorder l'OS à chaque tâche
 - On programme le système en utilisant un RTOS
 
@@ -114,9 +114,9 @@ Concrètement :
 
 ## FreeRTOS
 
-FreeRTOS est un système d'exploitation temps réel open source distribué sous license **MIT**.
+FreeRTOS est un système d'exploitation temps réel open source distribué sous licence **MIT**.
 
-Rachat par Amazon AWS en 2027 => "From Cloud to IoT"
+Rachat par Amazon AWS en 2017 => "From Cloud to IoT"
 
 > FreeRTOS : https://www.freertos.org/
 
@@ -131,7 +131,7 @@ Principales fonctionnalités :
 (basiques)
 
 - Fonctionnement préemptif ou coopératif
-- Ordonnacement par tranche de temps (time-slicing)
+- Ordonnancement par tranche de temps (time-slicing)
 - Attribution de priorités aux tâches
 
 (avancées)
@@ -148,11 +148,11 @@ Principales fonctionnalités :
 
 ## FreeRTOS
 
-FreeRTOS se présentent sous la forme de sources (fichiers) écrit en langage C (respectant la norme POSIX).
+FreeRTOS se présente sous la forme de sources (fichiers) écrits en langage C (respectant la norme POSIX).
 
-L'OS est entièremment téléversé sur la mémoire de la carte embarquée comme un programme "classique".
+L'OS est entièrement téléversé sur la mémoire de la carte embarquée comme un programme "classique".
 
-FreeRTOS nécessite très peu de ressource pour fonctionner :
+FreeRTOS nécessite très peu de ressources pour fonctionner :
 
 - 25 MHz CPU
 - 64 KB RAM
@@ -161,7 +161,7 @@ FreeRTOS nécessite très peu de ressource pour fonctionner :
 
 ## ESP32 et M5Stack
 
-**ESP32** est un microcontrôleur offrant des capacités inégalé pour son prix (< 3€) :
+**ESP32** est un microcontrôleur offrant des capacités inégalées pour son prix (< 3€) :
 
 - Processeur
   - Dual-core Xtensa LX6 (jusqu’à 240 MHz)
@@ -175,7 +175,7 @@ FreeRTOS nécessite très peu de ressource pour fonctionner :
 - UART, SPI, I2C, I2S, CAN
 - Capteurs capacitifs tactiles intégrés
 
-Ces capacités permettent d'embarqués des fonctionnalités avancées ainsi que des OS spécialisés (comme FreeRTOS).
+Ces capacités permettent d'embarquer des fonctionnalités avancées ainsi que des OS spécialisés (comme FreeRTOS).
 
 ---
 
@@ -213,7 +213,7 @@ C'est un ESP32 avec des capteurs et actionneurs en plus.
 
 ---
 
-## EPS32 et M5Stack
+## ESP32 et M5Stack
 
 Dans l'industrie, un M5Stack Core 2 serait envisagé en R&D pour passer sur une carte sur-mesure basée sur un ESP32 pour l'industrialisation.
 

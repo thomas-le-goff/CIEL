@@ -2,13 +2,13 @@
 
 Mettre en oeuvre deux tâches bloquantes sur Arduino et explorer des moyens simples de les rendre compatibles : 
 
-- Time slicing : mise en place d'un delay de 100 ms pour cadencer la boucle principale (superloop) et ainsi être capable de compter le temps écoulé. Inconvénients : comment gérer d'autre type de traitement bloquant que l'attente d'un délais.
+- Time slicing : mise en place d'un delay de 100 ms pour cadencer la boucle principale (superloop) et ainsi être capable de compter le temps écoulé. Inconvénients : comment gérer d'autres types de traitements bloquants que l'attente d'un délai.
 
-- Non-blocking time : utiliser des prémitive Arduino permettant de récupérer le temps écoulé depuis le début du programme et ainsi être capable d'attendre un certain temps sans utiliser l'instruction `delay` : comment faire avec d'autres tâches bloquantes (appel réseau etc.) (mise en avant de la nécessité d'utiliser une event loop)
+- Non-blocking time : utiliser des primitives Arduino permettant de récupérer le temps écoulé depuis le début du programme et ainsi être capable d'attendre un certain temps sans utiliser l'instruction `delay` : comment faire avec d'autres tâches bloquantes (appel réseau etc.) (mise en avant de la nécessité d'utiliser une event loop)
 
-Une fois ces deux programmes réalisés => faire la même chose en utilisant un système temps réel et ce rendre compte du gain.
+Une fois ces deux programmes réalisés => faire la même chose en utilisant un système temps réel et se rendre compte du gain.
 
-1 - À partir du programme suivant faites en sorte que le carré bleu clignote toute les seconde et le rouge toute les deux secondes.
+1 - À partir du programme suivant faites en sorte que le carré bleu clignote toutes les secondes et le rouge toutes les deux secondes.
 
 ```cpp
 #include <Arduino.h>
@@ -45,18 +45,18 @@ void loop(void)
 }
 ```
 
-2 - Quels sont les inconvénients de cette solution ? Donnez des cas ou ce n'est pas possible de procéder ainsi.
+2 - Quels sont les inconvénients de cette solution ? Donnez des cas où ce n'est pas possible de procéder ainsi.
 
-> Le processeur ne fait rien (il attend) la plus part du temps. Cela devient problématique si des capteurs / module comme BLE / Wifi doivent être scruté en plus.
+> Le processeur ne fait rien (il attend) la plupart du temps. Cela devient problématique si des capteurs / modules comme BLE / Wifi doivent être scrutés en plus.
 
 3 - Proposer une autre solution qui n'utilise pas la fonction `delay`
 
 > Mise en place d'un compteur non bloquant en utilisant la fonction `millis`
 
-4 - Que ce passe-t-il si on appel la méthode suivante dans la boucle principale ? 
+4 - Que se passe-t-il si on appelle la méthode suivante dans la boucle principale ? 
 
 ```cpp
-heavy_taskvoid heavy_task() {
+void heavy_task() {
   unsigned long d = random(10, 10000);
   delay(d);
 }
@@ -64,4 +64,4 @@ heavy_taskvoid heavy_task() {
 
 Imaginez que cette `heavy_task` correspond à l'attente suite à un appel réseau et que le clignotement d'un carré correspond à la récupération des données d'un capteur (surveillance d'une température etc.). Est-ce que le comportement actuel vous semble envisageable ?
 
-> L'objectif est de mettre en avant le fait que le côté deterministe d'un RTOS et la priorisation des tâches est nécessaire dans ce type de système.
+> L'objectif est de mettre en avant le fait que le côté déterministe d'un RTOS et la priorisation des tâches est nécessaire dans ce type de système.
