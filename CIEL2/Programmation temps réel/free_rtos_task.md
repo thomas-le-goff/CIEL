@@ -54,18 +54,18 @@ _BTS CIEL_
 
 ## Instruction bloquante
 
-Une instruction bloquante est une instruction dont l'évolution n'est pas directement liée au calcul effectué par le CPU ,mais, par des **événements extérieur**.
+Une instruction bloquante est une instruction dont l'évolution n'est pas directement liée au calcul effectué par le CPU, mais, par des **événements extérieurs**.
 
 Exemples :
 
-- attendre un délais (`delay(2000)`)
+- attendre un délai (`delay(2000)`)
 - attendre une réponse à une requête HTTP
-- attendre le traitement d'un processeur tier ou d'un périphérique (GPU, Capteur)
+- attendre le traitement d'un processeur tiers ou d'un périphérique (GPU, Capteur)
 - attendre l'écriture d'une donnée en mémoire ou sur le disque
 
 Attendre **==** le CPU ne fait rien (**cycle perdu**)
 
-> ℹ️ Beaucoup de programmes sont en réalités limités par les I/O du système et non par les performances du CPU.
+> ℹ️ Beaucoup de programmes sont en réalité limités par les I/O du système et non par les performances du CPU.
 
 ---
 
@@ -164,7 +164,7 @@ async function appelHttpAsynchrone() {
 Pour permettre des traitements bloquants, FreeRTOS permet de créer des tâches et se charge de l'ordonnancement :
 
 - Une tâche bloquée laisse la main à une autre tâche
-- La tâche non-bloquée aillant la plus haute priorité et choisie par l'OS pour s'éxecuter
+- La tâche non-bloquée ayant la plus haute priorité est choisie par l'OS pour s'exécuter
 
 ---
 
@@ -174,9 +174,9 @@ Une tâche est définie par :
 
 - Un état :
   - `READY` prête à être exécutée, en attente du CPU
-  - `RUNNING` en cours d'execution
+  - `RUNNING` en cours d'exécution
   - `SUSPENDED` désactivée volontairement
-  - `BLOCKED` en attente d'un événement exterieur (délai, sémaphore, etc.)
+  - `BLOCKED` en attente d'un événement extérieur (délai, sémaphore, etc.)
 - Une priorité (par rapport aux autres tâches)
   _(valeur max définie par `configMAX_PRIORITIES`)_
 
@@ -201,7 +201,7 @@ Une tâche est définie par :
 
 - **Événement externe (interruption matérielle)**
   - Une ISR (Interrupt Service Routine) peut réveiller une tâche (ex : sémaphore donné, message en queue, notification).
-- **La tâche courante se bloque volontairement** (raison vu précedemment)
+- **La tâche courante se bloque volontairement** (raison vue précédemment)
   - L’ordonnanceur choisit alors la tâche prête la plus prioritaire.
   - Si aucune tâche prête → tâche Idle tourne par défaut (jamais bloquée, priorité 0).
 
