@@ -76,10 +76,10 @@ Ce type de programmation est nécessaire dans certains secteurs :
 
 ### Concurrence VS Parallélisme
 
-- Concurrence : le CPU alterne les instructions de plusieurs tâches pour **simuler l'execution de deux tâches en même temps**. Le CPU ne peut éxecuter qu'une seule instruction à la fois.
-- Parallélisme : pour que deux tâches s'executent réellement en parallèle il faut **au minimum deux CPUs** (coeur / thread).
+- Concurrence : le CPU alterne les instructions de plusieurs tâches pour **simuler l'exécution de deux tâches en même temps**. Le CPU ne peut exécuter qu'une seule instruction à la fois.
+- Parallélisme : pour que deux tâches s'exécutent réellement en parallèle il faut **au minimum deux CPUs** (cœur / thread).
 
-> ℹ️ Le vrai parallèlisme est utilisé (et nécessaire) uniquement pour des enjeux de performances (répartir la charge de travail).
+> ℹ️ Le vrai parallélisme est utilisé (et nécessaire) uniquement pour des enjeux de performances (répartir la charge de travail).
 
 ![bg right:10%](./img/parallelism.webp)
 
@@ -98,7 +98,7 @@ Ils intègrent **moins de fonctionnalités** (beaucoup moins !) que les OS gén�
 
 ### Ordonnancement et préemption
 
-La majorité des OS modernes on un ordonnancement préemptif : L'ordonnanceur choisi la tâche / le processus qui est en cours d'execution à un instant T.
+La majorité des OS modernes ont un ordonnancement préemptif : L'ordonnanceur choisit la tâche / le processus qui est en cours d'exécution à un instant T.
 
 La différence entre un RTOS et un GPOS se trouve au niveau du choix de la tâche :
 
@@ -106,7 +106,7 @@ La différence entre un RTOS et un GPOS se trouve au niveau du choix de la tâch
 
 - GPOS : tous les processus sont mis en concurrence via un ordonnanceur complexe qui garantit à la fois **équité et réactivité**
 
-> ℹ️ Sur un GPOS il très compliqué de prédire la tâche qui sera en cours d'execution à un instant T.
+> ℹ️ Sur un GPOS il est très compliqué de prédire la tâche qui sera en cours d'exécution à un instant T.
 
 ---
 
