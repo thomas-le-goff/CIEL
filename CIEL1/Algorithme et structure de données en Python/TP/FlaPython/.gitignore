@@ -1,0 +1,95 @@
+# === Virtual environments ===
+.venv/
+venv/
+ENV/
+env/
+
+# === Buildozer and build files ===
+.buildozer/
+bin/
+build/
+dist/
+*.spec
+
+# === Python bytecode ===
+__pycache__/
+*.py[cod]
+*$py.class
+
+# === OS-specific files ===
+.DS_Store
+Thumbs.db
+
+# === Cache and temporary files ===
+*.log
+*.tmp
+*.swp
+
+# === Editor/IDE backup files ===
+*~
+*.bak
+*.old
+
+# === VSCode ===
+.vscode/
+
+# === PyCharm ===
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# === Eclipse + PyDev ===
+.project
+.pydevproject
+.metadata/
+*.tmp
+*.bak
+*.swp
+
+# === Thonny ===
+.thonny/
+
+# === Spyder ===
+.spyderproject
+.spyproject
+
+# === Rope (Python refactoring lib) ===
+.ropeproject/
+
+# === mypy ===
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# === Pyre type checker ===
+.pyre/
+
+# === Pytype ===
+.pytype/
+
+# === Pytest ===
+.cache/
+
+# === Pylint ===
+pylint.log
+
+# === Unit test / coverage ===
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# === Jupyter Notebook checkpoints ===
+.ipynb_checkpoints/
+
+# === VS Code devcontainer ===
+.devcontainer/

@@ -1,24 +1,30 @@
 ---
-title: RTOS - Introduction à FreeRTOS
+title: RTOS - Introduction à FreeRTOS - BTS CIEL
 version: 1.0.0
 theme: default
 _class: invert
 footer: Thomas Le Goff - 2025
-header: RTOS - Introduction à FreeRTOS
+header: RTOS - Introduction à FreeRTOS - BTS CIEL
 paginate: true
 marp: true
 style: |
   section {
-      font-size: 1.6em;
+    font-size: 1.6em;
   }
 
   img[alt~="center"] {
-      display: block;
-      margin: 0 auto;
+    display: block;
+    margin: 0 auto;
   }
 
   section.lead h1 {
-      text-align: center;
+    text-align: center;
+  }
+
+  .columns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 ---
 
@@ -45,7 +51,8 @@ _BTS CIEL_
 
 La programmation temps réel est un moyen de garantir le respect du temps d'exécution d'une tâche.
 
-Ce type de programmation est nécessaire dans certains secteurs : 
+Ce type de programmation est nécessaire dans certains secteurs :
+
 - l'industrie de production
 - l'aéronautique
 - l'automobile
@@ -55,6 +62,26 @@ Ce type de programmation est nécessaire dans certains secteurs :
 
 ![bg right:20%](./img/rtos_industry.jpg)
 
+---
+
+## Programmation et système temps réel
+
+### Concurrence VS Parallélisme
+
+![width:800 center](./img/concurrent_vs_parallelism.jpg)
+
+---
+
+## Programmation et système temps réel
+
+### Concurrence VS Parallélisme
+
+- Concurrence : le CPU alterne les instructions de plusieurs tâches pour **simuler l'execution de deux tâches en même temps**. Le CPU ne peut éxecuter qu'une seule instruction à la fois.
+- Parallélisme : pour que deux tâches s'executent réellement en parallèle il faut **au minimum deux CPUs** (coeur / thread).
+
+> ℹ️ Le vrai parallèlisme est utilisé (et nécessaire) uniquement pour des enjeux de performances (répartir la charge de travail).
+
+![bg right:10%](./img/parallelism.webp)
 
 ---
 
@@ -67,32 +94,47 @@ Ils intègrent **moins de fonctionnalités** (beaucoup moins !) que les OS gén�
 > ℹ️ Un **système déterministe** est un système qui réagit toujours de la même façon à un événement
 
 ---
-
 ## Programmation et système temps réel
 
-Deux niveaux de temps réel :
+### Ordonnancement et préemption
 
-- le temps réel strict (hard) : la contrainte de temps est associée à une situation critique voire catastrophique.
-    - système de freinage d'urgence
-    - surveillance de capteurs (avion, centrale nucléaire)
+La majorité des OS modernes on un ordonnancement préemptif : L'ordonnanceur choisi la tâche / le processus qui est en cours d'execution à un instant T.
 
-- le temps réel souple (soft) : la contrainte de temps est associée à de la pénibilité / mauvaise expérience d'usage.
-    - IHM (attention un bouton d'arrêt d'urgence correspond à la catégorie strict)
-    - latence réseaux
+La différence entre un RTOS et un GPOS se trouve au niveau du choix de la tâche :
 
-> ⚠️ la programmation temps réelle n'est pas une solution miracle. Il s'agit d'un ensemble d'outils et de pratiques permettant de rendre déterministe le temps d'exécution d'un programme. 
-Les spécifications doivent rester raisonnables et cohérentes.
+- RTOS : une tâche peut être interrompue si une tâche **plus prioritaire** devient prête (la priorisation des tâches est à la main du programmeur)
+
+- GPOS : tous les processus sont mis en concurrence via un ordonnanceur complexe qui garantit à la fois **équité et réactivité**
+
+> ℹ️ Sur un GPOS il très compliqué de prédire la tâche qui sera en cours d'execution à un instant T.
 
 ---
 
 ## Programmation et système temps réel
 
-Concrètement : 
+Deux niveaux de temps réel :
 
-- On définit la liste des tâches que doit faire le système
-- On définit la priorité de chaque tâche
-- On partage le temps (time-slicing) que doit accorder l'OS à chaque tâche
-- On programme le système en utilisant un RTOS
+- **le temps réel strict (hard)** : la contrainte de temps est associée à une situation critique voire catastrophique.
+
+  - système de freinage d'urgence
+  - surveillance de capteurs (avion, centrale nucléaire)
+
+- **le temps réel souple (soft)** : la contrainte de temps est associée à de la pénibilité / mauvaise expérience pour l'utilisateur.
+  - IHM (attention un bouton d'arrêt d'urgence correspond à la catégorie strict)
+  - latence réseaux
+
+![bg right:20%](./img/power_plant.jpg)
+
+---
+
+## Programmation et système temps réel
+
+Concrètement :
+
+1. On définit la liste des tâches que doit faire le système
+2. On définit la priorité de chaque tâche
+3. On partage le temps (time-slicing) que doit accorder l'OS à chaque tâche
+4. On programme le système en utilisant un RTOS
 
 ---
 
@@ -110,7 +152,7 @@ Concrètement :
 
 ![center](./img/windows_rtos.png)
 
---- 
+---
 
 ## FreeRTOS
 
@@ -122,42 +164,42 @@ Rachat par Amazon AWS en 2017 => "From Cloud to IoT"
 
 > Amazon AWS : https://aws.amazon.com/fr/freertos/
 
+![bg left:20%](./img/free_rtos_logo.jpg)
+
 ---
 
 ## FreeRTOS
 
-Principales fonctionnalités : 
+Principales fonctionnalités :
 
-(basiques)
-
-- Fonctionnement préemptif ou coopératif
-- Ordonnancement par tranche de temps (time-slicing)
+- Ordonnancement préemptif ou coopératif
 - Attribution de priorités aux tâches
-
-(avancées)
-
 - Files d’attente (queues)
 - Sémaphores binaires et à compteurs
-- Mutex simples et récursifs
-- Tampons de flux et de messages
-- Fonctions de hook sur le tick (tick hook functions)
-- Fonctions de hook sur l’inactivité (idle hook functions)
 - Mode sans tick pour les applications à très basse consommation (sur certaines architectures)
 
 > AWS ajoute d'autres fonctionnalités liées au cloud par le biais de bibliothèques optionnelles https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/01-Introduction
 
-## FreeRTOS
-
-FreeRTOS se présente sous la forme de sources (fichiers) écrits en langage C (respectant la norme POSIX).
-
-L'OS est entièrement téléversé sur la mémoire de la carte embarquée comme un programme "classique".
-
-FreeRTOS nécessite très peu de ressources pour fonctionner :
-
-- 25 MHz CPU
-- 64 KB RAM
+![bg left:20%](./img/free_rtos_logo.jpg)
 
 ---
+
+## FreeRTOS
+
+- FreeRTOS se présente sous la forme de sources (fichiers) écrits en langage C.
+
+- L'OS est entièrement téléversé sur la mémoire de la carte embarquée comme un programme "classique".
+
+- FreeRTOS nécessite très peu de ressources pour fonctionner :
+
+  - 25 MHz CPU
+  - 64 KB RAM
+
+![bg left:20%](./img/free_rtos_logo.jpg)
+
+---
+
+<style scoped>section{font-size:20px;}</style>
 
 ## ESP32 et M5Stack
 
@@ -175,9 +217,11 @@ FreeRTOS nécessite très peu de ressources pour fonctionner :
 - UART, SPI, I2C, I2S, CAN
 - Capteurs capacitifs tactiles intégrés
 
-Ces capacités permettent d'embarquer des fonctionnalités avancées ainsi que des OS spécialisés (comme FreeRTOS).
+Ses capacités permettent d'embarquer des fonctionnalités avancées ainsi que des OS spécialisés (comme FreeRTOS).
 
 ---
+
+<style scoped>section{font-size:20px;}</style>
 
 ## ESP32 et M5Stack
 
@@ -193,6 +237,8 @@ Comparaison avec d'autres modèles :
 > https://fr.wikipedia.org/wiki/ESP32
 
 ---
+
+<style scoped>section{font-size:20px;}</style>
 
 ## ESP32 et M5Stack
 
@@ -216,6 +262,22 @@ C'est un ESP32 avec des capteurs et actionneurs en plus.
 ## ESP32 et M5Stack
 
 Dans l'industrie, un M5Stack Core 2 serait envisagé en R&D pour passer sur une carte sur-mesure basée sur un ESP32 pour l'industrialisation.
+
+<div class="columns">
+
+<div>
+
+![width:256](./img/m5stack.webp)
+
+</div>
+
+<div>
+
+![width:256](./img/esp32.webp)
+
+</div>
+
+</div>
 
 ---
 
