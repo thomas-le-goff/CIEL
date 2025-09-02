@@ -125,7 +125,7 @@ int main(){
 
 ```c
 int global_counter(){
-    static int count = 0; // static permet d'obtenir une variable allouer dans l'espace mémoire statique.
+    static int count = 0; // static permet d'obtenir une variable allouée dans l'espace mémoire statique.
                           // Elle perdurera donc à la sortie de la fonction.
     count++;
     return count;
@@ -190,14 +190,14 @@ int global_counter(int count){
 
 int main(){
     int count = 0; // local à la fonction main (mais main est la fonction racine)
-    printf("%d ", global_counter()); // 1
-    printf("%d ", global_counter()); // 1
+    printf("%d ", global_counter(count)); // 1
+    printf("%d ", global_counter(count)); // 1
     return 0;
 }
 ```
 
-> ⚠️ Le comportement de la méthode `global_counter` reste toujours incorrect ! Les appels à `global_counter` modifie **l'argument** `count` et non pas la **variable locale** de la fonction `main`.
-> C'est ce qu'on appel un passage par **valeur**.
+> ⚠️ Le comportement de la méthode `global_counter` reste toujours incorrect ! Les appels à `global_counter` modifient **l'argument** `count` et non pas la **variable locale** de la fonction `main`.
+> C'est ce qu'on appelle un passage par **valeur**.
 
 ---
 
@@ -213,8 +213,8 @@ int global_counter(int count){
 
 int main(){
     int count = 0;
-    count = global_counter(); printf("%d ", count); // 1
-    count = global_counter(); printf("%d ", count); // 2
+    count = global_counter(count); printf("%d ", count); // 1
+    count = global_counter(count); printf("%d ", count); // 2
     return 0;
 }
 ```
@@ -230,20 +230,20 @@ int main(){
 
 ```c
 int global_counter(int *count){
-  *count++;
-  return count; // pas nécessaire en soit
+  (*count)++;
+  return *count; // pas nécessaire en soi
 }
 
 int main(){
     int count = 0;
-    printf("%d ", global_counter(&counter)); // 1
-    printf("%d ", global_counter(&counter)); // 2
+    printf("%d ", global_counter(&count)); // 1
+    printf("%d ", global_counter(&count)); // 2
     return 0;
 }
 ```
 
 > `main` peut "partager" l'accès à son espace local par le biais d'un **pointeur**.
-> C'est ce qu'on appel un passage d'**adresse**.
+> C'est ce qu'on appelle un passage d'**adresse**.
 
 ---
 
@@ -265,9 +265,9 @@ int main(){
 
 ## Allocation dynamique
 
-L'allocation dynamique est une technique qui permet au programme de choisir l'espace mémoire qu'il occupe pendant son éxecution.
+L'allocation dynamique est une technique qui permet au programme de choisir l'espace mémoire qu'il occupe pendant son exécution.
 
-4 fonctions standardisées sont mis à disposition par la **libc** permettant de demander à l'OS des blocs mémoires de tailles précises.
+4 fonctions standardisées sont mises à disposition par la **libc** permettant de demander à l'OS des blocs mémoires de tailles précises.
 
 ---
 
@@ -283,7 +283,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
   - libérer un bloc mémoire alloué, nécessaire si l'on veut éviter d'occuper inutilement de la mémoire (fuite)
 
 > ℹ️ Ces fonctions utilisent un espace mémoire nommé le tas (heap).
-> ⚠️ C'est la responsabilité du développeur de s'assurer que cet espace mémoire est correctement gérée.
+> ⚠️ C'est la responsabilité du développeur de s'assurer que cet espace mémoire est correctement géré.
 
 ---
 
@@ -291,7 +291,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 #### Définition
 
-- `malloc` (**m**emory **alloc**action) permet de réserver **dynamiquement** un bloc de mémoire dans le _heap_.
+- `malloc` (**m**emory **alloc**ation) permet de réserver **dynamiquement** un bloc de mémoire dans le _heap_.
 - Prototype dans **`<stdlib.h>`** :
 
   ```c
@@ -302,7 +302,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 - Alloue `size` octets en mémoire.
 
-- Retourne L'adresse du bloc alloué (pointeur).
+- Retourne l'adresse du bloc alloué (pointeur).
 
 - En cas d’échec, retourne `NULL`.
 
@@ -312,7 +312,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 #### Définition
 
-- `realloc` (**re**size **alloc**action) permet de **redimensionner** un bloc de mémoire déjà alloué avec `malloc`.
+- `realloc` (**re**size **alloc**ation) permet de **redimensionner** un bloc de mémoire déjà alloué avec `malloc`.
 - Prototype dans **`<stdlib.h>`** :
 
   ```c
@@ -363,9 +363,9 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 ### Quand y faire appel ?
 
-L'allocation dynamique est généralement plus coûteuse et plus complèxe à gérer que les deux autres technique d'allocation.
+L'allocation dynamique est généralement plus coûteuse et plus complexe à gérer que les deux autres techniques d'allocation.
 
-Cette technique est uniquement nécessaire s'il est impossible de connaître l'occupation mémoire d'un élément avant que le programme soit éxécuté.
+Cette technique est uniquement nécessaire s'il est impossible de connaître l'occupation mémoire d'un élément avant que le programme soit exécuté.
 
 ---
 
@@ -410,8 +410,8 @@ En langage C il existe **3** possibilités :
 | Type d’allocation | Avantages ✅                                                                                                   | Inconvénients ❌                                                                                                                                              |
 | ----------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Statique**      | - Simplicité d’utilisation <br> - Accès direct et rapide <br> - Accessible par tout                            | - Mémoire réservée en permanence <br> - Peu flexible                                                                                                          |
-| **Automatique**   | - Allocation/désallocation implicite et rapide <br> - Gérée par la pile (_stack_) <br> - Porté locale          | - Taille limitée <br> - Porté locale                                                                                                                          |
-| **Dynamique**     | - Grande flexibilité (taille définie pendant l'execution) <br> - Mémoire libérable quand on n’en a plus besoin | <br> - Gestion manuelle nécessaire (risque de fuite ou corruption)<br> - Plus lent que l’automatique (allocation dans le _heap_)<br> - Fragmentation possible |
+| **Automatique**   | - Allocation/désallocation implicite et rapide <br> - Gérée par la pile (_stack_) <br> - Portée locale          | - Taille limitée <br> - Portée locale                                                                                                                         |
+| **Dynamique**     | - Grande flexibilité (taille définie pendant l'exécution) <br> - Mémoire libérable quand on n’en a plus besoin | <br> - Gestion manuelle nécessaire (risque de fuite ou corruption)<br> - Plus lent que l’automatique (allocation dans le _heap_)<br> - Fragmentation possible |
 
 ---
 
