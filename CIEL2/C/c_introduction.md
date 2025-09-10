@@ -50,7 +50,7 @@ _BTS CIEL_
 
 ## Programmation structurée
 
-La programmation structurée définie les primitives suivantes
+La programmation structurée définit les primitives suivantes
 
 - 🔽 La séquence
 - 🔀 La sélection
@@ -97,7 +97,7 @@ Structures de données :
 
 ## 🔽 Séquence - typage
 
-Python utilise un typage dit **dynamique** et **strique**.
+Python utilise un typage dit **dynamique** et **strict**.
 
 ```python
 points = 3.2  # points est du type float
@@ -127,7 +127,7 @@ printf("Tu as %s points !\n", pts); // Typage faible : conversion implicite
 
 `Définition`
 
-**Typage Dynamique / statique** Est-ce qu'une variable de type **A** peut contenir une valeur de type **B** sans être rédéfinie.
+**Typage Dynamique / statique** Est-ce qu'une variable de type **A** peut contenir une valeur de type **B** sans être redéfinie.
 
 **Typage faible / fort** Est-ce qu'une variable de type **A** peut-être utilisée en tant que type **B** (sans cast explicite)
 
@@ -341,7 +341,7 @@ int n = 5;
 int tab3[n];
 
 const int s = 5;
-int tab4[s]; // Sauf en C99 (dans un context local) !
+int tab4[s]; // Sauf en C99 (dans un contexte local) !
 ```
 
 ![bg cover opacity:10%](./img/background.jpg)
@@ -396,7 +396,7 @@ int matrice[3][4] = {{0, 1, 3, 4}, {0, 1, 3, 4}, {0, 1, 3, 4}}
 Exemples d'utilisation :
 
 - Pixels d'une image
-- Plateau d'un jeu d'échec
+- Plateau d'un jeu d'échecs
 - Algèbre linéaire
 - Données tabulaires (classeur)
 
@@ -404,34 +404,34 @@ Exemples d'utilisation :
 
 --------------------------------------------------------------------------------
 
-## Chaînes de charactères
+## Chaînes de caractères
 
 ### null-terminated
 
-Une chaîne de charactères (`string`) peut-être représentée en utilisant un tableau de `char`.
+Une chaîne de caractères (`string`) peut-être représentée en utilisant un tableau de `char`.
 
 ```c
 char chaine[] = "BTS";
 ```
 
-Les châines de charactères se manipulent donc comme des tableaux.
+Les chaînes de caractères se manipulent donc comme des tableaux.
 
-> ℹ️ Le langage ajoute lui-même le charactère de fin de chaîne `\0`. La taille mémoire réelle utilisée par la variable est de `3 + 1 = 4 octets`
+> ℹ️ Le langage ajoute lui-même le caractère de fin de chaîne `\0`. La taille mémoire réelle utilisée par la variable est de `3 + 1 = 4 octets`
 
 ![bg cover opacity:10%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
-## Chaînes de charactères
+## Chaînes de caractères
 
 ### string.h
 
-La bibliothèque `string.h` définie des fonctions permettant de manipuler les chaînes de charactères.
+La bibliothèque `string.h` définit des fonctions permettant de manipuler les chaînes de caractères.
 
 ```c
 #include <string.h>
 
-size_t length = strlen("ma chaine de characteres");
+size_t length = strlen("ma chaine de caractères");
 
 printf("la chaîne est de taille : %zu \n", length); // 24
 ```
@@ -440,27 +440,27 @@ printf("la chaîne est de taille : %zu \n", length); // 24
 
 --------------------------------------------------------------------------------
 
-## Chaînes de charactères
+## Chaînes de caractères
 
 ### string.h
 
 Fonction                              | Définition
 ------------------------------------- | ----------------------------------------------------------
 `char * strcat(char * s1, char * s2)` | concaténation de `s1` et `s2`                              |
-`char * strchr(char * s1, int c)`     | recherche un charactère `c` dans `s1`                      |
+`char * strchr(char * s1, int c)`     | recherche un caractère `c` dans `s1`                      |
 `int strcmp(char *s1, char *s2)`      | `-1` si `s1` est < `s2`, `1` si `s2` est > `s1`, `0` sinon |
 `char *strcpy(char * s1, char *s2)`   | copie `s2` dans `s1` (attention **buffer overflow**)       |
-`size_t strlen(char *s)`              | nombre d'octets qui compose la chaîne                      |
+`size_t strlen(char *s)`              | nombre d'octets qui composent la chaîne                      |
 
 > ℹ️ Plus de détails ici : <https://en.wikibooks.org/wiki/C_Programming/String_manipulation>
 
-> ⚠️ Ces fonctions on des comportements particulier, bien lire la documentation.
+> ⚠️ Ces fonctions ont des comportements particuliers, bien lire la documentation.
 
 ![bg cover opacity:10%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
-## Chaînes de charactères
+## Chaînes de caractères
 
 ### string.h
 
