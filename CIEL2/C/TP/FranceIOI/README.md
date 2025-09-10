@@ -20,7 +20,7 @@ Rappel de C : https://learnxinyminutes.com/fr/c/
 - Préparation de l'onguent (optionnel)
 - Visite de la mine
 
-#### Chaînes de charactères
+#### Chaînes de caractères
 - Lire ou ne pas lire, telle est la question
 - Écriture en miroir
 
