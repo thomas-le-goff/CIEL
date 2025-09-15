@@ -1,13 +1,12 @@
 #include <stdio.h>
 
 #define MAX_DEPLACEMENTS 1000
-#define TYPE_DEPLACEMENT 6
+#define MAX_TYPE_DEPLACEMENT 6
 
 int main(void)
 {
-    int deplacementsInverses[] = {-1, 2, 1, 3, 5, 4};
+    int deplacementsInverses[MAX_TYPE_DEPLACEMENT] = {-1, 2, 1, 3, 5, 4};
     int nbDeplacements = 0;
-    int parcours[MAX_DEPLACEMENTS] = {0};
 
     scanf("%d", &nbDeplacements);
 
@@ -15,6 +14,8 @@ int main(void)
     {
         return -1;
     }
+
+    int parcours[nbDeplacements];
 
     for (size_t i = 0; i < nbDeplacements; i++)
     {
@@ -24,7 +25,7 @@ int main(void)
     for (size_t i = nbDeplacements; i > 0; i--)
     {
         int deplacement = parcours[i - 1];
-        if (deplacement >= TYPE_DEPLACEMENT)
+        if (deplacement >= MAX_TYPE_DEPLACEMENT)
         {
             return -1;
         }

@@ -1,5 +1,13 @@
 #include <stdio.h>
-#include <string.h>
+
+int strlen_hm(const char *str)
+{
+    char *c = str;
+    while (c != '\0')
+        c++;
+
+    return (size_t)(c - str);
+}
 
 int main(void)
 {
@@ -10,10 +18,10 @@ int main(void)
 
     for (size_t i = 0; i < nbLivres; i++)
     {
-        char titre[1000];
+        char titre[1001];
         scanf("%[^\n]\n", titre);
 
-        int longueurTitre = strlen(titre);
+        int longueurTitre = strlen_hm(titre);
 
         if (longueurTitre > plsGrandTitre)
         {

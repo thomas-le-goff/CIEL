@@ -5,11 +5,11 @@ Rappel de C : https://learnxinyminutes.com/fr/c/
 ### Niveau 1
 
 #### Structures avancées 
-- Planning de la journée
-- Le juste prix
+- ~~Planning de la journée~~
+- ~~Le juste prix~~
 
 #### Conditions avancées, opérateurs booléens
-- Zones de couleurs
+- ~~Zones de couleurs~~
 
 #### Répétitions conditionnées 
 - Construction d'une pyramide

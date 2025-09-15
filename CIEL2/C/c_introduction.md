@@ -447,10 +447,10 @@ printf("la chaîne est de taille : %zu \n", length); // 24
 Fonction                              | Définition
 ------------------------------------- | ----------------------------------------------------------
 `char * strcat(char * s1, char * s2)` | concaténation de `s1` et `s2`                              |
-`char * strchr(char * s1, int c)`     | recherche un caractère `c` dans `s1`                      |
+`char * strchr(char * s1, int c)`     | recherche un caractère `c` dans `s1`                       |
 `int strcmp(char *s1, char *s2)`      | `-1` si `s1` est < `s2`, `1` si `s2` est > `s1`, `0` sinon |
 `char *strcpy(char * s1, char *s2)`   | copie `s2` dans `s1` (attention **buffer overflow**)       |
-`size_t strlen(char *s)`              | nombre d'octets qui composent la chaîne                      |
+`size_t strlen(char *s)`              | nombre d'octets qui composent la chaîne                    |
 
 > ℹ️ Plus de détails ici : <https://en.wikibooks.org/wiki/C_Programming/String_manipulation>
 
@@ -501,6 +501,31 @@ int main(void) {
 
 ## Les pointeurs en C
 
+### Incrémentation de pointeur
+
+L'incrémentation d'un pointeur permet de le décaler de la taille mémoire du type de la variable pointée.
+
+```c
+int b = 10;
+int *a = &b;
+
+// Incrémente la valeur de b de 1
+(*a)++; 
+
+// Incrémente l'adresse de sizeof(int) (car il s'agit d'un pointeur vers un int)
+a++;
+
+// a contient désormais l'adresse de l'entier qui suit b
+```
+
+> ⚠️ Attention à la priorité de l'opérateur * 
+
+## ![bg cover opacity:10%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les pointeurs en C
+
 - déclaration d'un pointeur : `type *ptr;`
 - récupérer l'adresse d'une variable `var` : `&var;`
 - déréférencement (accède à la valeur pointée) : `*ptr`
@@ -521,7 +546,7 @@ Les pointeurs permettent :
 #include <stdio.h>
 
 int main(void) {
-    const char msg[] = "Coucou";
+    const char msg[] = "Hello";
 
     char copie[_];
 
@@ -542,7 +567,7 @@ int main(void) {
 
 --------------------------------------------------------------------------------
 
-## Exercice 3 - échange avec des pointeurs
+## Exercice 2 - échange avec des pointeurs
 
 ```c
 #include <stdio.h>
