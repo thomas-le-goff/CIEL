@@ -36,7 +36,13 @@ _BTS CIEL_
   - Sélection
   - Itération
 
+- Tableaux
+
 - Pointeurs
+
+- Fonctions et procédures
+
+- Structure
 
 - Exercices
 
@@ -301,7 +307,7 @@ for (int i = 0; i < 3; i++) {
 return 0;
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -319,7 +325,7 @@ printf("%d\n", tab3[0]);
 printf("%d\n", tab4[2]);
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -344,7 +350,7 @@ const int s = 5;
 int tab4[s]; // Sauf en C99 (dans un contexte local) !
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -364,7 +370,7 @@ void ma_fonction(int n) {
 
 > ⚠️ Le tableau sera alloué sur la pile.
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -381,7 +387,7 @@ printf("Taille mémoire occupée : %zu", sizeof(tab)) // 4 octets * 10 => 40 oct
 printf("Taille du tableau (dimension) : %zu", sizeof(tab) / sizeof(int)) // 4 octets * 10 / 4 octets => 10
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -400,7 +406,7 @@ Exemples d'utilisation :
 - Algèbre linéaire
 - Données tabulaires (classeur)
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -418,7 +424,7 @@ Les chaînes de caractères se manipulent donc comme des tableaux.
 
 > ℹ️ Le langage ajoute lui-même le caractère de fin de chaîne `\0`. La taille mémoire réelle utilisée par la variable est de `3 + 1 = 4 octets`
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -436,7 +442,7 @@ size_t length = strlen("ma chaine de caractères");
 printf("la chaîne est de taille : %zu \n", length); // 24
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -456,7 +462,7 @@ Fonction                              | Définition
 
 > ⚠️ Ces fonctions ont des comportements particuliers, bien lire la documentation.
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -470,7 +476,7 @@ Si vous souhaitez manipuler d'autres types d'encodage `wchar.h` est plus adapté
 
 > ℹ️ Table de référence de ISO-8859-1 <https://fr.wikipedia.org/wiki/ISO/CEI_8859-1>
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -495,7 +501,7 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -518,9 +524,9 @@ a++;
 // a contient désormais l'adresse de l'entier qui suit b
 ```
 
-> ⚠️ Attention à la priorité de l'opérateur * 
+> ⚠️ Attention à la priorité de l'opérateur *
 
-## ![bg cover opacity:10%](./img/background.jpg)
+## ![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -536,7 +542,7 @@ Les pointeurs permettent :
 - de gérer la **mémoire dynamique** (`malloc`, `free`)
 - de passer des paramètres **par adresse** aux fonctions
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -563,7 +569,7 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -592,7 +598,7 @@ void echange(___ _x, ___ _y)
 }
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -613,7 +619,7 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -630,12 +636,9 @@ int main(void) {
 
     for (int i = _____; i < _____; i++) {
 
-
-
         if (_____________) {
             max = ____;
         }
-
 
     }
 
@@ -645,4 +648,315 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:10%](./img/background.jpg)
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Définition
+
+Les fonctions permettent de **regrouper** plusieurs instructions sous forme d'un bloc **nommé et réutilisable**.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Fonction / procédure / sous-routine
+
+- **Fonction** : au sens mathématique, une fonction associe une ou plusieurs valeurs d'entrée à une ou plusieurs valeurs de sortie.
+- **Procédure** : en informatique, il s'agit d'un ensemble d'instructions regroupées pour réaliser une tâche précise, sans forcément produire un résultat.
+- **Sous-routine** : terme générique désignant une portion de code réutilisable, qu'il s'agisse d'une fonction ou d'une procédure.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+En général, on utilise le terme **fonction** lorsqu'une sous-routine n'a d'impact que sur ses valeurs de sortie.
+
+Si une sous-routine modifie d'autres éléments en dehors de son résultat (**effets de bord**), on parle plutôt de **procédure**.
+
+> ℹ️ Une fonction sans effet de bord est beaucoup plus simple à tester.
+
+> ℹ️ Cette propriété fait partie des fondements de la programmation fonctionnelle.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `divide`
+
+![center w:900px](./img/function_divide.svg)
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `divide`
+
+![center w:900px](./img/function_divide.svg)
+
+> ℹ️ Divide ne modifie pas ses entrées et ne produit pas d'effet de bords, il s'agit d'une fonction pure.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `list_add`
+
+![center w:900px](./img/function_list_add_pure.svg)
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `list_add`
+
+![center w:900px](./img/function_list_add_unpure.svg)
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `list_add`
+
+![center w:900px](./img/function_list_add_unpure_1.svg)
+
+> Cette version de `list_add` **modifie la liste passée en entrée**, elle n'est donc pas pure. On parle de fonction impure ou bien de procédure.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `malloc`
+
+![center w:900px](./img/function_malloc.svg)
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Exemple: `malloc`
+
+![center w:900px](./img/function_malloc_2.svg)
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Syntaxe
+
+Déclaration :
+
+```c
+float divide(float a, float b)
+{
+    return a / b;
+}
+```
+
+Appel d'une fonction :
+
+```c
+float result = divide(10.0, 2.0);
+```
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Paramètres & arguments
+
+- Paramètre : variable déclarée dans la définition d'une fonction.
+- Argument : valeur passée lors de l'appel de la fonction.
+
+```c
+float divide(float a, float b)
+{
+    return a / b;
+}
+
+divide(10.0, 2.0);
+```
+
+> ℹ️ Dans l'exemple ci-dessus `a`et `b` sont des **paramètres** et `10.0` et `2.0` sont des exemples **d'arguments**.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Passage par valeur
+
+En langage C, lors de l'appel d'une fonction il est uniquement possible de passer la **valeur** d'une variable et **non pas la variable elle-même**.
+
+La fonction n'ayant pas accès à la variable d'origine **elle ne peut pas la modifier**.
+
+La fonction peut uniquement écrire dans **l'espace mémoire qui lui est reservée**.
+
+### Passage de l'adresse
+
+Il est possible de **passer l'adresse d'une variable** en argument d'un appel de fonction.
+
+Dans ce cas la fonction a accès à espace mémoire "extérieur" et peut **modifier la variable d'origine**.
+
+> ℹ️ On appel ça un **passage par référence**.
+
+> ⚠️ Dans le cas du passage par valeur, une **copie** de la variable est créée.
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Passage par valeur
+
+```c
+float divide(float a , float b)
+{
+    return a / b;
+}
+
+divide(10.0, 2.0);
+
+float a = 2.0 ; 
+float b = 10.0;
+
+divide(a, b); // Ce sont les valeurs des variables a et b qui sont passees et non pas les variables elle-mêmes
+```
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Passage de l'adresse
+
+```c
+void reset(int *n) 
+{
+    *n = 0;
+}
+
+int a = 10;
+
+reset(&a);
+
+// a = 0
+```
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Quelques pièges :
+
+```c
+void fillArray(int tab[], int length, int value) 
+{
+    for (int i = 0; i < length; i++) 
+    {
+        tab[i] = value;
+    }
+}
+
+int array[10] = {0};
+
+fillArray(array, 10, 2);
+```
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Quelques pièges :
+
+```c
+typedef struct {
+    int x, y;
+} Point;
+
+void move(Point p) {
+    p.x += 10;
+    p.y += 10;
+}
+
+Point p = {
+    .x = 10,
+    .y = 2
+};
+
+move(p);
+```
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Quelques pièges :
+
+```c
+void displayArray(const int tab[], int length) 
+{
+    for (int i = 0; i < length; i++) 
+    {
+        printf("%d, ",  tab[i]);
+    }
+}
+
+int array[10] = {0};
+
+displayArray(array, 10);
+```
+
+![bg cover opacity:15%](./img/background.jpg)
+
+--------------------------------------------------------------------------------
+
+## Les fonctions et procédures en C
+
+### Quelques pièges :
+
+```c
+void pointer_to_pointer(int **p) 
+{
+    int b = 10;
+
+    *p = &b; // Attention correspond a un espace memoire ephemere (local a la fonction) 
+}
+
+int a = 10;
+
+pointer_to_pointer(&(&a));
+```
+
+![bg cover opacity:15%](./img/background.jpg)
