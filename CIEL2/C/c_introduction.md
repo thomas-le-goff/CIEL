@@ -704,7 +704,7 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 ![center w:900px](./img/function_divide.svg)
 
-> ℹ️ Divide ne modifie pas ses entrées et ne produit pas d'effet de bords, il s'agit d'une fonction pure.
+> ℹ️ Divide ne modifie pas ses entrées et ne produit pas d'effet de bord, il s'agit d'une fonction pure.
 
 ![bg cover opacity:15%](./img/background.jpg)
 
@@ -801,7 +801,7 @@ float divide(float a, float b)
 divide(10.0, 2.0);
 ```
 
-> ℹ️ Dans l'exemple ci-dessus `a`et `b` sont des **paramètres** et `10.0` et `2.0` sont des exemples **d'arguments**.
+> ℹ️ Dans l'exemple ci-dessus `a` et `b` sont des **paramètres** et `10.0` et `2.0` sont des exemples **d'arguments**.
 
 ![bg cover opacity:15%](./img/background.jpg)
 
@@ -815,15 +815,15 @@ En langage C, lors de l'appel d'une fonction il est uniquement possible de passe
 
 La fonction n'ayant pas accès à la variable d'origine **elle ne peut pas la modifier**.
 
-La fonction peut uniquement écrire dans **l'espace mémoire qui lui est reservée**.
+La fonction peut uniquement écrire dans **l'espace mémoire qui lui est réservée**.
 
 ### Passage de l'adresse
 
 Il est possible de **passer l'adresse d'une variable** en argument d'un appel de fonction.
 
-Dans ce cas la fonction a accès à espace mémoire "extérieur" et peut **modifier la variable d'origine**.
+Dans ce cas la fonction a accès à l'espace mémoire "extérieur" et peut **modifier la variable d'origine**.
 
-> ℹ️ On appel ça un **passage par référence**.
+> ℹ️ On appelle ça un **passage par référence**.
 
 > ⚠️ Dans le cas du passage par valeur, une **copie** de la variable est créée.
 
@@ -846,7 +846,7 @@ divide(10.0, 2.0);
 float a = 2.0 ; 
 float b = 10.0;
 
-divide(a, b); // Ce sont les valeurs des variables a et b qui sont passees et non pas les variables elle-mêmes
+divide(a, b); // Ce sont les valeurs des variables a et b qui sont passées et non pas les variables elles-mêmes
 ```
 
 --------------------------------------------------------------------------------
@@ -951,7 +951,7 @@ void pointer_to_pointer(int **p)
 {
     int b = 10;
 
-    *p = &b; // Attention correspond a un espace memoire ephemere (local a la fonction) 
+    *p = &b; // Attention correspond à un espace mémoire éphémère (local à la fonction) 
 }
 
 int a = 10;
