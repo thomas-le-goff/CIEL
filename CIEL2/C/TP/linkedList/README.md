@@ -21,24 +21,24 @@ Si vous voulez approfondir les listes chaînées, consultez [cet article][intro-
 ### Fichiers du projet
 
 - Les déclarations à implémenter sont dans le fichier `linked_list.h` et votre code doit être écrit dans le fichier `linked_list.c`
-- le fichier `make` contient les instructions pour construire le projet (compilation + éxecution des tests)
+- le fichier `make` contient les instructions pour construire le projet (compilation + exécution des tests)
 - `test_linked_list.c` contient le jeu de test
 
 ### Tests unitaires avec Unity
 
-Un jeu de tests unitaires correspondant aux spécifications a été rédigé pour vous permettre de valider les bons fonctionnement de votre programme (fichier `test_linked_list.c`).
+Un jeu de tests unitaires correspondant aux spécifications a été rédigé pour vous permettre de valider le bon fonctionnement de votre programme (fichier `test_linked_list.c`).
 
 Dans ce fichier chaque fonction correspond à un cas de test. Appuyez-vous sur son contenu pour concevoir et comprendre les attentes envers votre système (principe du TDD).
 
-Les tests peuvent être executés via la commande suivante :
+Les tests peuvent être exécutés via la commande suivante :
 
 ```shell
 make test
 ```
 
-Certains tests sont pour le moment ignorés (pour vous permettre d'implémenter chaque fonction petit à petit) ; pour activer plus de test vous pouvez supprimer les appels `TEST_IGNORE()` dans le fichier `test_linked_list.c`.
+Certains tests sont pour le moment ignorés (pour vous permettre d'implémenter chaque fonction petit à petit) ; pour activer plus de tests vous pouvez supprimer les appels `TEST_IGNORE()` dans le fichier `test_linked_list.c`.
 
-[Plus de details concernant le framework de test Unity](https://www.throwtheswitch.org/unity)
+[Plus de détails concernant le framework de test Unity](https://www.throwtheswitch.org/unity)
 
 ## Introduction
 
@@ -92,11 +92,11 @@ list_shift(list);
 
 ### 2 - Développement TDD
 
-**2.1** 💻 En utilisant le principe de TDD (**T**est **D**riven **D**evelopment) implémenter les fonctions `list_create`,`list_push`, `list_pop` et `list_destroy` en vous inspirant des fonctions déjà implémentées `list_unshift`, `list_shift` et `list_delete`.
+**2.1** 💻 En utilisant le principe de TDD (**T**est **D**riven **D**evelopment) implémentez les fonctions `list_create`,`list_push`, `list_pop` et `list_destroy` en vous inspirant des fonctions déjà implémentées `list_unshift`, `list_shift` et `list_delete`.
 
 ### 3 - From **int** to **station**
 
-**3.1** ✍️ La liste chaînée actuellement implémentée permet de stocker uniquement des entiers hors nous voulons stocker des `gares` proposer la modifications.
+**3.1** ✍️ La liste chaînée actuellement implémentée permet de stocker uniquement des entiers or nous voulons stocker des `gares` proposez la modification.
 
 **3.2** 💻 Adaptez le programme.
 
@@ -104,7 +104,7 @@ list_shift(list);
 
 Votre programme doit être écrit en suivante les recommandations de l'ANSSI (en terme de sécurité et qualité de code).
 
-- <https://cyber.gouv.fr/publications/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c> (nous verrons cela en détails plus tard 😉)
+- <https://cyber.gouv.fr/publications/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c> (nous verrons cela en détail plus tard 😉)
 
 Le fichier `makefile` est configuré pour approcher au maximum les contraintes et recommandations du document.
 
