@@ -63,7 +63,7 @@ Ajoutez les déclarations (prototypes) manquantes dans le fichier `tp_functions.
 
 > ℹ️ Par défaut, certains tests sont ignorés. Pour activer un test, supprimez l'appel à la fonction `TEST_IGNORE` dans le cas correspondant.
 
-**2.3** ✍️ - Il éxiste des différences subtiles entre une fonction et procédure. _Comptez combien de procédures et de combien de fonctions vous avez écrit_.
+**2.3** ✍️ - Il existe des différences subtiles entre une fonction et procédure. _Comptez combien de procédures et de combien de fonctions vous avez écrit_.
 
 <br>
 <br>

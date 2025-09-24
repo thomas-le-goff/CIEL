@@ -896,8 +896,8 @@ pointer_to_pointer(&(&a));
 
 La structure est un type de données **composite** :
 
-- il est construit à partir d'autres **type de données** (variable, structure, tableau, enum, etc.)
-- il rassemble un ensemble d'information en une unité aillant une **signification** et un **nom**
+- il est construit à partir d'autres **types de données** (variable, structure, tableau, enum, etc.)
+- il rassemble un ensemble d'informations en une unité ayant une **signification** et un **nom**
 
 En C le mot clé `struct` est utilisé pour déclarer une structure.
 
@@ -919,7 +919,7 @@ struct Point pointA;
 struct Point pointB;
 ```
 
-La structure `Point` permet de modéliser un point sur un plan 2D, ses coordonnées sont représentés par ses membres `x` et `y` de type entier.
+La structure `Point` permet de modéliser un point sur un plan 2D, ses coordonnées sont représentées par ses membres `x` et `y` de type entier.
 
 --------------------------------------------------------------------------------
 
@@ -941,7 +941,7 @@ int dot(struct Point a, struct Point b)
 }
 ```
 
-L'opérateur `.` permet d'accéder au membres (**composants**) de la structure.
+L'opérateur `.` permet d'accéder aux membres (**composants**) de la structure.
 
 --------------------------------------------------------------------------------
 
@@ -983,7 +983,7 @@ typedef struct {
 } Point;
 ```
 
-Cela permet de déclarer des variable de type `Point` plutôt que de devoir préciser `struct Point`.
+Cela permet de déclarer des variables de type `Point` plutôt que de devoir préciser `struct Point`.
 
 --------------------------------------------------------------------------------
 
