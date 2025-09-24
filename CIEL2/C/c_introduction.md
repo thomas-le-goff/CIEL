@@ -2,20 +2,19 @@
 title: Langage C introduction - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Langage C introduction - BTS CIEL
 paginate: true
 marp: true
 style: |-
   section {
-    font-size: 1.6em;
+      font-size: 1.6em;
   }
 
   img[alt~="center"] {
       display: block;
       margin: 0 auto;
-    }
+  }
 ---
 
 # Introduction au langage C
@@ -28,23 +27,21 @@ _BTS CIEL_
 
 ## Sommaire
 
-- Langage compilé
-- Programmation structurée
+- Notions de bases
 
-  - Instructions, variables et blocs
-  - Séquence
-  - Sélection
-  - Itération
+  - Langage compilé
+  - Programmation structurée
 
-- Tableaux
+    - Instructions, variables et blocs
+    - Séquence
+    - Sélection
+    - Itération
 
-- Pointeurs
+- Tableaux et pointeurs
 
 - Fonctions et procédures
 
-- Structure
-
-- Exercices
+- Structure et types avancés
 
 ![bg right right:33%](./img/summary.png)
 
@@ -307,8 +304,6 @@ for (int i = 0; i < 3; i++) {
 return 0;
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les tableaux en C
@@ -324,8 +319,6 @@ int tab4[]  = {10, 20, 30};
 printf("%d\n", tab3[0]);
 printf("%d\n", tab4[2]);
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -350,8 +343,6 @@ const int s = 5;
 int tab4[s]; // Sauf en C99 (dans un contexte local) !
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les tableaux en C
@@ -370,8 +361,6 @@ void ma_fonction(int n) {
 
 > ⚠️ Le tableau sera alloué sur la pile.
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les tableaux en C
@@ -386,8 +375,6 @@ int tab[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 printf("Taille mémoire occupée : %zu", sizeof(tab)) // 4 octets * 10 => 40 octets
 printf("Taille du tableau (dimension) : %zu", sizeof(tab) / sizeof(int)) // 4 octets * 10 / 4 octets => 10
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -406,8 +393,6 @@ Exemples d'utilisation :
 - Algèbre linéaire
 - Données tabulaires (classeur)
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Chaînes de caractères
@@ -424,8 +409,6 @@ Les chaînes de caractères se manipulent donc comme des tableaux.
 
 > ℹ️ Le langage ajoute lui-même le caractère de fin de chaîne `\0`. La taille mémoire réelle utilisée par la variable est de `3 + 1 = 4 octets`
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Chaînes de caractères
@@ -441,8 +424,6 @@ size_t length = strlen("ma chaine de caractères");
 
 printf("la chaîne est de taille : %zu \n", length); // 24
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -462,8 +443,6 @@ Fonction                              | Définition
 
 > ⚠️ Ces fonctions ont des comportements particuliers, bien lire la documentation.
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Chaînes de caractères
@@ -475,8 +454,6 @@ Les fonctions de `string.h` sont écrites pour l'encodage ASCII (ISO-8859-1).
 Si vous souhaitez manipuler d'autres types d'encodage `wchar.h` est plus adapté.
 
 > ℹ️ Table de référence de ISO-8859-1 <https://fr.wikipedia.org/wiki/ISO/CEI_8859-1>
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -501,8 +478,6 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les pointeurs en C
@@ -526,7 +501,7 @@ a++;
 
 > ⚠️ Attention à la priorité de l'opérateur *
 
-## ![bg cover opacity:15%](./img/background.jpg)
+## 
 
 --------------------------------------------------------------------------------
 
@@ -541,8 +516,6 @@ Les pointeurs permettent :
 - de manipuler des **tableaux** et des **chaînes**
 - de gérer la **mémoire dynamique** (`malloc`, `free`)
 - de passer des paramètres **par adresse** aux fonctions
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -568,8 +541,6 @@ int main(void) {
     return 0;
 }
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -598,8 +569,6 @@ void echange(___ _x, ___ _y)
 }
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Exercice 3 - tableau ou pointeur ?
@@ -618,8 +587,6 @@ int main(void) {
     return 0;
 }
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -648,8 +615,6 @@ int main(void) {
 }
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -657,8 +622,6 @@ int main(void) {
 ### Définition
 
 Les fonctions permettent de **regrouper** plusieurs instructions sous forme d'un bloc **nommé et réutilisable**.
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -669,8 +632,6 @@ Les fonctions permettent de **regrouper** plusieurs instructions sous forme d'un
 - **Fonction** : au sens mathématique, une fonction associe une ou plusieurs valeurs d'entrée à une ou plusieurs valeurs de sortie.
 - **Procédure** : en informatique, il s'agit d'un ensemble d'instructions regroupées pour réaliser une tâche précise, sans forcément produire un résultat.
 - **Sous-routine** : terme générique désignant une portion de code réutilisable, qu'il s'agisse d'une fonction ou d'une procédure.
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -684,8 +645,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 > ℹ️ Cette propriété fait partie des fondements de la programmation fonctionnelle.
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -693,8 +652,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 ### Exemple: `divide`
 
 ![center w:900px](./img/function_divide.svg)
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -706,8 +663,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 > ℹ️ Divide ne modifie pas ses entrées et ne produit pas d'effet de bord, il s'agit d'une fonction pure.
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -716,8 +671,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 ![center w:900px](./img/function_list_add_pure.svg)
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -725,8 +678,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 ### Exemple: `list_add`
 
 ![center w:900px](./img/function_list_add_unpure.svg)
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -738,8 +689,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 > Cette version de `list_add` **modifie la liste passée en entrée**, elle n'est donc pas pure. On parle de fonction impure ou bien de procédure.
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -748,8 +697,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 
 ![center w:900px](./img/function_malloc.svg)
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -757,8 +704,6 @@ Si une sous-routine modifie d'autres éléments en dehors de son résultat (**ef
 ### Exemple: `malloc`
 
 ![center w:900px](./img/function_malloc_2.svg)
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -781,8 +726,6 @@ Appel d'une fonction :
 float result = divide(10.0, 2.0);
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -802,8 +745,6 @@ divide(10.0, 2.0);
 ```
 
 > ℹ️ Dans l'exemple ci-dessus `a` et `b` sont des **paramètres** et `10.0` et `2.0` sont des exemples **d'arguments**.
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -826,8 +767,6 @@ Dans ce cas la fonction a accès à l'espace mémoire "extérieur" et peut **mod
 > ℹ️ On appelle ça un **passage par référence**.
 
 > ⚠️ Dans le cas du passage par valeur, une **copie** de la variable est créée.
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -868,8 +807,6 @@ reset(&a);
 // a = 0
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -889,8 +826,6 @@ int array[10] = {0};
 
 fillArray(array, 10, 2);
 ```
-
-![bg cover opacity:15%](./img/background.jpg)
 
 --------------------------------------------------------------------------------
 
@@ -916,8 +851,6 @@ Point p = {
 move(p);
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -938,8 +871,6 @@ int array[10] = {0};
 displayArray(array, 10);
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
-
 --------------------------------------------------------------------------------
 
 ## Les fonctions et procédures en C
@@ -951,7 +882,7 @@ void pointer_to_pointer(int **p)
 {
     int b = 10;
 
-    *p = &b; // Attention correspond à un espace mémoire éphémère (local à la fonction) 
+    *p = &b; // Attention : correspond à un espace mémoire éphémère (local à la fonction) 
 }
 
 int a = 10;
@@ -959,4 +890,121 @@ int a = 10;
 pointer_to_pointer(&(&a));
 ```
 
-![bg cover opacity:15%](./img/background.jpg)
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+La structure est un type de données **composite** :
+
+- il est construit à partir d'autres **type de données** (variable, structure, tableau, enum, etc.)
+- il rassemble un ensemble d'information en une unité aillant une **signification** et un **nom**
+
+En C le mot clé `struct` est utilisé pour déclarer une structure.
+
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+Exemple de définition d'une structure :
+
+```c
+// Définition
+struct Point {
+    int x;
+    int y;
+};
+
+// Création de variable de type "struct Point"
+struct Point pointA;
+struct Point pointB;
+```
+
+La structure `Point` permet de modéliser un point sur un plan 2D, ses coordonnées sont représentés par ses membres `x` et `y` de type entier.
+
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+### Opérateur `.`
+
+La structure se manipule comme un seul élément **composite** :
+
+```c
+struct Point {
+    int x;
+    int y;
+}
+
+int dot(struct Point a, struct Point b)
+{
+    return a.x * b.x + b.x * b.y;
+}
+```
+
+L'opérateur `.` permet d'accéder au membres (**composants**) de la structure.
+
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+### Opérateur `->`
+
+```c
+void scale(struct Point *a, int s)
+{
+    a->x * s;
+    a->y * s;
+}
+```
+
+L'opérateur `->` permet de déférencer le pointeur et d'accéder directement au membre, c'est l'équivalent de : `(*p).membre`.
+
+--------------------------------------------------------------------------------
+
+## Alias avec `typedef`
+
+Le mot clé `typedef` permet de créer un alias (définition de type).
+
+```c
+struct Point {
+    int x;
+    int y;
+};
+
+typedef struct Point Point;
+```
+
+Ou en abrégé :
+
+```c
+typedef struct {
+    int x;
+    int y;
+} Point;
+```
+
+Cela permet de déclarer des variable de type `Point` plutôt que de devoir préciser `struct Point`.
+
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+### Initialisation
+
+```c
+Point a;
+
+a.x = 10;
+a.y = 20;
+
+// one-shot
+
+Point b = {10, 20}
+Point c = {.x = 10, .y = 20}
+```
+
+--------------------------------------------------------------------------------
+
+## Structures en langage C
+
+![](./img/slither_struct.png)

@@ -5,6 +5,7 @@
 ## Presse & Communautés Tech
 
 - Ars Technica → <https://arstechnica.com/>
+- The register → <https://www.theregister.com/>
 - InfoQ (FR) → <https://www.infoq.com/fr/>
 - Hacker News → <https://news.ycombinator.com/>
 - Stack Overflow Blog → <https://stackoverflow.blog/>
@@ -16,7 +17,7 @@
 - CLUSIF (FR) → <https://clusif.fr/les-publications/>
 - CIRCL (LUX) → <https://www.circl.lu/pub/>
 - Check Point → <https://research.checkpoint.com/?t=eMwRSDZHI_QVkwGEfnc8UQ&s=09>
-- OpenWall → https://www.openwall.com/
+- OpenWall → <https://www.openwall.com/>
 
 ## Institutions & CERT
 
