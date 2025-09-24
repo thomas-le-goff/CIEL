@@ -75,7 +75,7 @@ _BTS CIEL_
 
 ## Allocation mémoire en C
 
-Un ordinateur a une quantité de mémoire limitée. Le rôle de l'OS est d'accorder (allouer) une certaine quantité de mémoire à chaque programme et de récupérer cette quantité pour la réutiliser ailleurs (recyclage).
+Un ordinateur a une quantité de mémoire limitée. Le rôle de l'OS est d'accorder (**allouer**) une certaine quantité de mémoire à chaque programme et de récupérer cette quantité pour la réutiliser ailleurs (**recyclage**).
 
 Le compilateur C offre deux manières d'allouer de la mémoire :
 
@@ -155,6 +155,59 @@ Ce mode d'allocation permet au programme d'utiliser efficacement la mémoire tou
 ## Allocation automatique
 
 ### Stack
+
+L'allocation automatique repose sur une structure de données appelée pile (stack).
+
+La pile suit une organisation de type **LIFO** (**L**ast **I**n, **F**irst **O**ut), ce qui signifie que le dernier élément ajouté sera le premier à être retiré.
+
+Dans ce modèle, une variable récemment allouée sera donc libérée en premier, imposant une proximité **temporelle et logique** entre la donnée et les instructions qui la manipulent.
+
+![center width:256px](./img/stack.gif)
+
+--------------------------------------------------------------------------------
+
+## Allocation automatique
+
+### Stack frame
+
+La stack est découpée en stack frame créée lors de l'invocation/activation de fonction :
+
+```c
+void hello(char * name)
+{
+  printf("Hello %s !\n", name); // 3 - stack frame pour printf
+}
+
+int main(void) // 1 - stack frame pour main
+{
+  char * name = "CIEL";
+  hello(name); // 2 - stack frame pour hello
+}
+```
+
+--------------------------------------------------------------------------------
+
+## Allocation automatique
+
+### Stack frame en détail
+
+![center width:360px](./img/stack_detail_2.svg)
+
+--------------------------------------------------------------------------------
+
+## Allocation automatique
+
+### Stack frame en détail
+
+![center width:360px](./img/stack_frame_detail.svg)
+
+--------------------------------------------------------------------------------
+
+## Allocation automatique
+
+### Stack frame en détail
+
+![center width:360px](./img/stack_detail_2.svg)
 
 --------------------------------------------------------------------------------
 
@@ -387,8 +440,6 @@ Cette technique est uniquement nécessaire s'il est impossible de connaître l'o
 </p>
 </div>
 
-
-
 --------------------------------------------------------------------------------
 
 ## Allocation (en bref)
@@ -407,20 +458,28 @@ En langage C il existe **3** possibilités :
 
 ## Allocation (en bref)
 
-Type d'allocation | Avantages ✅                                                                                                   | Inconvénients ❌
------------------ | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------
+Type d'allocation | Avantages ✅                    | Inconvénients ❌
+----------------- | ------------------------------ | ---------------
 **Statique**      | - Simplicité d'utilisation<br>
+
 - Accès direct et rapide<br>
-- Accessible par tout                             | - Mémoire réservée en permanence<br>
-- Peu flexible
-**Automatique**   | - Allocation/désallocation implicite et rapide<br>
+
+- Accessible par tout | - Mémoire réservée en permanence<br>
+
+- Peu flexible **Automatique** | - Allocation/désallocation implicite et rapide<br>
+
 - Gérée par la pile (_stack_)<br>
-- Portée locale          | - Taille limitée<br>
-- Portée locale
-**Dynamique**     | - Grande flexibilité (taille définie pendant l'exécution)<br>
-- Mémoire libérable quand on n'en a plus besoin | <br>
+
+- Portée locale | - Taille limitée<br>
+
+- Portée locale **Dynamique** | - Grande flexibilité (taille définie pendant l'exécution)<br>
+
+- Mémoire libérable quand on n'en a plus besoin |<br>
+
 - Gestion manuelle nécessaire (risque de fuite ou corruption)<br>
+
 - Plus lent que l'automatique (allocation dans le _heap_)<br>
+
 - Fragmentation possible
 
 --------------------------------------------------------------------------------
