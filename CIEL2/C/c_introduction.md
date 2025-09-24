@@ -74,6 +74,7 @@ int ma_variable; // Attention, comportement non prédictible si non initialisé
 ```
 
 --------------------------------------------------------------------------------
+<style scoped="">section{font-size:22px;}</style>
 
 ## 🔽 Séquence - typage
 
@@ -97,6 +98,8 @@ Structures de données :
 > ℹ️ Ces types sont directement supportés par le langage C (sans bibliothèques externes).
 
 --------------------------------------------------------------------------------
+
+<style scoped="">section{font-size:24px;}</style>
 
 ## 🔽 Séquence - typage
 
@@ -135,6 +138,8 @@ printf("Tu as %s points !\n", pts); // Typage faible : conversion implicite
 **Typage faible / fort** Est-ce qu'une variable de type **A** peut-être utilisée en tant que type **B** (sans cast explicite)
 
 --------------------------------------------------------------------------------
+
+<style scoped="">section{font-size:22px;}</style>
 
 ## 🔽 Séquence - opérations mathématiques
 
@@ -499,7 +504,7 @@ a++;
 // a contient désormais l'adresse de l'entier qui suit b
 ```
 
-> ⚠️ Attention à la priorité de l'opérateur *
+> ⚠️ Attention à la priorité de l'opérateur `*`
 
 ## 
 
@@ -748,6 +753,8 @@ divide(10.0, 2.0);
 
 --------------------------------------------------------------------------------
 
+<style scoped="">section{font-size:20px;}</style>
+
 ## Les fonctions et procédures en C
 
 ### Passage par valeur
@@ -960,6 +967,8 @@ void scale(struct Point *a, int s)
 L'opérateur `->` permet de déférencer le pointeur et d'accéder directement au membre, c'est l'équivalent de : `(*p).membre`.
 
 --------------------------------------------------------------------------------
+
+<style scoped="">section{font-size:24px;}</style>
 
 ## Alias avec `typedef`
 
