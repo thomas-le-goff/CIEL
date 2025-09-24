@@ -1,16 +1,10 @@
-# Liste chaînée
+# CIEL2 - TP structure en langage C : implémentation d'une liste chaînée
 
 ![](img/linked-list.png)
 
-## Introduction
+## Avant de commencer
 
-Vous travaillez sur un projet visant à développer un système de planification des trains pour un réseau ferroviaire très fréquenté.
-
-On vous demande de développer le système de gestion des itinéraires de train.
-
-Chaque itinéraire est constitué d'une **séquence de gares où un train donné s'arrête**.
-
---------------------------------------------------------------------------------
+L'objectif de ce TP est de vous faire implémenter une liste chaînée en utilisant les structures et des fonctions associées.
 
 ### Liste chaînée
 
@@ -24,7 +18,39 @@ Dans une **liste doublement chaînée**, chaque nœud est relié à la fois au n
 
 Si vous voulez approfondir les listes chaînées, consultez [cet article][intro-linked-list], qui les explique à l'aide de jolis schémas.
 
+### Fichiers du projet
+
+- Les déclarations à implémenter sont dans le fichier `linked_list.h` et votre code doit être écrit dans le fichier `linked_list.c`
+- le fichier `make` contient les instructions pour construire le projet (compilation + éxecution des tests)
+- `test_linked_list.c` contient le jeu de test
+
+### Tests unitaires avec Unity
+
+Un jeu de tests unitaires correspondant aux spécifications a été rédigé pour vous permettre de valider les bons fonctionnement de votre programme (fichier `test_linked_list.c`).
+
+Dans ce fichier chaque fonction correspond à un cas de test. Appuyez-vous sur son contenu pour concevoir et comprendre les attentes envers votre système (principe du TDD).
+
+Les tests peuvent être executés via la commande suivante :
+
+```shell
+make test
+```
+
+Certains tests sont pour le moment ignorés (pour vous permettre d'implémenter chaque fonction petit à petit) ; pour activer plus de test vous pouvez supprimer les appels `TEST_IGNORE()` dans le fichier `test_linked_list.c`.
+
+[Plus de details concernant le framework de test Unity](https://www.throwtheswitch.org/unity)
+
+## Introduction
+
+Vous travaillez sur un projet visant à développer un système de planification des trains pour un réseau ferroviaire très fréquenté.
+
+On vous demande de développer le système de gestion des itinéraires de train.
+
+Chaque itinéraire est constitué d'une **séquence de gares où un train donné s'arrête**.
+
 ## Instructions
+
+### Spécifications fonctionnelles
 
 Votre équipe a décidé d'utiliser une **liste doublement chaînée** pour représenter chaque itinéraire.
 
@@ -44,29 +70,41 @@ Le système doit suivre la spécification suivante :
 
 - La taille d'un itinéraire se mesure non pas en distance parcourue, mais par le nombre de gares desservies.
 
-Les déclarations à implémenter sont dans le fichier `linked_list.h` et votre code doit être écrit dans le fichier `linked_list.c`
+### 1 - Formalisation du problème
 
-### Tests
+**1.1** ✍️ lisez le jeu de test `test_linked_list` et le fichier `linked_list.h` et donnez l'état de la liste après les opérations suivantes :
 
-Un jeu de tests unitaires correspondant aux spécifications a été rédigé pour vous permettre de valider les bons fonctionnement de votre programme (fichier `test_linked_list.c`).
+```c
+struct list *list = list_create();
 
-Dans ce fichier chaque fonction correspond à un cas de test. Appuyez-vous sur son contenu pour concevoir et comprendre les attentes envers votre système (principe du TDD).
-
-Les tests peuvent être executés via la commande suivante :
-
-```shell
-make test
+list_push(list, 1);
+list_push(list, 2);
+list_pop(list);
+list_push(list, 3);
+list_shift(list);
+list_unshift(list, 4);
+list_push(list, 5);
+list_pop(list);
+list_shift(list);
 ```
 
-Certains tests sont pour le moment ignorés (pour vous permettre d'implémenter chaque fonction petit à petit) ; pour activer plus de test vous pouvez supprimer les appels `TEST_IGNORE()` dans le fichier `test_linked_list.c`.
+**1.2** ✍️ à partir de la spécification fonctionnelle et des autres éléments à votre disposition détaillez les éléments à mettre en place. _Donnez la/les structure(s), fonction(s) et ou procédure(s) nécessaire(s)_.
 
-[Plus de details concernant le framework de test Unity](https://www.throwtheswitch.org/unity)
+### 2 - Développement TDD
+
+**2.1** 💻 En utilisant le principe de TDD (**T**est **D**riven **D**evelopment) implémenter les fonctions `list_create`,`list_push`, `list_pop` et `list_destroy` en vous inspirant des fonctions déjà implémentées `list_unshift`, `list_shift` et `list_delete`.
+
+### 3 - From **int** to **station**
+
+**3.1** ✍️ La liste chaînée actuellement implémentée permet de stocker uniquement des entiers hors nous voulons stocker des `gares` proposer la modifications.
+
+**3.2** 💻 Adaptez le programme.
 
 ### Contraintes
 
 Votre programme doit être écrit en suivante les recommandations de l'ANSSI (en terme de sécurité et qualité de code).
 
-- <https://cyber.gouv.fr/publications/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c>
+- <https://cyber.gouv.fr/publications/regles-de-programmation-pour-le-developpement-securise-de-logiciels-en-langage-c> (nous verrons cela en détails plus tard 😉)
 
 Le fichier `makefile` est configuré pour approcher au maximum les contraintes et recommandations du document.
 
