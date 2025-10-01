@@ -16,7 +16,7 @@ Dans une **liste doublement chaînée**, chaque nœud est relié à la fois au n
 
 ![](https://upload.wikimedia.org/wikipedia/commons/2/26/Liste_doublement_cha%C3%AEn%C3%A9e.png)
 
-Si vous voulez approfondir les listes chaînées, consultez [cet article][intro-linked-list], qui les explique à l'aide de jolis schémas.
+Si vous voulez approfondir les listes chaînées, consultez [cet article](https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d), qui les explique à l'aide de jolis schémas.
 
 ### Fichiers du projet
 
@@ -128,6 +128,4 @@ coredumpctl gdb <PID>
 
 ## Crédits
 
-Cet exercice provient de la plateforme [exercism.org](https://exercism.org/).
-
-[intro-linked-list]: https://medium.com/basecs/whats-a-linked-list-anyway-part-1-d8b7e6508b9d
+Ce TP prend appui sur un exercice de la plateforme [exercism.org](https://exercism.org/).

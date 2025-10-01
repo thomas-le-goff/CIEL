@@ -61,15 +61,13 @@ _BTS CIEL_
 
 ## Rappel sur la mémoire
 
-### Vitesse des différentes mémoires
+### Différentes mémoires
 
 ![center width:480px](./img/memory_hierarchy.png)
 
 --------------------------------------------------------------------------------
 
-## Rappel sur la mémoire
-
-### Adressage mémoire
+![center width:200px](./img/memory_stack.svg)
 
 --------------------------------------------------------------------------------
 
