@@ -1,6 +1,6 @@
 # CIEL 2 - TP allocation mémoire 🐍🍎
 
-Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intêret en vous faisant programmer un jeu de Snake.
+Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intérêt en vous faisant programmer un jeu de Snake.
 
 <center>
   <img src="./resources/snake.gif" alt="locking-door-fail-sliding-door" width="280">
@@ -27,7 +27,7 @@ make && ./bin/Debug/snaCke
 
 > ℹ️ Me solliciter si vous rencontrez une erreur liée à la compilation/exécution du programme.
 
-> Voici un document de référence des fonctions mis à disposition par Raylib <https://www.raylib.com/cheatsheet/cheatsheet.html>
+> Voici un document de référence des fonctions mises à disposition par Raylib <https://www.raylib.com/cheatsheet/cheatsheet.html>
 
 ## Instructions
 
@@ -52,17 +52,17 @@ make && ./bin/Debug/snaCke
 
 ### 2 - Manger la pomme 🍎
 
-**2.1** 💻 - En vous appuyant sur la forme géométrique de la pomme et de la tête du serpent modifier le corps de la fonction `check_square_collision` pour retourner `true` quand une collision à lieu entre le carré position `a` de côté `a_size` et le carré de position `b` de côté `b_size`.
+**2.1** 💻 - En vous appuyant sur la forme géométrique de la pomme et de la tête du serpent modifier le corps de la fonction `check_square_collision` pour retourner `true` quand une collision a lieu entre le carré position `a` de côté `a_size` et le carré de position `b` de côté `b_size`.
 
 <br>
 <br>
 
-**2.2** 💻 - Dans la fonction `update` détectez l'appel à la fonction `check_square_collision`. Mettez à jour le score, déplacez la pomme et faite grandir le serpent dans le cas ou une collision avec la pomme est détéctée.
+**2.2** 💻 - Dans la fonction `update` détectez l'appel à la fonction `check_square_collision`. Mettez à jour le score, déplacez la pomme et faites grandir le serpent dans le cas où une collision avec la pomme est détectée.
 
 <br>
 <br>
 
-**2.3** 💻 - Ecrivez le coprs de la fonction `draw_score` pour afficher un texte avec le score à l'endroit de votre choix sur l'écran.
+**2.3** 💻 - Ecrivez le corps de la fonction `draw_score` pour afficher un texte avec le score à l'endroit de votre choix sur l'écran.
 
 <br>
 <br>
@@ -74,7 +74,7 @@ make && ./bin/Debug/snaCke
 **3.1** 💻 - La fonction `grow_snake` doit faire grandir le serpent d'un "morceau", écrivez le corps de cette fonction en suivant les instructions suivantes :
 
 - Allouez un espace mémoire pour contenir le nouveau "morceau" du serpent
-- Le serpent utilise le principe de liste chaînée, chaque "morceau" (maillon) contient un pointeur vers le suivante (pour plus de détail : <https://fr.wikipedia.org/wiki/Liste_cha%C3%AEn%C3%A9e>) :
+- Le serpent utilise le principe de liste chaînée, chaque "morceau" (maillon) contient un pointeur vers le suivant (pour plus de détails : <https://fr.wikipedia.org/wiki/Liste_cha%C3%AEn%C3%A9e>) :
 
   - Le nouveau "morceau" doit être inséré juste après la tête.
   - La position du nouveau maillon est la position actuelle de la tête.
@@ -82,10 +82,10 @@ make && ./bin/Debug/snaCke
 <br>
 <br>
 
-**3.2** 💻 - Maintenant que le serpent grandi, il est nécessaire d'adapter la fonction `move_snake` pour que chaque maillon soit dessiné l'un après l'autre :
+**3.2** 💻 - Maintenant que le serpent grandit, il est nécessaire d'adapter la fonction `move_snake` pour que chaque maillon soit dessiné l'un après l'autre :
 
 - Le maillon N+1 doit prendre la position du maillon N.
-- La tête doit prendre la position passé en paramètre (`new_position`)
+- La tête doit prendre la position passée en paramètre (`new_position`)
 
 <br>
 <br>
@@ -106,4 +106,4 @@ make && ./bin/Debug/snaCke
 
 ## Crédits
 
-On oubliera pas de remercier [Ramon Santamaria (raysan5)](https://github.com/raysan5) pour cette bibliothèque de qualité qui simplifie grandement les choses.
+On n'oubliera pas de remercier [Ramon Santamaria (raysan5)](https://github.com/raysan5) pour cette bibliothèque de qualité qui simplifie grandement les choses.
