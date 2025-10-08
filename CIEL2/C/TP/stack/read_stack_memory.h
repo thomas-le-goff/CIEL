@@ -11,25 +11,25 @@
 
 typedef unsigned char u8;
 
-static void dump_stack_memory(const u8 *from, const u8 *to)
+__attribute__((noinline)) static void dump_stack_memory(const u8 *from, const u8 *to)
 {
-    const u8 *lo = from;
-    const u8 *hi = to;
+    const u8 *lo = to;
+    const u8 *hi = from;
 
-    printf("From %p to %p ", hi, lo);
+    printf(GREEN "From %p to %p \n", lo, hi);
 
     printf(GREEN "Adresse \t Valeur (dec) \t Valeur (hex)\n");
-    printf("---------------------------------------------\n");
+    printf(GREEN "---------------------------------------------\n");
 
     for (const u8 *i = lo; i != hi; i++)
     {
-        printf("%p \t %i \t\t 0x%02X\n", i, *i, *i);
+        printf(GREEN "%p \t %i \t\t 0x%02X\n", i, *i, *i);
     }
 
-    printf("---------------------------------------------\n");
+    printf(GREEN "---------------------------------------------\n");
 }
 
-static void read_stack_bytes(size_t buffer_size, u8 buffer[], const u8 *start)
+__attribute__((noinline)) static void read_stack_bytes(size_t buffer_size, u8 buffer[], const u8 *start)
 {
     u8 *ptr = (u8 *)start;
     for (size_t i = 0; i < buffer_size; i++)
@@ -39,17 +39,23 @@ static void read_stack_bytes(size_t buffer_size, u8 buffer[], const u8 *start)
     }
 }
 
-static void diff_dump(const u8 *start, size_t buffer_size, const u8 buffer_before[], const u8 buffer_after[])
+__attribute__((noinline)) static void diff_dump(const u8 *start, size_t buffer_size, const u8 buffer_before[], const u8 buffer_after[])
 {
     printf(GREEN "Addr\t\tDec\tHex (changed bytes only)\n");
-    printf("------------------------------------------------\n");
+    printf(GREEN "------------------------------------------------\n");
 
     // 2.2 Complétez ce programme pour afficher les différences entre buffer_before et buffer_after
 
     // Ligne pour afficher une diff
-    // printf("%p\t%3u\t0x%02X  (was %3u / 0x%02X)\n", &start[i], buffer_after[i], buffer_after[i], buffer_before[i], buffer_before[i]);
+    for (size_t i = 0; i < buffer_size; i++)
+    {
+        if (buffer_before[i] != buffer_after[i])
+        {
+            printf(GREEN "%p\t%3u\t0x%02X  (was %3u / 0x%02X)\n", &start[i], buffer_after[i], buffer_after[i], buffer_before[i], buffer_before[i]);
+        }
+    }
 
-    printf("------------------------------------------------\n");
+    printf(GREEN "------------------------------------------------\n");
 }
 
 #endif

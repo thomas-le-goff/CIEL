@@ -3,7 +3,7 @@
 
 #include "read_stack_memory.h"
 
-void *magic_function(size_t buffer_size, u8 stack_snapshot_buffer[buffer_size])
+__attribute__((noinline)) void *magic_function(size_t buffer_size, u8 stack_snapshot_buffer[buffer_size])
 {
     void *rbp = __builtin_frame_address(0);
 

@@ -4,6 +4,12 @@ This GitHub repository contains all the sources for the courses, TDs and TPs I t
 
 These courses are development-oriented and focus on Cybersecurity and good development practices (trusted computing).
 
+## Todo
+
+CI/CD:
+- Generate PDF and HTML from markdown course file
+- Generate ZIP from all TPs subfolder 
+
 ## Get Started
 
 The courses are mainly in slideshow format and are written using Markdown and the MARP framework. (Course as code 😉)

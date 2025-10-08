@@ -314,11 +314,133 @@ int main(){
 
 --------------------------------------------------------------------------------
 
+## Allocation statique et automatique
+
+```c
+#include <stdio.h>
+
+const int G_OFFSET_X, G_OFFSET_Y;
+const int G_I_WIDTH, G_I_HEIGHT = 16, 16;
+const int G_GAP = 4;
+const int G_I_PER_LINE = 2;
+
+typedef struct { char * title; } MenuItem;
+
+void draw_rect(int x, int y, int w, int h) {
+  for (int i = x; i<x+w; i++) {
+    for (int j = y; j<y+h; j++) {
+      draw_pixel(i,j);
+    }  
+  }
+}
+
+int main() {
+  MenuItem menu[4];
+
+  menu[0] = MenuItem {.title = "Netflix"};
+  menu[1] = MenuItem {.title = "Prime Video"};
+  // ...
+
+  const menu_size = sizeof(menu)/sizeof(MenuItem);
+
+  int row = 0;
+  int col;
+
+  for(size_t i=0; i<menu_size; i++) {
+    col = i;
+
+    draw_rect(col*G_I_WIDTH+G_I_GAP, row*G_i_HEIGHT+G_I_GAP, G_I_WIDTH,G_I_HEIGHT);
+
+    row += (i%G_I_PER_LINE != 0 ? 1 : 0); 
+  }
+}
+```
+
+--------------------------------------------------------------------------------
+
 ## Allocation dynamique
 
-L'allocation dynamique est une technique qui permet au programme de choisir l'espace mémoire qu'il occupe pendant son exécution.
+### Un peu de contexte
 
-4 fonctions standardisées sont mises à disposition par la **libc** permettant de demander à l'OS des blocs mémoires de tailles précises.
+Cas d'usage : charger le contenu d'un fichier (ex: `mon_export_canva.pdf`) en mémoire pour l'afficher à l'écran (lecteur de PDF).
+
+Comment savoir l'espace mémoire occupé par le contenu du fichier ?
+
+![center](./img/file_to_memory.svg)
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+### Un peu de contexte
+
+Cas d'usage : charger le contenu d'un fichier (ex: `mon_export_canva.pdf`) en mémoire pour l'afficher à l'écran (lecteur de PDF).
+
+Comment savoir **l'espace mémoire occupé** par le contenu du fichier ?
+
+_Deux solutions possibles :_
+
+- Pré-allouer (allocation statique ou automatique) un volume suffisament important pour espérer contenir la plus part des PDF ...
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+### Un peu de contexte
+
+Cas d'usage : charger le contenu d'un fichier (ex: `mon_export_canva.pdf`) en mémoire pour l'afficher à l'écran (lecteur de PDF).
+
+Comment savoir **l'espace mémoire occupé** par le contenu du fichier ?
+
+_Deux solutions possibles :_
+
+- Pré-allouer (allocation statique ou automatique) **Problèmes** : espace mémoire gaspillé, espace mémoire insuffisant, etc.
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+### Un peu de contexte
+
+Cas d'usage : charger le contenu d'un fichier (ex: `mon_export_canva.pdf`) en mémoire pour l'afficher à l'écran (lecteur de PDF).
+
+Comment savoir **l'espace mémoire occupé** par le contenu du fichier ?
+
+_Deux solutions possibles :_
+
+- Pré-allouer (allocation statique ou automatique)
+
+  - _Problèmes_ : espace mémoire gaspillé, espace mémoire insuffisant, etc.
+
+- Allouer au fur et à mesure la mémoire nécessaire (**allocation dynamique**)
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+### Un peu de contexte
+
+Cas d'usage : charger le contenu d'un fichier (ex: `mon_export_canva.pdf`) en mémoire pour l'afficher à l'écran (lecteur de PDF).
+
+Comment savoir **l'espace mémoire occupé** par le contenu du fichier ?
+
+_Deux solutions possibles :_
+
+- Pré-allouer (allocation statique ou automatique)
+
+  - _Problèmes_ : espace mémoire gaspillé, espace mémoire insuffisant, etc.
+
+- Allouer au fur et à mesure la mémoire nécessaire (**allocation dynamique**)
+
+  - _Problèmes_ : "error-prone", performance.
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+L'allocation dynamique est une technique qui permet au programme de **modifier l'espace mémoire** qu'il occupe **pendant son exécution**.
+
+**4 fonctions** standardisées sont mises à disposition par la **libc** permettant de demander à l'OS des blocs mémoires de tailles précises.
 
 --------------------------------------------------------------------------------
 
@@ -411,6 +533,8 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 ### void *
 
+![center](./img/void-black-hole.jpg)
+
 --------------------------------------------------------------------------------
 
 ## Allocation dynamique
@@ -419,7 +543,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 L'allocation dynamique est généralement plus coûteuse et plus complexe à gérer que les deux autres techniques d'allocation.
 
-Cette technique est uniquement nécessaire s'il est impossible de connaître l'occupation mémoire d'un élément avant que le programme soit exécuté.
+Cette technique est **uniquement nécessaire s'il est impossible de connaître l'occupation mémoire d'un élément avant que le programme soit exécuté**.
 
 --------------------------------------------------------------------------------
 
@@ -452,37 +576,24 @@ En langage C il existe **3** possibilités :
 
 --------------------------------------------------------------------------------
 
-<style scoped="">section{font-size:20px;}</style>
+## Null References: The Billion Dollar Mistake
 
-## Allocation (en bref)
+L'expression "Null References: The Billion Dollar Mistake" vient de Tony Hoare, l'inventeur du concept de **null reference** dans les années 1960 (Algol 60).
 
-Type d'allocation | Avantages ✅                    | Inconvénients ❌
------------------ | ------------------------------ | ---------------
-**Statique**      | - Simplicité d'utilisation<br>
-
-- Accès direct et rapide<br>
-
-- Accessible par tout | - Mémoire réservée en permanence<br>
-
-- Peu flexible **Automatique** | - Allocation/désallocation implicite et rapide<br>
-
-- Gérée par la pile (_stack_)<br>
-
-- Portée locale | - Taille limitée<br>
-
-- Portée locale **Dynamique** | - Grande flexibilité (taille définie pendant l'exécution)<br>
-
-- Mémoire libérable quand on n'en a plus besoin |<br>
-
-- Gestion manuelle nécessaire (risque de fuite ou corruption)<br>
-
-- Plus lent que l'automatique (allocation dans le _heap_)<br>
-
-- Fragmentation possible
+Il considère que l'introduction de la valeur null dans les langages de programmation a **causé innombrables bugs, pannes, failles de sécurité et pertes financières**.
 
 --------------------------------------------------------------------------------
 
 ## Null References: The Billion Dollar Mistake
+
+### Alternatives
+
+Catégorie                                 | Exemples                              | Philosophie                                    | Sécurité
+----------------------------------------- | ------------------------------------- | ---------------------------------------------- | -------------
+🟥 **Permissifs**                         | C, C++, Java, Python, Go              | `null` libre, vérifications manuelles          | ⚠️ Faible
+🟨 **Encadrés / Nullabilité déclarative** | C# 8+, Kotlin, Swift, TypeScript, Ada | `?` ou `not null`, contrôlé par le compilateur | ✅ Bonne
+🟩 **Optionnels explicites**              | Rust, Haskell, F#, OCaml, Elm, Scala  | `Option` / `Maybe`, absence = type             | 🟢 Excellente
+🟦 **Alternatifs / Spécialisés**          | Erlang, Elixir, Prolog, SPARK, Coq    | Pas de `null` dans le modèle, tout est valeur  | 🧠 Totale
 
 --------------------------------------------------------------------------------
 
