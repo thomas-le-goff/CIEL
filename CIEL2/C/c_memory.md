@@ -533,7 +533,7 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 ### void *
 
-![center](./img/void-black-hole.jpg)
+![center w:640](./img/void-black-hole.jpg)
 
 --------------------------------------------------------------------------------
 

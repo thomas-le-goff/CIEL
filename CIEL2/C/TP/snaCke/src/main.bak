@@ -1,3 +1,12 @@
+/*
+Raylib example file.
+This is an example main file for a simple raylib project.
+Use this as a starting point or replace it with your code.
+
+by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit https://creativecommons.org/publicdomain/zero/1.0/
+
+*/
+
 #include <stdlib.h>
 #include <math.h>
 
@@ -18,6 +27,8 @@
 #define STEP_PER_SECOND 4.0f
 #define STEP_INTERVAL (1.0f / STEP_PER_SECOND)
 
+#define PINK (Color){255, 100, 150, 255}
+
 typedef enum
 {
 	Up,	   // 0
@@ -37,90 +48,97 @@ typedef struct GameState
 	SnakeChunk snake_head;
 	Vector2 apple_position;
 	Direction snake_direction;
-	int score;
 	float accumulator;
 } GameState;
 
-/**
- * @brief Checks if two squares are colliding.
- *
- * Determines whether two square entities, centered at positions `a` and `b`,
- * overlap each other. The size (width/height) of each square is given by
- * `a_size` and `b_size`.
- *
- * @param a        Center position of the first square.
- * @param b        Center position of the second square.
- * @param a_size   Size (width/height) of the first square.
- * @param b_size   Size (width/height) of the second square.
- *
- * @return true if the two squares overlap, false otherwise.
- */
+// Exo : inspecter l'usage de la mémoire par le programme (Valgring, configuration GCC, Debugger de Visual Studio Code)
+
+// Exo : coder cette méthode.
 bool check_square_collision(Vector2 a, Vector2 b, int a_size, int b_size)
 {
-	// TODO: Implement square collision detection logic.
-	return false;
-}
-
-/**
- * @brief Moves the snake to a new position.
- *
- * Updates the position of the snake's head and shifts each body segment
- * to follow the position of the previous one. The order of segments
- * is preserved.
- *
- * @param head          Pointer to the first segment (head) of the snake.
- * @param new_position  New position of the head.
- */
-void move_snake(SnakeChunk *head, Vector2 new_position)
-{
-	// TODO: Implement snake movement logic.
-}
-
-/**
- * @brief Grows the snake by adding one new segment.
- *
- * Adds a new segment at the end of the snake, copying the position of
- * the current last segment. This increases the total length of the snake.
- *
- * @param head  Pointer to the first segment (head) of the snake.
- */
-void grow_snake(SnakeChunk *head)
-{
-	// TODO: Implement snake growth logic.
-}
-
-/**
- * @brief Frees all memory used by the snake.
- *
- * Iterates through the linked list representing the snake and releases
- * each dynamically allocated segment.
- *
- * @param head  Pointer to the first segment (head) of the snake.
- */
-void free_snake(SnakeChunk *head)
-{
-	// TODO: Implement memory cleanup for the snake.
+	return a.x <= b.x + b_size && a.x + a_size >= b.x && a.y <= b.y + b_size && a.y + a_size >= b.y;
 }
 
 Vector2 move_apple(Vector2 position)
 {
-	// Bonus : adaptez les valeurs pour rendre le jeu plus juste...
+	// Exo : adapter les valeurs pour rendre le jeu plus juste => mettre un écart de taille SNAKE_SIZE entre le mure et la pomme.
 	position.x = GetRandomValue(SNAKE_CHUNK_SIZE, WINDOW_WIDTH - SNAKE_CHUNK_SIZE),
 	position.y = GetRandomValue(SNAKE_CHUNK_SIZE, WINDOW_HEIGHT - SNAKE_CHUNK_SIZE);
 
 	return position;
 }
 
+void move_snake(SnakeChunk *head, Vector2 new_position)
+{
+	// Exo : version recursive (plus simple mais attention au limite)
+
+	// Recursive version
+	// if (head) {
+	// 	move_snake(head->next, head->position);
+	// 	head->position = new_position;
+	// }
+
+	Vector2 last_position = new_position;
+	SnakeChunk *current = head;
+
+	// Exo: qu'est-ce que la NASA n'aime pas dans ce code ?
+
+	while (current)
+	{
+		Vector2 current_position = current->position;
+
+		current->position = last_position;
+		last_position = current_position;
+		current = current->next;
+	}
+}
+
+void grow_snake(SnakeChunk *head)
+{
+	SnakeChunk *new = (SnakeChunk *)malloc(sizeof(SnakeChunk));
+
+	// Exo: doit-on réellement rechercher la queue ? Est-ce qu'il n'y a pas une solution moins couteuse ?
+	// SnakeChunk *tail = head;
+	// while (tail->next)
+	// {
+	// 	tail = tail->next;
+	// }
+
+	// Exo: découverte et utilisation de l'allocateur mémoire proposé par Raylib.
+
+	// next->position = head->position;
+	// next->next = NULL; // Exo : en quoi cette ligne est-elle nécessaire ? Que ce passe-t-il si ->next n'est pas initialisé à NULL ?
+
+	// tail->next = next;
+
+	// Alternative : insertion en tête
+	new->position = head->position;
+	new->next = head->next;
+
+	head->next = new;
+}
+
 GameState update(GameState state)
 {
+	// Exo : comment améliorer ce code ? => ne pas utiliser un enum mais directement un vecteur pour exprimer la direction du serpent.
+	// Move the snake
+
 	if (IsKeyDown(KEY_UP) && state.snake_direction > Down)
 	{
 		state.snake_direction = Up;
+	}
+	else if (IsKeyDown(KEY_DOWN) && state.snake_direction > Down)
+	{
+		state.snake_direction = Down;
 	}
 
 	if (IsKeyDown(KEY_RIGHT) && state.snake_direction <= Down)
 	{
 		state.snake_direction = Right;
+	}
+	else if (IsKeyDown(KEY_LEFT) && state.snake_direction <= Down)
+	{
+		state.snake_direction = Left;
 	}
 
 	float dt = GetFrameTime();
@@ -136,15 +154,27 @@ GameState update(GameState state)
 		case Up:
 			new_position.y -= SNAKE_SPEED;
 			break;
+		case Down:
+			new_position.y += SNAKE_SPEED;
+			break;
+		case Right:
+			new_position.x += SNAKE_SPEED;
+			break;
+		case Left:
+			new_position.x -= SNAKE_SPEED;
+			break;
+
 		default:
 			break;
 		}
 
 		move_snake(&state.snake_head, new_position);
 
+		// Does the snake eats the apple ?
 		if (check_square_collision(state.snake_head.position, state.apple_position, SNAKE_CHUNK_SIZE, APPLE_SIZE))
 		{
-			// TODO
+			state.apple_position = move_apple(state.apple_position);
+			grow_snake(&state.snake_head);
 		}
 	}
 
@@ -209,6 +239,7 @@ void draw_snake(SnakeChunk *head)
 	int i = 0;
 	while (chunk)
 	{
+		// Head
 		if (chunk != head)
 		{
 			DrawRectangleWithMargin(chunk->position.x, chunk->position.y, SNAKE_CHUNK_SIZE, SNAKE_CHUNK_SIZE, DARKGREEN, Clamp(i, 1, 16));
@@ -255,16 +286,13 @@ void draw_apple(Vector2 apple_position)
 	DrawRectangle(stemX, stemY, APPLE_STEM_WIDTH, APPLE_STEM_HEIGHT, BROWN);
 }
 
-void draw_score(int score)
-{
-	// TODO
-}
-
 void draw(GameState state)
 {
+	// Draw apple
 	draw_apple(state.apple_position);
+
+	// Draw snake
 	draw_snake(&state.snake_head);
-	draw_score(state.score);
 }
 
 int main()
@@ -279,7 +307,6 @@ int main()
 			.next = NULL},
 		.snake_direction = Up,
 		.apple_position = {10, 10},
-		.score = 0,
 		.accumulator = 0};
 
 	while (!WindowShouldClose())

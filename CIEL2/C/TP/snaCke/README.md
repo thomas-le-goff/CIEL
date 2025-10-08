@@ -1,113 +1,109 @@
-# Raylib-Quickstart
-A simple cross platform template for setting up a project with the bleeding edge raylib code.
-Works with C or C++.
+# CIEL 2 - TP allocation mémoire 🐍🍎
 
-## Supported Platforms
-Quickstart supports the main 3 desktop platforms:
-* Windows
-* Linux
-* MacOS
+Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intêret en vous faisant programmer un jeu de Snake.
 
-# Naming projects
-Do not name your game project 'raylib', it will conflict with the raylib library.
+<center>
+  <img src="./resources/snake.gif" alt="locking-door-fail-sliding-door" width="280">
+</center>
 
-# VSCode Users (all platforms)
-*Note* You must have a compiler toolchain installed in addition to vscode.
+## Avant de commencer
 
-* Download the quickstart
-* Rename the folder to your game name
-* Open the folder in VSCode
-* Run the build task ( CTRL+SHIFT+B or F5 )
-* You are good to go
+Ce projet utilise la bibliothèque [Raylib](https://www.raylib.com/) pour faciliter l'utilisation des entrées (clavier) et sorties (dessins sur l'écran).
 
-# Windows Users
-There are two compiler toolchains available for windows, MinGW-W64 (a free compiler using GCC), and Microsoft Visual Studio
-## Using MinGW-W64
-* Double click the `build-MinGW-W64.bat` file
-* CD into the folder in your terminal
-  * if you are usiing the W64devkit and have not added it to your system path environment variable, you must use the W64devkit.exe terminal, not CMD.exe
-  * If you want to use cmd.exe or any other terminal, please make sure that gcc/mingw-W64 is in your path environment variable.
-* run `make`
-* You are good to go
+Afin de télécharger et compiler la bibliothèque exécutez les commandes suivantes (à faire uniquement une fois):
 
-### Note on MinGW-64 versions
-Make sure you have a modern version of MinGW-W64 (not mingw).
-The best place to get it is from the W64devkit from
-https://github.com/skeeto/w64devkit/releases
-or the version installed with the raylib installer
-#### If you have installed raylib from the installer
-Make sure you have added the path
+```c
+cd build
+./premake5 gmake
+cd ..
+make
+```
 
-`C:\raylib\w64devkit\bin`
+Vous pourrez ensuite pour compiler et lancer votre programme utiliser la commande suivante :
 
-To your path environment variable so that the compiler that came with raylib can be found.
+```c
+make && ./bin/Debug/snaCke
+```
 
-DO NOT INSTALL ANOTHER MinGW-W64 from another source such as msys2, you don't need it.
+> ℹ️ Me solliciter si vous rencontrez une erreur liée à la compilation/exécution du programme.
 
-## Microsoft Visual Studio
-* Run `build-VisualStudio2022.bat`
-* double click the `.sln` file that is generated
-* develop your game
-* you are good to go
+> Voici un document de référence des fonctions mis à disposition par Raylib <https://www.raylib.com/cheatsheet/cheatsheet.html>
 
-# Linux Users
-* CD into the build folder
-* run `./premake5 gmake`
-* CD back to the root
-* run `make`
-* you are good to go
+## Instructions
 
-# MacOS Users
-* CD into the build folder
-* run `./premake5.osx gmake`
-* CD back to the root
-* run `make`
-* you are good to go
+### 1 - Déplacer le serpent 🐍
 
-# Output files
-The built code will be in the bin dir
+**1.1** 💻 - Sachant `IsKeyDown(KEY_UP)` permet de savoir quand la touche "flêche du haut" est appuyée adaptez les premières instructions de la fonction `update` pour permettre au serpent de descendre et d'aller à gauche.
 
-# Working directories and the resources folder
-The example uses a utility function from `path_utils.h` that will find the resources dir and set it as the current working directory. This is very useful when starting out. If you wish to manage your own working directory you can simply remove the call to the function and the header.
+<br>
+<br>
 
-# Changing to C++
-Simply rename `src/main.c` to `src/main.cpp` and re-run the steps above and do a clean build.
+**1.2** 💻 - Adaptez l'instruction `switch` présente dans la fonction `update` pour gérer les cas `Down`, `Right`, `Left`.
 
-# Using your own code
-Simply remove `src/main.c` and replace it with your code, and re-run the steps above and do a clean build.
+<br>
+<br>
 
-# Building for other OpenGL targets
-If you need to build for a different OpenGL version than the default (OpenGL 3.3) you can specify an OpenGL version in your premake command line. Just modify the bat file or add the following to your command line
+**1.3** 💻 Sachant que `SnakeChunk *head` est un pointeur vers la tête du serpent et en étudiant le fonctionnement de la fonction `draw_snake` (qui dessine le serpent) écrivez le corps de la fonction `move_snake`.
 
-## For OpenGL 1.1
-`--graphics=opengl11`
+<br>
+<br>
 
-## For OpenGL 2.1
-`--graphics=opengl21`
+> ℹ️ à ce stade vous devriez avoir un serpent qui se déplace dans les 4 directions.
 
-## For OpenGL 4.3
-`--graphics=opengl43`
+### 2 - Manger la pomme 🍎
 
-## For OpenGLES 2.0
-`--graphics=opengles2`
+**2.1** 💻 - En vous appuyant sur la forme géométrique de la pomme et de la tête du serpent modifier le corps de la fonction `check_square_collision` pour retourner `true` quand une collision à lieu entre le carré position `a` de côté `a_size` et le carré de position `b` de côté `b_size`.
 
-## For OpenGLES 3.0
-`--graphics=opengles3`
+<br>
+<br>
 
-# License
-Copyright (c) 2020-2025 Jeffery Myers
+**2.2** 💻 - Dans la fonction `update` détectez l'appel à la fonction `check_square_collision`. Mettez à jour le score, déplacez la pomme et faite grandir le serpent dans le cas ou une collision avec la pomme est détéctée.
 
-This software is provided "as-is", without any express or implied warranty. In no event 
-will the authors be held liable for any damages arising from the use of this software.
+<br>
+<br>
 
-Permission is granted to anyone to use this software for any purpose, including commercial 
-applications, and to alter it and redistribute it freely, subject to the following restrictions:
+**2.3** 💻 - Ecrivez le coprs de la fonction `draw_score` pour afficher un texte avec le score à l'endroit de votre choix sur l'écran.
 
-  1. The origin of this software must not be misrepresented; you must not claim that you 
-  wrote the original software. If you use this software in a product, an acknowledgment 
-  in the product documentation would be appreciated but is not required.
+<br>
+<br>
 
-  2. Altered source versions must be plainly marked as such, and must not be misrepresented
-  as being the original software.
+> ℹ️ - à ce stade le serpent peut manger la pomme et le score est incrémenté.
 
-  3. This notice may not be removed or altered from any source distribution.
+### 3 - Faire grandir le serpent 🎢
+
+**3.1** 💻 - La fonction `grow_snake` doit faire grandir le serpent d'un "morceau", écrivez le corps de cette fonction en suivant les instructions suivantes :
+
+- Allouez un espace mémoire pour contenir le nouveau "morceau" du serpent
+- Le serpent utilise le principe de liste chaînée, chaque "morceau" (maillon) contient un pointeur vers le suivante (pour plus de détail : <https://fr.wikipedia.org/wiki/Liste_cha%C3%AEn%C3%A9e>) :
+
+  - Le nouveau "morceau" doit être inséré juste après la tête.
+  - La position du nouveau maillon est la position actuelle de la tête.
+
+<br>
+<br>
+
+**3.2** 💻 - Maintenant que le serpent grandi, il est nécessaire d'adapter la fonction `move_snake` pour que chaque maillon soit dessiné l'un après l'autre :
+
+- Le maillon N+1 doit prendre la position du maillon N.
+- La tête doit prendre la position passé en paramètre (`new_position`)
+
+<br>
+<br>
+
+> ℹ️ - à ce stade le serpent grandit lorsqu'il mange la pomme.
+
+### 4 - Game Over 😵
+
+**4.1** 💻 - Dans le jeu d'origine, le joueur perd dès que le serpent se mange lui-même ou qu'il touche un mur. Ajoutez dans la fonction `update` la détection de ces deux cas.
+
+<br>
+<br>
+
+**4.2** 💻 - Ajoutez au programme une fonction `reset` qui prend un pointeur vers le `GameState` qui libère la mémoire initialement allouée par le serpent et qui réinitialise l'état du jeu.
+
+<br>
+<br>
+
+## Crédits
+
+On oubliera pas de remercier [Ramon Santamaria (raysan5)](https://github.com/raysan5) pour cette bibliothèque de qualité qui simplifie grandement les choses.
