@@ -506,7 +506,7 @@ int main(void) {
     Node *head = malloc(sizeof(Node));
     Node *second = malloc(sizeof(Node));
 
-    if (head == NULL || second == NULL) return 1; // verifier si l'allocation à réussie
+    if (head == NULL || second == NULL) return 1; // vérifier si l'allocation a réussi
 
     head->next = second;
     second->next = NULL;
