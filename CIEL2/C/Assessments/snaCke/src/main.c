@@ -1,3 +1,11 @@
+// ███████╗███╗   ██╗ █████╗  ██████╗██╗  ██╗███████╗
+// ██╔════╝████╗  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝
+// ███████╗██╔██╗ ██║███████║██║     █████╔╝ █████╗  
+// ╚════██║██║╚██╗██║██╔══██║██║     ██╔═██╗ ██╔══╝  
+// ███████║██║ ╚████║██║  ██║╚██████╗██║  ██╗███████╗
+// ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+// Thomas Le Goff - BTS CIEL2 2025 
+
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
@@ -58,7 +66,8 @@ typedef struct GameState
  */
 bool check_square_collision(Vector2 a, Vector2 b, int a_size, int b_size)
 {
-	return a.x <= b.x + b_size && a.x + a_size >= b.x && a.y <= b.y + b_size && a.y + a_size >= b.y;
+	// TODO: 2.1
+	return false;
 }
 
 /**
@@ -79,9 +88,9 @@ void move_snake(SnakeChunk *head, Vector2 new_position)
 	while (current)
 	{
 		Vector2 current_position = current->position;
-		current->position = next_position;
+		// TODO: 1.3 (il manque une ligne ...)
 		next_position = current_position;
-		current = current->next;
+		current = NULL; // TODO: 3.2 (ce n'est pas la bonne ligne ...)
 	}
 }
 
@@ -95,17 +104,17 @@ void move_snake(SnakeChunk *head, Vector2 new_position)
  */
 void grow_snake(SnakeChunk *head)
 {
-	SnakeChunk *new = malloc(sizeof(SnakeChunk));
-
+	// TODO: 3.1 (comment initialiser new ?)
+	SnakeChunk *new;
 	SnakeChunk *last = head;
 
-	while (last->next)
+	while (/*TODO: 3.1 (quand avons-nous trouvé le dernier maillon ?)*/ false)
 	{
 		last = last->next;
 	}
 
-	last->next = new;
-	new->position = last->position;
+	// TODO: 3.1 (comment attacher le nouveau maillon au reste du serpent ?)
+	new->position = head->position;
 	new->next = NULL;
 }
 
@@ -113,51 +122,60 @@ void grow_snake(SnakeChunk *head)
  * @brief Frees all memory used by the snake.
  *
  * Iterates through the linked list representing the snake and releases
- * each dynamically allocated segment.
+ * each dynamically allocated segment (head is not dynamically allocated).
  *
  * @param head  Pointer to the first segment (head) of the snake.
  */
 void free_snake(SnakeChunk *head)
 {
-	SnakeChunk *current = head->next;
-	while (current)
-	{
-		SnakeChunk *next = current->next;
-		free(current);
-		current = next;
-	}
+	// TODO: 4.2
 }
 
+/**
+ * @brief Draws the player's current score on screen.
+ *
+ * This function is responsible for displaying the score
+ * in a visible area of the window (e.g., top-left corner).
+ * You can use Raylib functions like DrawText() or DrawTextFormat().
+ *
+ * @param score The current score to display.
+ */
+void draw_score(int score)
+{
+	// TODO: 2.3
+}
+
+/**
+ * @brief Moves the apple to a new random position within the game window.
+ *
+ * The apple is repositioned randomly while ensuring it stays
+ * within the visible area and not too close to the window borders.
+ * You may adjust the random range for better gameplay balance.
+ *
+ * @param position A pointer to the apple's current position (Vector2).
+ */
 void move_apple(Vector2 *position)
 {
+	// Bonus : adaptez les valeurs pour rendre le jeu plus juste...
 	position->x = GetRandomValue(SNAKE_CHUNK_SIZE, WINDOW_WIDTH - SNAKE_CHUNK_SIZE),
 	position->y = GetRandomValue(SNAKE_CHUNK_SIZE, WINDOW_HEIGHT - SNAKE_CHUNK_SIZE);
 }
 
-bool game_is_over(SnakeChunk *head)
+/**
+ * @brief Checks whether the Snake game is over.
+ *
+ * This function analyzes the current state of the snake starting from its head (`head`)
+ * and returns `true` if a game-over condition is detected, such as:
+ * - collision with the game field boundaries;
+ * - collision with the snake's own body;
+ *
+ * @param head Pointer to the first segment (the head) of the snake.
+ * @return true if the game is over, false otherwise.
+ */
+bool is_game_over(SnakeChunk *head)
 {
-	bool collide = !check_square_collision(head->position, Vector2Zero(), SNAKE_CHUNK_SIZE, WINDOW_WIDTH);
-	if (collide)
-	{
-		return true;
-	}
-
-	// Just to prevent head hitting the second
-	if (head->next == NULL)
-		return false;
-
-	SnakeChunk *current = head->next->next;
-	while (current)
-	{
-		if (check_square_collision(head->position, current->position, SNAKE_CHUNK_SIZE - 4, SNAKE_CHUNK_SIZE - 4))
-		{
-			return true;
-		}
-	}
-
-	return false;
-
 	// TODO: 4.1
+	return false;
 }
 
 GameState initial_state()
@@ -174,24 +192,27 @@ GameState initial_state()
 	return newState;
 }
 
+/**
+ * @brief Updates the game state for one frame.
+ *
+ * This function handles player input, time progression,
+ * snake movement, and collision detection with the apple.
+ * It should be called every frame from the main game loop.
+ *
+ * @param state The current game state (snake, apple, score, etc.).
+ * @return The updated game state after processing movement and collisions.
+ */
 GameState update(GameState state)
 {
+	// TODO: 1.1
 	if (IsKeyDown(KEY_UP) && state.snake_direction > Down)
 	{
 		state.snake_direction = Up;
-	}
-	else if (IsKeyDown(KEY_DOWN) && state.snake_direction > Down)
-	{
-		state.snake_direction = Down;
 	}
 
 	if (IsKeyDown(KEY_RIGHT) && state.snake_direction <= Down)
 	{
 		state.snake_direction = Right;
-	}
-	else if (IsKeyDown(KEY_LEFT) && state.snake_direction <= Down)
-	{
-		state.snake_direction = Left;
 	}
 
 	float dt = GetFrameTime();
@@ -202,19 +223,11 @@ GameState update(GameState state)
 
 		Vector2 new_position = state.snake_head.position;
 
+		// TODO: 1.2
 		switch (state.snake_direction)
 		{
 		case Up:
 			new_position.y -= SNAKE_SPEED;
-			break;
-		case Down:
-			new_position.y += SNAKE_SPEED;
-			break;
-		case Right:
-			new_position.x += SNAKE_SPEED;
-			break;
-		case Left:
-			new_position.x -= SNAKE_SPEED;
 			break;
 		default:
 			break;
@@ -224,12 +237,10 @@ GameState update(GameState state)
 
 		if (check_square_collision(state.snake_head.position, state.apple_position, SNAKE_CHUNK_SIZE, APPLE_SIZE))
 		{
-			move_apple(&state.apple_position);
-			state.score += 10;
-			grow_snake(&state.snake_head);
+			// TODO: 2.2
 		}
 
-		if (game_is_over(&state.snake_head))
+		if (is_game_over(&state.snake_head))
 		{
 			free_snake(&state.snake_head);
 			state = initial_state();
@@ -343,11 +354,6 @@ void draw_apple(Vector2 apple_position)
 	DrawRectangle(stemX, stemY, APPLE_STEM_WIDTH, APPLE_STEM_HEIGHT, BROWN);
 }
 
-void draw_score(int score)
-{
-	DrawText(TextFormat("SCORE: %i", score), 25, 25, 32, WHITE);
-}
-
 void draw(GameState state)
 {
 	draw_apple(state.apple_position);
@@ -363,15 +369,9 @@ int main()
 
 	SetRandomSeed(time(NULL));
 
-	GameState state = {
-		.snake_head = {
-			.position = {WINDOW_WIDTH / 2 - SNAKE_CHUNK_SIZE / 2, WINDOW_HEIGHT / 2 - SNAKE_CHUNK_SIZE / 2},
-			.next = NULL},
-		.snake_direction = Up,
-		.apple_position = {10, 10},
-		.score = 0,
-		.accumulator = 0};
+	GameState state = initial_state();
 
+	// Create the first apple
 	move_apple(&state.apple_position);
 
 	while (!WindowShouldClose())
@@ -386,8 +386,6 @@ int main()
 
 		EndDrawing();
 	}
-
-	free_snake(&state.snake_head);
 
 	CloseWindow();
 	return 0;

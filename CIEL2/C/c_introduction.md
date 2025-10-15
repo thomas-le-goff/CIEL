@@ -49,6 +49,8 @@ _BTS CIEL_
 
 ## Langage compilé
 
+![w:880 center](./img/compilation.png)
+
 --------------------------------------------------------------------------------
 
 ## Programmation structurée
@@ -74,6 +76,7 @@ int ma_variable; // Attention, comportement non prédictible si non initialisé
 ```
 
 --------------------------------------------------------------------------------
+
 <style scoped="">section{font-size:22px;}</style>
 
 ## 🔽 Séquence - typage
@@ -243,7 +246,7 @@ if (42) {
 
 Opération | Définition
 --------- | -------------------------
-`x \      | \                         | y` | vrai si x ou y est vrai
+`x || y`  | vrai si x ou y est vrai
 `x && y`  | vrai si x et y sont vrais
 `!x`      | vrai si x est faux
 
@@ -1016,4 +1019,15 @@ Point c = {.x = 10, .y = 20}
 
 ## Structures en langage C
 
-![](./img/slither_struct.png)
+```
++----------------------+
+|                      |
+|   Ooo                |
+|      o               |
+|       oooo           |
+|           o*         |
+|                      |
++----------------------+
+```
+
+> ℹ️ [https://slither.io/](https://slither.io/)

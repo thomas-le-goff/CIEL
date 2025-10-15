@@ -2,7 +2,6 @@
 title: Langage C - Gestion de la mémoire - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Langage C - Gestion de la mémoire - BTS CIEL
 paginate: true
@@ -314,50 +313,6 @@ int main(){
 
 --------------------------------------------------------------------------------
 
-## Allocation statique et automatique
-
-```c
-#include <stdio.h>
-
-const int G_OFFSET_X, G_OFFSET_Y;
-const int G_I_WIDTH, G_I_HEIGHT = 16, 16;
-const int G_GAP = 4;
-const int G_I_PER_LINE = 2;
-
-typedef struct { char * title; } MenuItem;
-
-void draw_rect(int x, int y, int w, int h) {
-  for (int i = x; i<x+w; i++) {
-    for (int j = y; j<y+h; j++) {
-      draw_pixel(i,j);
-    }  
-  }
-}
-
-int main() {
-  MenuItem menu[4];
-
-  menu[0] = MenuItem {.title = "Netflix"};
-  menu[1] = MenuItem {.title = "Prime Video"};
-  // ...
-
-  const menu_size = sizeof(menu)/sizeof(MenuItem);
-
-  int row = 0;
-  int col;
-
-  for(size_t i=0; i<menu_size; i++) {
-    col = i;
-
-    draw_rect(col*G_I_WIDTH+G_I_GAP, row*G_i_HEIGHT+G_I_GAP, G_I_WIDTH,G_I_HEIGHT);
-
-    row += (i%G_I_PER_LINE != 0 ? 1 : 0); 
-  }
-}
-```
-
---------------------------------------------------------------------------------
-
 ## Allocation dynamique
 
 ### Un peu de contexte
@@ -533,7 +488,35 @@ Les principales fonctions pour la gestion de l'allocation dynamique :
 
 ### void *
 
-![center w:640](./img/void-black-hole.jpg)
+Le type `void *` en C est un pointeur générique capable de référencer n'importe quel type de donnée. Il est utile pour écrire du code générique (comme `malloc` ou `qsort`), mais il faut le caster avant utilisation, car le compilateur ne connaît pas le type réel pointé.
+
+--------------------------------------------------------------------------------
+
+## Allocation dynamique
+
+### Exemple d'utilisation de `malloc` et `free` (liste chaînée)
+
+```c
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+int main(void) {
+    Node *head = malloc(sizeof(Node));
+    Node *second = malloc(sizeof(Node));
+
+    if (head == NULL || second == NULL) return 1; // verifier si l'allocation à réussie
+
+    head->next = second;
+    second->next = NULL;
+
+    free(second);
+    free(head);
+
+    return 0;
+}
+```
 
 --------------------------------------------------------------------------------
 

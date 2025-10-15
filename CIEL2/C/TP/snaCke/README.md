@@ -1,9 +1,9 @@
-# CIEL 2 - TP allocation mémoire 🐍🍎
+# CIEL 2 - TP allocation dynamique de la mémoire 🐍🍎
 
 Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intérêt en vous faisant programmer un jeu de Snake.
 
 <center>
-  <img src="./resources/snake.gif" alt="locking-door-fail-sliding-door" width="280">
+  <img src="./resources/snake.gif" alt="nokia-snake" width="280">
 </center>
 
 ## Avant de commencer
