@@ -18,7 +18,7 @@ make
 Vous pourrez ensuite pour compiler et lancer votre programme utiliser la commande suivante :
 
 ```c
-make && ./bin/Debug/snaCke
+make && ./bin/Debug/snaCke_assessment
 ```
 
 > ℹ️ Me solliciter si vous rencontrez une erreur liée à la compilation/exécution du programme.
