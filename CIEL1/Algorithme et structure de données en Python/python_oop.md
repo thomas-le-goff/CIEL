@@ -7,19 +7,19 @@ footer: Thomas Le Goff - 2025
 header: Python - POO - BTS CIEL
 paginate: true
 marp: true
-style: |
-    section {
-        font-size: 1.6em;
-    }
+style: |-
+  section {
+      font-size: 1.6em;
+  }
 
-    img[alt~="center"] {
-        display: block;
-        margin: 0 auto;
-    }
+  img[alt~="center"] {
+      display: block;
+      margin: 0 auto;
+  }
 
-    section.lead h1 {
-        text-align: center;
-    }
+  section.lead h1 {
+      text-align: center;
+  }
 ---
 
 # Python - Programmation orientée objet
@@ -28,7 +28,7 @@ _BTS CIEL_
 
 ![bg right:33%](./img/python_oop_cover.png)
 
----
+--------------------------------------------------------------------------------
 
 ## Sommaire
 
@@ -41,14 +41,13 @@ _BTS CIEL_
 
 ![bg right:33%](./img/summary.png)
 
----
+--------------------------------------------------------------------------------
 
-<style scoped>section{font-size:24px;}</style>
+<style scoped="">section{font-size:24px;}</style>
 
 ## Le paradigme objet
 
-La programmation orientée objet est un **paradigme de programmation** càd une manière de formaliser une solution logique
-dans un programme informatique.
+La programmation orientée objet est un **paradigme de programmation** càd une manière de formaliser une solution logique dans un programme informatique.
 
 Les principaux langages orientés objet (par ordre d'apparition):
 
@@ -59,24 +58,23 @@ Les principaux langages orientés objet (par ordre d'apparition):
 - Java (1995)
 - C#, Swift, Kotlin etc. (> 2000)
 
-> Ce paradigme est devenu un standard de l'industrie.
-> Attention cependant, aujourd'hui beaucoup de langages sont multi-paradigme.
+> Ce paradigme est devenu un standard de l'industrie. Attention cependant, aujourd'hui beaucoup de langages sont multi-paradigme.
 
----
+--------------------------------------------------------------------------------
 
-<style scoped>section{font-size:24px;}</style>
+<style scoped="">section{font-size:24px;}</style>
 
 ## Le paradigme objet
 
 ### Principe
 
-La POO consiste à structurer le code autour d’objets qui représentent des **entités**, combinant **données** et **comportements**, et qui **interagissent** entre eux au travers de messages pour réaliser les fonctionnalités du programme.
+La POO consiste à structurer le code autour d'objets qui représentent des **entités**, combinant **données** et **comportements**, et qui **interagissent** entre eux au travers de messages pour réaliser les fonctionnalités du programme.
 
 ![w:400 center](./img/python_oop_paradigm.png)
 
----
+--------------------------------------------------------------------------------
 
-<style scoped>section{font-size:24px;}</style>
+<style scoped="">section{font-size:24px;}</style>
 
 ## Le paradigme objet
 
@@ -84,9 +82,9 @@ La POO consiste à structurer le code autour d’objets qui représentent des **
 
 ![w:600 center](./img/python_oop_pillars.png)
 
-> Plus de détail : https://en.wikipedia.org/wiki/Object-oriented_programming
+> Plus de détail : <https://en.wikipedia.org/wiki/Object-oriented_programming>
 
----
+--------------------------------------------------------------------------------
 
 ## La POO en Python
 
@@ -96,7 +94,7 @@ Python est langage multi-paradigme, cependant, il met la POO au coeur de son fon
 - Python permet de définir des **classes** qui permettent de décrire le **comportement des objets**
 - Héritage et le polymorphisme sont possibles par **rédéfinition de méthodes**
 
----
+--------------------------------------------------------------------------------
 
 ## La POO en Python
 
@@ -119,23 +117,22 @@ ma_voiture = Voiture("Toyota", "Corolla")
 ma_voiture.demarrer()
 ```
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
-Une classe permet de définir les données et le comportement d'un objet.
-En Python la définition d'une classe se fait en utilisant le mot clé `class`
+Une classe permet de définir les données et le comportement d'un objet. En Python la définition d'une classe se fait en utilisant le mot clé `class`
 
 Vous en connaissez déjà :
 
-| Classe              | Description courte                                                                        |
-|---------------------|-------------------------------------------------------------------------------------------|
-| `str`               | Chaîne de caractères (ex. `"bonjour".upper()` utilise une méthode OOP).                   |
-| `list`              | Liste modifiable (ex. `append`, `pop`, etc.).                                             |
-| `dict`              | Dictionnaire clé-valeur, avec des méthodes (`get`, `items`, etc.).                        |
-| `file` (via `open`) | Fichier ouvert, instance de `TextIOWrapper`, avec méthodes comme `.read()` ou `.write()`. |
+Classe              | Description courte
+------------------- | -----------------------------------------------------------------------------------------
+`str`               | Chaîne de caractères (ex. `"bonjour".upper()` utilise une méthode OOP).
+`list`              | Liste modifiable (ex. `append`, `pop`, etc.).
+`dict`              | Dictionnaire clé-valeur, avec des méthodes (`get`, `items`, etc.).
+`file` (via `open`) | Fichier ouvert, instance de `TextIOWrapper`, avec méthodes comme `.read()` ou `.write()`.
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -149,7 +146,7 @@ with open("exemple.txt", "r", encoding="utf-8") as fichier:
 - `fichier` est **une** instance de `TextIOWrapper` pour manipuler `exemple.txt` en lecture
 - `.read()` est une **méthode** de `TextIOWrapper` appelée sur l'instance `fichier`
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -157,12 +154,11 @@ with open("exemple.txt", "r", encoding="utf-8") as fichier:
 
 - L'**instance** est **une version / réalisation** de ce schéma.
 
-- La classe permet d'isoler dans un même endroit les données et le traitement (comportement) associé tout en évitant
-  qu'ils soient perturbés par d'autres éléments du programme (principe d'encapsulation).
+- La classe permet d'isoler dans un même endroit les données et le traitement (comportement) associé tout en évitant qu'ils soient perturbés par d'autres éléments du programme (principe d'encapsulation).
 
 ![w:400 center](./img/python_oop_schema.png)
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -192,7 +188,7 @@ compte2 = CompteBancaire("Lucie Débit", 3.42, "FR76 3000 4000 5000 6000 0000 00
 compte3 = CompteBancaire("Zéro Euro", 0.00, "FR00 0000 0000 0000 0000 0000 000")
 ```
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -213,7 +209,7 @@ class Etudiant:
         pass
 ```
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -240,7 +236,7 @@ port1 = Port(80, "TCP", "ouvert")
 port2 = Port(443, "TCP", "filtré")
 ```
 
----
+--------------------------------------------------------------------------------
 
 ## Classe et instance
 
@@ -267,27 +263,28 @@ fichier1 = Fichier("rapport_de_stage", "docx", 51200)
 fichier4 = Fichier("cours_reseau", "pdf", 1048576)
 ```
 
----
+--------------------------------------------------------------------------------
 
-<style scoped>section{font-size:20px;}</style>
+<style scoped="">section{font-size:20px;}</style>
 
 ## Classe et instance
 
 ### Éléments d'une classe
 
-| Élément                   | Description                                     | Exemple                                    |
-|---------------------------|-------------------------------------------------|--------------------------------------------|
-| Attribut d'instance       | Variable propre à chaque objet                  | `self.nom = "Alice"`                       |
-| Méthode d'instance        | Fonction liée à un objet, accède à `self`       | `def afficher(self):`                      |
-| Constructeur (`__init__`) | Appelé à la création d’une instance             | `def __init__(self, nom):`                 |
-| Héritage                  | Classe qui hérite d'une autre                   | `class Fille(Parent):`                     |
-| Surcharge (override)      | Redéfinition d'une méthode héritée              | `def afficher(self):` dans une sous-classe |
-| Attribut de classe        | Variable partagée par toutes les instances      | `nb_instances = 0`                         |
-| Méthode de classe         | Reçoit `cls`, agit au niveau de la classe       | `@classmethod def creer(cls):`             |
-| Méthode statique          | Méthode indépendante de l’objet et de la classe | `@staticmethod def est_pair(x):`           |
+Élément                   | Description                                     | Exemple
+------------------------- | ----------------------------------------------- | ------------------------------------------
+Attribut d'instance       | Variable propre à chaque objet                  | `self.nom = "Alice"`
+Méthode d'instance        | Fonction liée à un objet, accède à `self`       | `def afficher(self):`
+Constructeur (`__init__`) | Appelé à la création d'une instance             | `def __init__(self, nom):`
+Héritage                  | Classe qui hérite d'une autre                   | `class Fille(Parent):`
+Surcharge (override)      | Redéfinition d'une méthode héritée              | `def afficher(self):` dans une sous-classe
+Attribut de classe        | Variable partagée par toutes les instances      | `nb_instances = 0`
+Méthode de classe         | Reçoit `cls`, agit au niveau de la classe       | `@classmethod def creer(cls):`
+Méthode statique          | Méthode indépendante de l'objet et de la classe | `@staticmethod def est_pair(x):`
 
----
-<style scoped>section{font-size:20px;}</style>
+--------------------------------------------------------------------------------
+
+<style scoped="">section{font-size:20px;}</style>
 
 ## Classe et instance
 
@@ -315,18 +312,19 @@ class Compteur:
         pass
 ```
 
----
-<style scoped>section{font-size:20px;}</style>
+--------------------------------------------------------------------------------
+
+<style scoped="">section{font-size:20px;}</style>
 
 ### Classe et instance
 
 ### Éléments d'une classe (suite)
 
-| Élément                 | Description                                                          | Exemple                                     |
-|-------------------------|----------------------------------------------------------------------|---------------------------------------------|
-| Encapsulation           | Convention pour masquer des détails internes (`_`, `__`)             | `_interne`, `__prive`                       |
-| Propriété (`@property`) | Accès contrôlé à un attribut                                         | `@property def age(self):`                  |
-| Méthodes spéciales      | Méthodes magiques : comportement intégré (`__str__`, `__eq__`, etc.) | `def __str__(self):`                        |
-| Destructeur (`__del__`) | Appelé à la destruction de l’objet (peu courant)                     | `def __del__(self):`                        |
-| Polymorphisme           | Méthodes communes à plusieurs classes                                | `obj.afficher()` sur divers objets          |
-| Docstring               | Documentation intégrée de la classe ou méthode                       | `"""Classe représentant un utilisateur."""` |
+Élément                 | Description                                                          | Exemple
+----------------------- | -------------------------------------------------------------------- | -------------------------------------------
+Encapsulation           | Convention pour masquer des détails internes (`_`, `__`)             | `_interne`, `__prive`
+Propriété (`@property`) | Accès contrôlé à un attribut                                         | `@property def age(self):`
+Méthodes spéciales      | Méthodes magiques : comportement intégré (`__str__`, `__eq__`, etc.) | `def __str__(self):`
+Destructeur (`__del__`) | Appelé à la destruction de l'objet (peu courant)                     | `def __del__(self):`
+Polymorphisme           | Méthodes communes à plusieurs classes                                | `obj.afficher()` sur divers objets
+Docstring               | Documentation intégrée de la classe ou méthode                       | `"""Classe représentant un utilisateur."""`
