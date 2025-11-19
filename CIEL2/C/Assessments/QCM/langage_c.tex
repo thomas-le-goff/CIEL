@@ -1,0 +1,258 @@
+\documentclass[12pt]{exam}
+
+\begin{document}
+
+% =============================
+% SUJET A
+% =============================
+
+\begin{center}
+\Large BTS CIEL2 — QCM Langage C — Sujet A
+\end{center}
+\begin{center}
+12/11/2025 \hfill Nom et prénom:\enspace \hrulefill
+\end{center}
+
+\textbf{Cochez la ou les bonnes réponses :}
+
+\begin{questions}
+
+\question Quelle instruction permet d’obtenir la taille du tableau \texttt{int tab[]} :
+\begin{checkboxes}
+ \choice \texttt{sizeof(tab)}
+ \choice \texttt{len(tab)}
+ \CorrectChoice \texttt{sizeof(tab) / sizeof(int)}
+\end{checkboxes}
+
+\question Quelles sont les caractéristiques du typage en C :
+\begin{checkboxes}
+ \CorrectChoice statique et faible
+ \choice dynamique et faible
+ \choice dynamique et strict
+\end{checkboxes}
+
+\question Quelle est la différence entre \texttt{calloc} et \texttt{malloc} :
+\begin{checkboxes}
+ \choice Elles sont identiques
+ \CorrectChoice \texttt{calloc} initialise la mémoire à zéro
+ \choice \texttt{malloc} initialise la mémoire avec des valeurs aléatoires
+\end{checkboxes}
+
+\question Lors de l’allocation dynamique, la mémoire est :
+\begin{checkboxes}
+ \CorrectChoice sur le tas
+ \choice sur la pile
+ \CorrectChoice gérée via un pointeur
+\end{checkboxes}
+
+\question Les mots clés \texttt{signed} et \texttt{unsigned} servent à :
+\begin{checkboxes}
+ \CorrectChoice définir la représentation d’un entier (positif/négatif)
+ \choice choisir si le compilateur doit signer le code
+ \choice typer une variable Unicode
+\end{checkboxes}
+
+\question Résultat de \texttt{11 / 2} :
+\begin{checkboxes}
+ \choice 5.5
+ \CorrectChoice 5
+ \choice comportement indéfini
+\end{checkboxes}
+
+\question Que signifie \texttt{int *p = NULL;} :
+\begin{checkboxes}
+ \choice Pointe vers la case mémoire 0
+ \CorrectChoice Le pointeur ne pointe vers aucune adresse valide
+ \choice Le pointeur contient une adresse non initialisée
+\end{checkboxes}
+
+\pagebreak{}
+\question Quelle syntaxe est invalide pour une boucle \texttt{for} :
+\begin{checkboxes}
+ \CorrectChoice \texttt{for(i in list)\{ \}}
+ \choice \texttt{for(int i=0; i<3; i++);}
+ \choice \texttt{for(;;)\{ \}}
+\end{checkboxes}
+
+\question Quelle valeur est fausse au sens booléen :
+\begin{checkboxes}
+ \choice 1
+ \CorrectChoice 0
+ \choice "" (chaîne vide)
+\end{checkboxes}
+
+\question À quoi sert une structure :
+\begin{checkboxes}
+ \CorrectChoice Structurer les données en mémoire
+ \CorrectChoice Type composite regroupant plusieurs champs
+ \choice Construire ses propres structures de contrôles
+\end{checkboxes}
+
+\question Si une zone allouée n’est jamais libérée :
+\begin{checkboxes}
+ \choice Libération automatique à la fin du programme
+ \CorrectChoice Fuite mémoire
+ \choice Allocation réutilisée par le système
+\end{checkboxes}
+
+\question Fonctions pour l’allocation dynamique :
+\begin{checkboxes}
+ \choice mem\_alloc, mem\_free, mem\_init
+ \CorrectChoice malloc, free, realloc
+ \choice new, delete, sizeof
+\end{checkboxes}
+
+\question Lequel de ces types utilise le moins de mémoire :
+\begin{checkboxes}
+ \choice signed short
+ \CorrectChoice char
+ \choice unsigned float
+\end{checkboxes}
+
+\question Quelle est la conséquence d’un \texttt{free()} multiple :
+\begin{checkboxes}
+ \choice Ignoré par le système
+ \CorrectChoice Comportement indéfini
+ \choice Libère seulement la dernière occurrence
+\end{checkboxes}
+
+\question Où sont stockées les variables locales :
+\begin{checkboxes}
+ \choice En mémoire globale
+ \CorrectChoice Sur la stack
+ \choice Sur la heap
+\end{checkboxes}
+
+\end{questions}
+
+\newpage
+\setcounter{page}{1}
+
+% =============================
+% SUJET B
+% =============================
+
+\begin{center}
+\Large BTS CIEL2 — QCM Langage C — Sujet B
+\end{center}
+\begin{center}
+12/11/2025 \hfill Nom et prénom:\enspace \hrulefill
+\end{center}
+
+\textbf{Cochez la ou les bonnes réponses :}
+
+\begin{questions}
+
+\question Quelle définition décrit un tableau :
+\begin{checkboxes}
+ \choice Ensemble d’éléments de taille variable
+ \CorrectChoice Zone mémoire contiguë d’éléments du même type
+ \CorrectChoice Adresse mémoire constante
+\end{checkboxes}
+
+\question Quelle est la différence entre la stack et la heap :
+\begin{checkboxes}
+ \CorrectChoice Stack = locales, Heap = dynamiques
+ \choice Stack = manuel, Heap = auto
+ \CorrectChoice Stack = auto, Heap = manuel
+\end{checkboxes}
+
+\question Pourquoi libérer la mémoire :
+\begin{checkboxes}
+ \choice Ce n'est plus nécessaire avec les systèmes récents
+ \CorrectChoice Pour éviter une fuite mémoire
+ \choice Cela évite au Garbage Collector de se déclencher
+\end{checkboxes}
+
+\question Quelles sont les valeurs considérées comme fausses :
+\begin{checkboxes}
+ \CorrectChoice 0
+ \choice "" (chaîne vide)
+ \choice 1
+\end{checkboxes}
+
+\question Qu’est-ce qu’un pointeur \texttt{void *} :
+\begin{checkboxes}
+ \choice Pointeur vers une fonction
+ \CorrectChoice Pointeur générique sans type
+ \choice Pointeur vers une adresse constante
+\end{checkboxes}
+
+\question Quelles sont les caractéristiques du typage en C :
+\begin{checkboxes}
+ \choice dynamique et strict
+ \CorrectChoice statique et faible
+ \choice dynamique et faible
+\end{checkboxes}
+
+\question Code invalide :
+\begin{checkboxes}
+ \CorrectChoice \texttt{for(i in list)\{ \}}
+ \choice \texttt{for(int i=0; i<3; i++);}
+ \choice \texttt{for(;;)\{ \}}
+\end{checkboxes}
+
+\pagebreak{}
+\question Que fait \texttt{sizeof(char)} :
+\begin{checkboxes}
+ \choice Retourne 8
+ \CorrectChoice Retourne 1
+ \choice Taille dépend du compilateur
+\end{checkboxes}
+
+\question Erreur courante avec les chaînes :
+\begin{checkboxes}
+ \CorrectChoice Buffer Overflow
+ \choice Dirty Stack
+ \choice Character Spoofing
+\end{checkboxes}
+
+\question Quel est le comportement attendu avec ce code :
+\begin{verbatim}
+int *cool_function() {
+    int a = 0;
+    return &a;
+}
+\end{verbatim}
+\begin{checkboxes}
+ \choice Stack overflow
+ \CorrectChoice Segmentation Fault
+\end{checkboxes}
+
+\question Quand \texttt{malloc} retourne \texttt{NULL} :
+\begin{checkboxes}
+ \CorrectChoice Quand la mémoire n’a pas pu être allouée
+ \choice Jamais
+ \choice Lorsque le pointeur initial vaut NULL
+\end{checkboxes}
+
+\question Quelle est la conséquence d’un oubli de \texttt{free()} :
+\begin{checkboxes}
+ \choice Comportement indéfini
+ \CorrectChoice Fuite mémoire
+ \choice Crash du système
+\end{checkboxes}
+
+\question Que fait \texttt{strcpy(dest, src);} :
+\begin{checkboxes}
+ \choice Affecte un pointeur vers \texttt{src}
+ \CorrectChoice Copie la chaîne \texttt{src} dans \texttt{dest}
+\end{checkboxes}
+
+\question À quoi sert le mot-clé \texttt{struct} :
+\begin{checkboxes}
+ \choice Créer un tableau dynamique
+ \CorrectChoice Définir un type de données composite
+ \choice Créer sa propre structure de contrôle
+\end{checkboxes}
+
+\question Différence entre \texttt{malloc} et \texttt{realloc} :
+\begin{checkboxes}
+ \choice \texttt{malloc} met la mémoire à zéro
+ \CorrectChoice \texttt{realloc} utilise un bloc existant
+ \choice realloc est obsolète
+\end{checkboxes}
+
+\end{questions}
+
+\end{document}

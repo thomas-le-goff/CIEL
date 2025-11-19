@@ -59,13 +59,13 @@ _BTS CIEL_
 
 - Simplicité d'apprentissage
 
-  - Syntaxe allégé pour se concentrer sur la logique
+  - Syntaxe allégée pour se concentrer sur la logique
   - Peu de "cérémonie" / pas de compilation
 
 - Populaire dans les milieux professionel et scolaire :
 
   - N°1 sur l'Index [Tiobe (27% des parts)](https://www.tiobe.com/tiobe-index/) et sur [PYPL (31%)](https://pypl.github.io/PYPL.html)
-  - En France : Langage de la recherche et l'éducation nationale
+  - En France : langage de la recherche et l'éducation nationale
 
 --------------------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ with socketserver.TCPServer(("", 8000), Handler) as httpd:
     httpd.serve_forever()
 ```
 
-> 🎯 Permettrent de construire un **logiciel** sans ajouter de bibliothèques tiers.
+> 🎯 Permettrent de construire un **logiciel** complet sans ajouter de bibliothèques tiers.
 
 --------------------------------------------------------------------------------
 
@@ -143,7 +143,7 @@ En Python il n'est pas nécessaire d'écrire le code dans une fonction principal
 
 Cependant vous **pouvez** :
 
-- Préciser l'interpréteur à utiliser pour votre script (shebang) en positionnant l'instruction suivante en début de fichier
+- Préciser l'interpréteur à utiliser pour votre script (shebang) en positionnant l'instruction suivante en début de fichier :
 
 ```python
 #!/usr/bin/env python3
@@ -285,7 +285,7 @@ print("Hello world !")
 le_max = max(10, 15)
 ```
 
-Fonctions équivalente à `printf` et `scanf` :
+Fonctions équivalentes à `printf` et `scanf` :
 
 ```python
 x = int(input("Entrez un nombre :"))
@@ -482,7 +482,7 @@ print(resultat) # BTS CIEL anciennement SNIR.
 
 Cet exemple nous montre que :
 
-- Python ne différenci par une chaîne de charactère et un charactère simple (`''` peut-être utilisé à la place de `""`)
+- Python ne différencie par une chaîne de charactère et un charactère simple (`''` peut-être utilisé à la place de `""`)
 - Il est possible de concaténer deux `string` via l'opérateur `+`
 - Les `string` se manipule comme des séquences (`reversed` et `[3:]`)
 
@@ -548,7 +548,7 @@ En programmation, un paradigme correspond à une manière de formuler la répons
 
 - Python : programmation impérative, **fonctionnelle** et **orientée objet**.
 
-> Python vous offre plusieurs manière de décrire un programme : à vous de choisir celle qui convient le mieux à votre besoin.
+> Python vous offre plusieurs manières de décrire un programme : à vous de choisir celle qui convient le mieux à votre besoin.
 
 --------------------------------------------------------------------------------
 

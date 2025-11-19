@@ -41,6 +41,7 @@ _BTS CIEL_
   - Ensemble
 
 - Parcours à l'aide d'une boucle
+
 - Exercices
 
 ![bg right:33%](./img/summary.png)
@@ -77,7 +78,7 @@ notes = [10, 12, 12, 18]
 notes.append(20)
 ```
 
-Les éléments sont accesibles via leur index
+Les éléments sont accessibles via leur index
 
 ```python
 rouge = couleurs[0]
@@ -92,6 +93,8 @@ print(derniere_note)
 
 --------------------------------------------------------------------------------
 
+<style scoped="">section{font-size:22px;}</style>
+
 ## Liste - opérations non destructives
 
 Opération      | Définition
@@ -103,6 +106,8 @@ Opération      | Définition
 `lst.count(x)` | Compte le nombre d'occurrences de `x`
 `lst.copy()`   | Renvoie une copie **indépendante** de la liste
 `sorted(lst)`  | Renvoie une **nouvelle** liste triée
+`lst1 + lst2`  | Concatène deux listes
+`lst * n`      | Répète la liste `n` fois
 
 > ℹ️ Une opération non destructives ne modifie pas la liste originale (ici `lst`).
 
@@ -149,13 +154,30 @@ departement, age, nom = personne
 Les tuples et les listes offrent des possibilités proches, mais leurs usages diffèrent :
 
 - Les tuples sont **immuables** et servent souvent à stocker des éléments de types variés, accédés via leur position.
-- Les listes sont **mutables**, contiennent en général des éléments de même type, et sont souvent à l'aide d'une boucle.
+- Les listes sont **mutables**, contiennent en général des éléments de même type, généralement les éléments d'une liste sont traités en ensemble à l'aide d'une boucle.
 
 > ℹ️ **Immuable** signifie qui ne peut pas être modifié après sa création
 
 --------------------------------------------------------------------------------
 
-## N-uplet - opérations non-desctructives
+## N-uplet - cas courant d'utilisation
+
+Il est fréquent d'utiliser un N-uplet en résultat de fonction pour retourner plusieurs valeurs :
+
+```python
+def swap(a, b):
+    return b, a
+
+a, b = 10, 2
+a, b = swap(a, b)
+
+print(a) # 2
+print(b) # 10
+```
+
+--------------------------------------------------------------------------------
+
+## N-uplet - opérations non-destructives
 
 Opération    | Définition
 ------------ | -----------------------------------------------
@@ -177,22 +199,22 @@ Le dictionnaire est un ensemble de paires _clé-valeur_ au sein duquel les clés
 personne = {"nom": "Jean Dupont", "age": 35, "departement": 56, "couleur_preferee": "rouge"}
 ```
 
-L'accès à une valeur se fait en utilisant la clé
+L'accès à une valeur se fait en utilisant la clé :
 
 ```python
+# Lecture
 nom = personne["nom"]
-couleur = personne["couleur_preferee"]
 
-print(nom)
-# Résultat : "Jean Dupont"
+# Ecriture
+personne["couleur_preferee"] = "vert"
 
-print(couleur)
-# Résultat : "rouge"
+print(nom) # Résultat : "Jean Dupont"
+print(personne["couleur_preferee"]) # Résultat : "vert"
 ```
 
 --------------------------------------------------------------------------------
 
-## Dictionnaire - opérations non-desctructives
+## Dictionnaire - opérations non-destructives
 
 Opération    | Description
 ------------ | ------------------------------------------------------
@@ -207,7 +229,7 @@ Opération    | Description
 
 --------------------------------------------------------------------------------
 
-## Dictionnaire - opérations desctructives
+## Dictionnaire - opérations destructives
 
 Opération            | Description
 -------------------- | -------------------------------------------------------------------------------------
@@ -236,7 +258,7 @@ print(panier)
 
 <style scoped="">section{font-size:22px;}</style>
 
-## Ensemble - opérations non-desctructives
+## Ensemble - opérations non-destructives
 
 Opération                              | Description
 -------------------------------------- | --------------------------------------------------------
@@ -250,7 +272,7 @@ Opération                              | Description
 
 --------------------------------------------------------------------------------
 
-## Ensemble - opérations desctructives
+## Ensemble - opérations destructives
 
 Opération      | Description
 -------------- | ------------------------------------------
@@ -277,6 +299,8 @@ Structure        | Ordonnée | Mutable | Doublons autorisés | Accès par clé/i
 --------------------------------------------------------------------------------
 
 ## Instruction `in`
+
+L'instruction `in` est utilisable pour **chaque type de collection**. Elle permet de **vérifier** qu'une collection **contient un élément**.
 
 Structure | Ce que fait `in`     | Complexité moyenne | Remarques
 --------- | -------------------- | ------------------ | ------------------------------------------------
@@ -391,5 +415,3 @@ for i in mon_ensemble:
 # Liens et sources
 
 - <https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences>
-
---------------------------------------------------------------------------------
