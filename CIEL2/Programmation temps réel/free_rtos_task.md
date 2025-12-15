@@ -2,6 +2,7 @@
 title: RTOS - Gestion des tâches - BTS CIEL
 version: 1.0.0
 theme: default
+_class: invert
 footer: Thomas Le Goff - 2025 - CC BY-NC-SA
 header: RTOS - Gestion des tâches - BTS CIEL
 paginate: true
@@ -326,7 +327,7 @@ Une tâche est définie par :
 
 ![center](./img/round_robin_scheduling.jpg)
 
-> Source : https://en.wikipedia.org/wiki/Round-robin_scheduling
+> Source : <https://en.wikipedia.org/wiki/Round-robin_scheduling>
 
 --------------------------------------------------------------------------------
 
@@ -666,6 +667,12 @@ void vTask(void *pvParameters)
 ```
 
 > ⚠️ Les opérations de suppression et de création de tâches sont coûteuses pour l'OS.
+
+--------------------------------------------------------------------------------
+
+## Exercices
+
+![center width:800px](img/time_slicing_template.svg)
 
 --------------------------------------------------------------------------------
 

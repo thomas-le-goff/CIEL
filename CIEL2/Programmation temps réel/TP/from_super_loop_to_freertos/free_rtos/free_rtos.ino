@@ -4,8 +4,8 @@
 
 M5GFX display;
 
-volatile bool flg_red = false;
-volatile bool flg_blue = false;
+bool flg_red = false;
+bool flg_blue = false;
 
 void TaskRed(void *pvParameters)
 {
@@ -53,7 +53,6 @@ void TaskDraw(void *pvParameters)
     {
       Serial.printf("Draw core=%d\n", xPortGetCoreID());
     }
-
     vTaskDelay(delayTicks);
   }
 }

@@ -2,7 +2,6 @@
 title: Python Introduction - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Python Introduction - BTS CIEL
 paginate: true
@@ -105,7 +104,7 @@ with socketserver.TCPServer(("", 8000), Handler) as httpd:
     httpd.serve_forever()
 ```
 
-> 🎯 Permettrent de construire un **logiciel** complet sans ajouter de bibliothèques tiers.
+> 🎯 Permettre de construire un **logiciel** complet sans ajouter de bibliothèques tiers.
 
 --------------------------------------------------------------------------------
 
@@ -113,7 +112,9 @@ with socketserver.TCPServer(("", 8000), Handler) as httpd:
 
 ## Interprété VS compilé
 
-![center width:600px](./img/compiled_vs_interpreted.svg)
+![center width:480px](./img/compiled_vs_interpreted.svg)
+
+> ℹ️ Python est un langage interprété.
 
 --------------------------------------------------------------------------------
 
@@ -191,11 +192,11 @@ mon_bool = True  # boolean
 Types natifs du langage :
 
 - Numériques `int`, `float`, `complex`
-- Séquences
-- Dictionnaires
+- Séquences `list`, `tuple`, `range`, `str`, `bytes`
+- Dictionnaires (mapping) `dict`
 - Classes, instances et exceptions
 
-> ℹ️ Natif signifie qu'ils sont fourni par l'interpréteur Python.
+> ℹ️ Natif signifie qu'ils sont inclus dans l'interpréteur Python.
 
 > ℹ️ D'autres types peuvent être fournis par des bibliothèques (Numpy, Panda, etc.)
 
@@ -278,7 +279,7 @@ else:
 
 # 🔽 Séquence - appel de fonction
 
-L'appel de fonction se fait via le nom de la fonction suivi de la liste des arguments entre parenthèses :
+L'appel de fonction se fait en utilisant le **nom de la fonction**, suivi de la **liste des arguments** entre parenthèses :
 
 ```python
 print("Hello world !")
@@ -297,6 +298,8 @@ print(f'Vous avez saisi le nombre {x}')
 
 # 🔀 Sélection - if / elif / else
 
+La sélection permet de modifier le "chemin" emprunté par le programme, en fonction de la valeur d'une **expression booléenne**. 
+
 ```python
 ma_variable = 10
 if ma_variable == 11:
@@ -305,6 +308,39 @@ elif ma_variable == 12:
     print("or")
 else:
     print("bar")
+
+# Affichera : "bar"
+```
+
+--------------------------------------------------------------------------------
+
+# 🔀 Sélection - if / elif / else
+
+L'instruction `if` doit être suivie d'un **bloc** de code. Les règles d'indentation sont ici très importante. 
+
+`if` peut-être seul ou accompagné de :
+- un ou plusieur `elif`; 
+- d'un seul `else`.
+
+Les instructions `if` peuvent être imbriquées pour former des instructions de sélection plus complèxes.
+
+--------------------------------------------------------------------------------
+
+# 🔀 Sélection - if / elif / else
+
+```python
+a = 10
+if a >= 10:
+    if a <= 50:
+        print("Inférieur ou égal à 50.")
+    elif a <= 60:
+        print("Inférieur ou égal à 60 mais supérieur à 50.")
+    elif a <= 80:
+        print("Inférieur ou égal à 80 mais supérieur à 60.")
+    else:
+        print("Supérieur à 80.")
+else:
+    print("Inférieur à 10.")
 ```
 
 --------------------------------------------------------------------------------
@@ -421,6 +457,12 @@ for animal in animals:
 
 # 🔁 Itération - fonction range
 
+La fonction `range` permet de générer une **suite arithmétique** entre deux bornes.
+
+Elle est souvent utilisée avec l'instruction `for` pour itérer un nombre de fois.
+
+La borne supérieure est **exclue**.
+
 ```python
 ma_liste = list(range(5, 10))
 # [5, 6, 7, 8, 9]
@@ -430,10 +472,10 @@ for e in ma_liste:
 
 # Résultat: 5, 6, 7, 8, 9
 
-for i in range(1, 10):
+for i in range(0, 10):
     print(i)
 
-# Résultat: 1, 2, 3, 4, 5, 6, 7, 8, 9
+# Résultat: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 ```
 
 --------------------------------------------------------------------------------
@@ -589,3 +631,11 @@ python3 --version
 - **P**rogrammation **O**rienté **O**bjet
 
 ![center width:200px](./img/next_hand.jpg)
+
+--------------------------------------------------------------------------------
+
+# Liens et sources
+
+- <https://docs.python.org/3/tutorial>
+- <https://craftinginterpreters.com/a-map-of-the-territory.html>
+- <https://en.wikipedia.org/wiki/Structured_programming>

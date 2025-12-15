@@ -2,7 +2,6 @@
 title: Python - structure de données - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Python - structure de données - BTS CIEL
 paginate: true

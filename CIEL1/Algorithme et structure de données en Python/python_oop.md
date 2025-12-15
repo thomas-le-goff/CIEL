@@ -74,18 +74,6 @@ La POO consiste à structurer le code autour d'objets qui représentent des **en
 
 --------------------------------------------------------------------------------
 
-<style scoped="">section{font-size:24px;}</style>
-
-## Le paradigme objet
-
-### Principe
-
-![w:600 center](./img/python_oop_pillars.png)
-
-> Plus de détail : <https://en.wikipedia.org/wiki/Object-oriented_programming>
-
---------------------------------------------------------------------------------
-
 ## La POO en Python
 
 Python est langage multi-paradigme, cependant, il met la POO au coeur de son fonctionnement :
