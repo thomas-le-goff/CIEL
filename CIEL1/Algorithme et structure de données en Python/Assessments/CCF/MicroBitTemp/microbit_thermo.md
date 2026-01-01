@@ -80,7 +80,7 @@ Le développement est découpé en **4 étapes**. Si vous bloquez sur une des é
 
 ### Étape 1 : Acquisition de la température (5 points)
 
-Lire la température actuelle et la stockée lorsque l'utilisateur touche le logo tactile de la carte.
+Lire la température actuelle et la stocker lorsque l'utilisateur touche le logo tactile de la carte.
 
 - La mesure est déclenchée lorsque l'utilisateur touche le logo tactile à l'aide de `pin_logo.is_touched()`.<br>
 
@@ -93,7 +93,7 @@ Lire la température actuelle et la stockée lorsque l'utilisateur touche le log
 
 ### Étape 2 : Affichage avec le bouton A (4 points)
 
-Afficher les informations actuelle quand l'utilisateur appuie sur le bouton A.
+Afficher les informations actuelles quand l'utilisateur appuie sur le bouton A.
 
 - Le nombre d'appuis sur le bouton A est obtenu avec `button_a.get_presses()`.
 

@@ -128,7 +128,7 @@ default_temp_info = {
 
 temp_info = load_from_files(default_temp_info)
 
-display.show(flocon)
+display.show(snowflake)
 sleep(1000)
 
 count = 0
