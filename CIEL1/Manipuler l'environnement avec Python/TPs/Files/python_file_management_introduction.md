@@ -167,4 +167,95 @@ Questions :
 - Comment faire pour que le fichier de sortie ait le même nom que le fichier d’entrée, mais avec le suffixe `_MAJ` ?
 - Comment adapter se code pour réécrire dans `entree.txt` plutôt que dans `sortie.txt` ?
 
+Voici deux exercices supplémentaires (8 et 9) axés sur la manipulation du système de fichiers avec le module **`os`** en Python. Ces exercices sont adaptés à des étudiants de BTS CIEL (niveau Licence) et couvrent la création, la suppression, la vérification et la navigation dans les dossiers.
+
+### Exercice 8 - Création et gestion de dossiers
+
+Objectif : Créer une arborescence de dossiers, vérifier leur existence et les supprimer si nécessaire.
+
+#### Énoncé
+1. Créez un dossier nommé `mon_super_projet` dans le répertoire courant.
+2. À l’intérieur de `mon_super_projet`, créez deux sous-dossiers : `src` et `docs`.
+3. Vérifiez que les dossiers ont bien été créés en affichant leur chemin absolu.
+4. Supprimez le dossier `docs` et vérifiez qu’il n’existe plus.
+
+#### Code de base à compléter
+```python
+import os
+
+if not os.path.exists("mon_super_projet"):
+    os.mkdir("mon_super_projet")
+    print("Dossier 'mon_super_projet' créé.")
+else:
+    print("Le dossier 'mon_super_projet' existe déjà.")
+
+chemin_src = os.path.join("mon_super_projet", "src")
+chemin_docs = os.path.join("mon_super_projet", "docs")
+
+if not os.path.exists(chemin_src):
+    os.mkdir(chemin_src)
+    print(f"Dossier '{chemin_src}' créé.")
+
+if not os.path.exists(chemin_docs):
+    os.mkdir(chemin_docs)
+    print(f"Dossier '{chemin_docs}' créé.")
+
+print(f"Chemin absolu de 'src' : {os.path.abspath(chemin_src)}")
+print(f"Chemin absolu de 'docs' : {os.path.abspath(chemin_docs)}")
+
+if os.path.exists(chemin_docs):
+    os.rmdir(chemin_docs)
+    print(f"Dossier '{chemin_docs}' supprimé.")
+else:
+    print(f"Le dossier '{chemin_docs}' n'existe pas.")
+```
+
+#### Questions
+- Pourquoi utilise-t-on `os.path.exists` avant de créer un dossier ?
+- Quel est le rôle de `os.path.join` ?
+- Que se passe-t-il si on essaie de supprimer un dossier non vide avec `os.rmdir` ?
+- Comment faire pour supprimer un dossier et tout son contenu (y compris les sous-dossiers et fichiers) ?
+
+### Exercice 9 - Lister et parcourir les fichiers d’un dossier
+
+Objectif : Lister les fichiers et dossiers d’un répertoire, puis déplacer un fichier d’un dossier à un autre.
+
+#### Énoncé
+1. Dans le dossier `mon_super_projet`, créez un fichier nommé `fichier_test.txt` avec un contenu quelconque.
+2. Listez tous les fichiers et dossiers présents dans `mon_super_projet`.
+3. Déplacez le fichier `fichier_test.txt` dans le dossier `src`.
+4. Vérifiez que le fichier a bien été déplacé en listant à nouveau le contenu de `mon_super_projet` et de `src`.
+
+#### Code de base à compléter
+```python
+import os
+
+chemin_fichier = os.path.join("mon_super_projet", "fichier_test.txt")
+with open(chemin_fichier, "w", encoding="utf-8") as f:
+    f.write("Contenu de test pour le fichier.")
+
+print("Contenu initial de 'mon_super_projet' :")
+for element in os.listdir("mon_super_projet"):
+    print(f"- {element}")
+
+chemin_destination = os.path.join("mon_super_projet", "src", "fichier_test.txt")
+if os.path.exists(chemin_fichier):
+    os.rename(chemin_fichier, chemin_destination)
+    print(f"Fichier déplacé vers '{chemin_destination}'.")
+
+print("\nContenu de 'mon_super_projet' après déplacement :")
+for element in os.listdir("mon_super_projet"):
+    print(f"- {element}")
+
+print("\nContenu de 'src' après déplacement :")
+for element in os.listdir(os.path.join("mon_super_projet", "src")):
+    print(f"- {element}")
+```
+
+#### Questions
+- Pourquoi utilise-t-on `os.path.join` pour construire les chemins ?
+- Quelle est la différence entre `os.listdir` et `os.scandir` ?
+- Que se passe-t-il si le fichier de destination existe déjà lors de l’utilisation de `os.rename` ?
+- Comment gérer les erreurs si le dossier de destination n’existe pas ?
+
 ## TODO exercice cumulant chargement d'un fichier et structure de données (JSON => dictionnaire) et (CSV => list /set)
