@@ -157,7 +157,48 @@ _✍️ Essayez de comprendre en quoi cette classe illustre le principe RAII._
 
 ## Générer des nouveaux monstres
 
-TODO
+Actuellement, la génération d'un monstre se fait au démarrage de l'application. Cela est dû au fait que la génération de l'ADN est fait au moment de la **construction** d'un objet `CryptoMonster` et que notre instance `my_monster` est créée au lancement du programme.
+
+Afin de générer un nouveau monstre à chaque appuie sur la touche `Espace` deux adaptations sont possibles : 
+
+- ajouter une méthode publique `void generateDNA();` dans `CryptoMonster` qui aurait pour effet de re-générer une nouvelle séquence d'ADN à chaque appel
+- être capable de de créer une **instance** de `CryptoMonster` et l'affecter à `my_monster` lors de l'appuie sur `Espace` (en d'autres termes : tuer notre monstre et en faire naître un nouveau)
+
+Dans notre cas, par soucis de cohérence avec le monde réel, nous allons utiliser la deuxième possibilité.
+
+Lorsque l'on souhaite créer dynamiquement (pendant l'exécution du programme) des instances de classes, il est nécessaire de faire appel à **l'allocation dynamique**.
+
+L'idée est de remplacer `my_monster` par un pointeur vers un espace mémoire sur le tas (en anglais "heap") et de le faire correspondre à un autre espace mémoire lors de l'appuie sur la touche `Espace` (sans oublier de supprimer l'ancien qui ne sera plus utile).
+
+Avant de commencer les modifications, nous allons adapter la classe `CryptoMonster` pour identifier l'étape de construction et de destruction.
+
+_✍️ Ajoutez un log dans le constructeur de la classe `CryptoMonster` (`CryptoMonster::CryptoMonster()`), ainsi q'un destructeur `CryptoMonster::~CryptoMonster()` lui aussi avec un log (via `std::cout << "Mon super log" << std:endl`)_
+
+_✍️ Adaptez le code de création de `my_monster` pour utiliser les opérateurs `new` et `delete` (une modification du type et des appels de méthodes associés sera sûrement nécessaire)._
+
+Maintenant que `my_monster` est une référence vers `CryptoMonster` il est possible de modifier l'instance correspondante.
+
+_✍️ Trouvez où placer le code suivant et complétez les commentaires._
+
+```cpp
+if (IsKeyPressed(KEY_SPACE))
+{
+  // TODO Supprimer le monstre (ssi il existe)
+  // TODO Créer un nouveau monstre et l'affecter à my_monster
+}
+```
+
+### Un code plus robuste avec les smart pointers (à passez si vous n'êtes pas en avance)
+
+Essayez de remplacer l'usage de `new` et `delete` avec un smart pointer comme `std::unique_ptr`.
+
+L'objectif des smart pointer est de gérer la mémoire dynamiquement allouée à la place du développeur, notamment, en s'appuyant sur la mémoire automatique.
+
+Dans notre cas, nous aimerions nous "débarasser" de la nécessité d'utiliser `delete` et s'assurer que la mémoire de `my_monster` soit automatiquement libérée.
+
+__En vous appuyant sur [la référence C++ concernant `std::unique_ptr`](https://en.cppreference.com/w/cpp/memory/unique_ptr.html), adaptez le code pour ne plus utiliser `new` et `delete`._
+
+> Il possible (et souhaité) de faire la même chose avec `RenderTexture2d target`, mais, en fournissant un "custom deleter" pour libérer la mémoire utilisée en appelant `UnloadRenderTexture`.
 
 ## Exporter un monstre
 
