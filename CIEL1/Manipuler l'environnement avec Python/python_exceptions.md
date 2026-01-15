@@ -24,7 +24,7 @@ style: |
 
 # Python - Gestion des exceptions
 
-_BTS CIEL_
+_BTS CIEL_ 
 
 ![bg right:33%](./img/python_exceptions_cover.png)
 
@@ -38,8 +38,8 @@ _BTS CIEL_
   - Stacktrace
   - Structure `try` / `except`
   - Structure `else` / `finally` et `with`
-  - Exceptions de la librairies standard
-  - Exceptions sur-mesure
+  - Exceptions de la bibliothèque standard
+  - Exceptions sur-mesures
 - Bien gérer les exceptions
 
 ![bg right:33%](./img/summary.png)
@@ -52,7 +52,7 @@ _BTS CIEL_
 
 ### Définition
 
-En programmation, une exception est un **événement inattendu** (non-souhaité) qui a lieu lors de l'exécution d'une instruction.
+En programmation, une exception est un **évènement inattendu** (non-souhaité) qui a lieu lors de l'exécution d'une instruction.
 
 Lorsqu'une exception a lieu, il est généralement préférable de stopper l'exécution du programme, mais, dans certains cas il est possible de proposer une alternative et de faire fonctionner l'opération autrement.
 
@@ -62,16 +62,16 @@ Lorsqu'une exception a lieu, il est généralement préférable de stopper l'ex�
 
 ### Exemples d'exceptions
 
-Lié au code lui-même :
+Liées au code lui-même :
 
 - Manque de validation (ensemble incorrect)
 - Mauvais usage d'une méthode / fonction
 - Opération impossible (division par zéro etc.)
 
-Lié à l'environnement d'exécution :
+Liées à l'environnement d'exécution :
 
 - Parser un fichier dans un format incorrect (JSON par exemple)
-- Essayer d'écrire dans un fichier alors que le disque est plein
+- Tenter d'écrire dans un fichier alors que le disque est plein
 - Communication réseau en hors ligne
 
 ---
@@ -80,7 +80,7 @@ Lié à l'environnement d'exécution :
 
 ### Gestion intégrée
 
-Les langages de haut niveau comme Python intègrent des mécanismes de gestion des exceptions, permettant aux développeurs de traiter les erreurs de manière structurée et naturelle, comme une composante essentielle du développement.
+Les langages de haut niveau, comme Python, intègrent des mécanismes de gestion des exceptions. Ils permettent aux développeurs de traiter les erreurs de manière structurée et naturelle, comme une composante essentielle du développement.
 
 Python propose l'utilisation de l'instruction `try` / `except`.
 
@@ -90,7 +90,7 @@ Python propose l'utilisation de l'instruction `try` / `except`.
 
 ## Qu'est-ce qu'une exception ?
 
-D'autres langages ont une philosophie différente : Il est parfois préférable de laisser le programme planter que de créer un problème plus complexe.
+D'autres langages ont une philosophie différente : Il est parfois préférable de laisser le programme échouer, plutôt que de tenter un chemin alternatif et de risquer de créer un problème plus complexe.
 
 > Voir philosophie **Erlang** "Let It Crash" : https://wiki.c2.com/?DontCatchExceptions
 
