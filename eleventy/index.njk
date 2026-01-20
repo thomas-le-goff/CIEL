@@ -1,0 +1,27 @@
+---
+layout: base.njk
+---
+
+<h1>Thomas Le Goff</h1>
+<p>Cours de programmation informatique en BTS CIEL</p>
+<nav class="attachments-menu">
+    {% for className, classData in attachments | dictsort %}
+        <section class="attachments-class">
+            <h3>{{ className }}</h2>
+            {% for topicName, files in classData %}
+                <div class="attachments-topic">
+                    <h4>{{ topicName }}</h3>
+                    <ul>
+                        {% for file in files %}
+                            <li>
+                                <a href="/attachments/{{ className }}/{{ topicName | url }}/{{ file }}" target="_blank" rel="noopener">
+                                    {{ file }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </section>
+    {% endfor %}
+</nav>

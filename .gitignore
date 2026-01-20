@@ -76,4 +76,4 @@ dmypy.json
 .pyre/
 
 # Profiling
-.prof
+.profnode_modules/
