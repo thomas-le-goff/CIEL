@@ -206,5 +206,27 @@ TODO
 
 ## Améliorations orientées objets
 
-TODO
+Afin de rendre le code plus modulaire et adaptable nous allons faire appelle à la programmation orientée objet.
+
+Actuellement, notre programme possède 2 classes : 
+
+- `CryptoMonster` qui encaspule l'ADN du monster et expose des méthodes (propriétés dérivées) pour accéder aux différents membres
+- `PartManager` qui charge les différentes textures qui compose un monstre et offre des méthodes pour accéder à la texture adaptée
+  
+Nous souhaitons ajouter 2 classes : 
+
+- `Game` une classe **abstraite** qui contiendra la logique dîte "métier" de notre programme (actuellement présente dans `main.cpp`) 
+- `RaylibGame` qui est un sous-type de `Game` contenant la logique propre à la bibliothèque Raylib.
+
+_✍️ Selon vous, quel est l'intêret de séparer le contenu de `main.cpp` en deux classes au lieu d'une ?_
+
+
+Voici le diagramme de classes de `Game` et `RaylibGame`
+
+[![](https://mermaid.ink/img/pako:eNqlk91PwjAQwP-V5XxBGYSt2xgLIVE0xAcSY3wyS8hBCyzZ2qXrFET82-02PoZEE_Weer_76t21G5gJyiCAWYxZdhvhQmISckMLjSSbqUhw4-Yp5BV7xHUcTUeYMKPVeh8YxWlvKzOUxNhUpJB-H6eZkjhTg8GRtpL1JBE8U0wagTGU61SJcaXXnFKUapIgx0Xp9qDVcaXtaxbSLEo2LmvgY09qLE8pKg2NFxHRGqcSXw_0yC-WyGnM7lapkOq6HMNZ7M5nxDiTOvcXrzO_e57mame-qlmLG5xMoPHNZM5DWXm93wdvT3dW22ptc80jPp3uKf-xz7-3-Z8uD02CCQsZUQiUzJkJCZMJFiqUbYaglky_Xwj0kbI55rEKIeRbHZYifxYi2UdKkS-WEMwxzrRWvaXdZzlQyThlcihyriCwHKtbZoFgAysIiOe13Y7r-5bftW3PdYgJa-1mW23HJk7Ptx2fuMTytia8lYU77S7xXdt1vZ5D_B5xyPYTEe8kwg?type=png)](https://mermaid.live/edit#pako:eNqlk91PwjAQwP-V5XxBGYSt2xgLIVE0xAcSY3wyS8hBCyzZ2qXrFET82-02PoZEE_Weer_76t21G5gJyiCAWYxZdhvhQmISckMLjSSbqUhw4-Yp5BV7xHUcTUeYMKPVeh8YxWlvKzOUxNhUpJB-H6eZkjhTg8GRtpL1JBE8U0wagTGU61SJcaXXnFKUapIgx0Xp9qDVcaXtaxbSLEo2LmvgY09qLE8pKg2NFxHRGqcSXw_0yC-WyGnM7lapkOq6HMNZ7M5nxDiTOvcXrzO_e57mame-qlmLG5xMoPHNZM5DWXm93wdvT3dW22ptc80jPp3uKf-xz7-3-Z8uD02CCQsZUQiUzJkJCZMJFiqUbYaglky_Xwj0kbI55rEKIeRbHZYifxYi2UdKkS-WEMwxzrRWvaXdZzlQyThlcihyriCwHKtbZoFgAysIiOe13Y7r-5bftW3PdYgJa-1mW23HJk7Ptx2fuMTytia8lYU77S7xXdt1vZ5D_B5xyPYTEe8kwg)
+
+_✍️ à partir du diagramme écrivez les fichiers de déclarations correspondant._
+
+_✍️ à partir du diagramme et du fichier `main.cpp` écrivez les déclarations des méthodes `Game::update` et `Game::draw`._
+
 
