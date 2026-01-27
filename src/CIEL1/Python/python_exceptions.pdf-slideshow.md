@@ -7,18 +7,45 @@ footer: Thomas Le Goff - 2025
 header: Python - Gestion des exceptions - BTS CIEL
 paginate: true
 marp: true
-style: |
+style: |-
   section {
-      font-size: 1.6em;
+    font-size: 1.6em;
   }
 
   img[alt~="center"] {
-      display: block;
-      margin: 0 auto;
+    display: block;
+    margin: 0 auto;
   }
 
-  section.lead h1 {
-      text-align: center;
+  section.gridify {
+    display: grid;
+    grid-template:
+      "title title" auto
+      "up-left up-right" 1fr
+      "down-left down-right" 1fr
+      / 1fr 1fr;
+    gap: 0 1rem;
+    align-items: start;
+  }
+
+  section.gridify > h2 {
+    grid-area: title;
+  }
+
+  section.gridify > pre:nth-of-type(1) {
+    grid-area: up-left;
+  }
+
+  section.gridify > pre:nth-of-type(2) {
+    grid-area: up-right;
+  }
+
+  section.gridify > pre:nth-of-type(3) {
+    grid-area: down-left;
+  }
+
+  section.gridify > pre:nth-of-type(4) {
+    grid-area: down-right;
   }
 ---
 
@@ -33,6 +60,7 @@ _BTS CIEL_
 ## Sommaire
 
 - Qu'est-ce qu'une exception ?
+- Comment font les autres ?
 - Exception en Python
   - Mot clé `raise`
   - Stacktrace
@@ -54,7 +82,7 @@ _BTS CIEL_
 
 En programmation, une exception est un **évènement inattendu** (non-souhaité) qui a lieu lors de l'exécution d'une instruction.
 
-Lorsqu'une exception a lieu, il est généralement préférable de stopper l'exécution du programme, mais, dans certains cas il est possible de proposer une alternative et de faire fonctionner l'opération autrement.
+Lorsqu'une exception a lieu, il est généralement **préférable de stopper l'exécution du programme**, mais, dans certains cas il est possible de **proposer une alternative** et de faire fonctionner l'opération autrement.
 
 ---
 
@@ -62,7 +90,7 @@ Lorsqu'une exception a lieu, il est généralement préférable de stopper l'ex�
 
 ### Exemples d'exceptions
 
-Liées au code lui-même :
+Liées au programme lui-même :
 
 - Manque de validation (ensemble incorrect)
 - Mauvais usage d'une méthode / fonction
@@ -70,9 +98,9 @@ Liées au code lui-même :
 
 Liées à l'environnement d'exécution :
 
-- Parser un fichier dans un format incorrect (JSON par exemple)
-- Tenter d'écrire dans un fichier alors que le disque est plein
-- Communication réseau en hors ligne
+- Traiter un fichier dans un format incorrect (JSON par exemple)
+- Écrire dans un fichier alors que le disque dure est plein
+- Communiquer sur le réseau en hors ligne
 
 ---
 
@@ -80,19 +108,59 @@ Liées à l'environnement d'exécution :
 
 ### Gestion intégrée
 
-Les langages de haut niveau, comme Python, intègrent des mécanismes de gestion des exceptions. Ils permettent aux développeurs de traiter les erreurs de manière structurée et naturelle, comme une composante essentielle du développement.
+Les langages de haut niveau, comme Python, intègrent des **mécanismes de gestion des exceptions**. Ils permettent aux développeurs de traiter les erreurs de manière **structurée et naturelle**, comme une composante essentielle du développement.
 
-Python propose l'utilisation de l'instruction `try` / `except`.
+Python propose l'utilisation de la structure `try` / `except` :
 
-> Loi de Murphy : « Tout ce qui est susceptible de mal tourner tournera mal. »
+```python
+try:
+    x = int(input("Please enter a number: "))
+except ValueError:
+    print("Oops!  That was no valid number.  Try again...")
+```
 
 ---
+<!-- _class: gridify -->
 
-## Qu'est-ce qu'une exception ?
+## Comment font les autres ?
 
-D'autres langages ont une philosophie différente : Il est parfois préférable de laisser le programme échouer, plutôt que de tenter un chemin alternatif et de risquer de créer un problème plus complexe.
+```c
+int main() {
+    FILE *f = fopen("filename.ext", "r");
 
-> Voir philosophie **Erlang** "Let It Crash" : https://wiki.c2.com/?DontCatchExceptions
+    if (f == NULL) {
+        perror("Erreur");
+        exit(EXIT_FAILURE);
+    }
+
+    return 0;
+}
+```
+
+```php
+try {
+    $f = fopen("filename.ext", "r");
+    if ($f === false) {
+        throw new Exception("Impossible d'ouvrir le fichier");
+    }
+} catch (Exception $e) {
+    die("Erreur: " . $e->getMessage());
+}
+```
+
+```python
+try:
+    f = open("filename.ext")
+except Exception as err:
+    raise SystemExit(err)
+```
+
+```go
+f, err := os.Open("filename.ext")
+if err != nil {
+    log.Fatal(err)
+}
+```
 
 ---
 
@@ -102,7 +170,7 @@ Une exception est une instance de la classe `BaseException`.
 
 Les exceptions qui héritent de `BaseException` sont divisées en deux familles (héritage):
 
-- `Exception` faites pour être gérées (catch)
+- `Exception` généralement faites pour être traitées (catch)
 - les autres (qui héritent directement de `BaseException`) comme `KeyboardInterrupt` qui ne sont pas faites pour être gérées
 
 ---
@@ -113,9 +181,9 @@ Les exceptions qui héritent de `BaseException` sont divisées en deux familles 
 
 Le mot clé `raise` permet de lever une exception.
 
-En levant (émettant) une exception le programme bascule en mode exception jusqu'à ce que l'exception soit "attrapée".
+En levant (émettant) une exception le programme bascule en **mode exception** jusqu'à ce que l'exception soit "attrapée".
 
-Si l'exception n'est pas attrapée, le programme est terminé en erreur.
+Si l'exception n'est **pas attrapée**, le programme **est terminé en erreur**.
 
 ---
 
@@ -123,7 +191,7 @@ Si l'exception n'est pas attrapée, le programme est terminé en erreur.
 
 ### Mot clé `raise`
 
-Le mot clé `raise` est utilisable depuis n'importe quel endroit du programme.
+Il est possible d'utiliser le mot clé `raise` depuis n'importe quel endroit du programme.
 
 Il est utilisé pour indiquer que l'opération ne se passe pas comme prévu.
 
@@ -271,9 +339,9 @@ if __name__ == "__main__":
 import sys
 
 try:
-    f = open('myfile.txt') # OSError possible
+    f = open('myfile.txt')
     s = f.readline()
-    i = int(s.strip()) # ValueError possible
+    i = int(s.strip())
 except OSError as err:
     print("OS error:", err)
 except ValueError:
@@ -290,7 +358,7 @@ except Exception as err:
 ### Utiliser une exception comme un cas alternatif
 
 Parfois, il est plus simple de tenter une opération et de traiter l'exception comme un **cas alternatif** plutôt que de valider les données en amont.
-Attention tout de même de ne pas en abuser, l'utilisation des exceptions n'est généralement pas recommandée pour ce genre de besoin.
+Attention : utiliser ce mécanisme uniquement si vous n'avez pas d'autres choix
 
 ```python
 def is_number(s):
@@ -302,20 +370,14 @@ def is_number(s):
         return True
 ```
 
-> Python ne fourni pas de fonction pour vérifier qu'une chaîne de charactère peut être convertie en nombre.
-
---- 
-<!-- _class: lead -->
-
-# Exercices
-
-![bg right:50%](./img/exercices.png)
-
 ---
 
 ## Bien gérer les exceptions
 
+Quelques questions à se poser avant d'utiliser le mécanisme d'exception : 
+
 - Est-ce qu'un pattern `with` standard est associé avec l'objet / méthode que j'utilise ?
 - Est-ce que la méthode/fonction appelée est susceptible de générer des exceptions (voir la documentation) ?
 - Suis-je capable de traiter le cas d'exception ? 
-- Est-ce nécessaire de donner plus d'informations à l'utilisateur (faut-il spécialiser l'exception)  
+- Est-ce nécessaire de donner plus d'informations à l'utilisateur (faut-il spécialiser l'exception) ?
+- Ais-je une autre option si je souhaite représenter un cas alternatif ?
