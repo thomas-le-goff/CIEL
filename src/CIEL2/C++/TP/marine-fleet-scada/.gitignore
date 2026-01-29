@@ -1,0 +1,70 @@
+# ========================
+# Python cache & artifacts
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# ========================
+# Virtual environments
+# ========================
+venv/
+.env/
+.envrc/
+ENV/
+env/
+.venv/
+
+# ========================
+# Build & packaging
+# ========================
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ========================
+# Test & coverage
+# ========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ========================
+# Logs & runtime files
+# ========================
+*.log
+*.pid
+
+# ========================
+# IDEs & editors
+# ========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Jupyter / notebooks
+# ========================
+.ipynb_checkpoints/
+
+# ========================
+# Local config / secrets
+# ========================
+*.env
+config.local.*
+secrets.*
