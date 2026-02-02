@@ -56,8 +56,8 @@ class GPRMC(NMEAMessage):
         nmea_splitted = nmea_str.split(",")
         obj.time = nmea_splitted[1]
         obj.status = nmea_splitted[2]
-        obj.latitude = GPRMC._parse_latlon(nmea_splitted[3], nmea_splitted[4])
-        obj.longitude = GPRMC._parse_latlon(nmea_splitted[5], nmea_splitted[6])
+        obj.latitude = GPRMC._format_coordinate(nmea_splitted[3], nmea_splitted[4])
+        obj.longitude = GPRMC._format_coordinate(nmea_splitted[5], nmea_splitted[6])
         obj.speed = nmea_splitted[7]
         obj.course = nmea_splitted[8]
         obj.date = nmea_splitted[9]
@@ -85,9 +85,19 @@ class GPRMC(NMEAMessage):
         return True  # TODO
 
     @staticmethod
-    def _parse_latlon(value: str, direction: str) -> float:
-        """Convertit DDMM.MMMM en degrés décimaux."""
-        degrees = float(value[:2])
-        minutes = float(value[2:]) / 60
-        result = degrees + minutes
-        return -result if direction in ["W", "S"] else result
+    def _format_coordinate(coord: float, hemi: str) -> float:
+        if hemi in ['W', 'E']:
+            deg_len = 3
+        elif hemi in ['N', 'S']:
+            deg_len = 2
+
+        deg = float(str(coord)[0:deg_len])
+        min = float(str(coord)[deg_len:])
+        angle = deg + min / 60
+
+        if hemi in ['W', 'S']:
+            angle = -angle
+
+        return angle
+
+     
