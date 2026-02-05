@@ -148,7 +148,7 @@ Rectangle {
 
 Le modèle prend la forme d'une **instance de classe**.
 
-Cette classe doit **hériter** de `QAbstractItemModel` ou de l'un de ses ancêtres :
+Cette classe doit **hériter** de `QAbstractItemModel` ou de l'un de ses héritiers :
 
 - `QAbstractListModel` pour les ensembles **unidimensionnels** (une liste)
 - `QAbstractTableModel` pour les ensembles **multidimensionnels** (un tableau)
@@ -181,7 +181,7 @@ Qt offre des modèles plus avancés pour travailler avec des sources de données
 
 La vue prend la forme d'une **instance de classe**.
 
-Cette classe doit hériter de `QAbstractItemView` ou de l'un de ses ancêtres :
+Cette classe doit hériter de `QAbstractItemView` ou de l'un de ses héritiers :
 
 - `QListView` pour représenter les données sous forme de liste
 - `QTableView` pour représenter les données sous forme de tableau

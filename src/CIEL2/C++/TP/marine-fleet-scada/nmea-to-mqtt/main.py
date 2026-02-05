@@ -73,7 +73,7 @@ class Program:
             except RuntimeError as err:
                 logging.error(err)
 
-            time.sleep(1)
+            time.sleep(0.3)
 
 
 # Entrypoint

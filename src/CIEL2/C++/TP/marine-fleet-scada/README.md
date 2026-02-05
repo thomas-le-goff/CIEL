@@ -245,23 +245,64 @@ if __name__ == "__main__":
 
 _✍️ En vous appuyant sur les deux programmes, écrivez un programme Python qui correspond au cahier des charges et aux normes de développement industrielles_
 
-> Documentation sur l'utilisation des socket en Python : https://docs.python.org/3/library/socket.html
+> Documentation sur l'utilisation des socket en Python : https://docs.python.org/3/library/socket.html.
 > 
-> Documentation de paho-mqtt : https://pypi.org/project/paho-mqtt/
+> Documentation de paho-mqtt : https://pypi.org/project/paho-mqtt/.
 
 ## Valorisation des données de navigation
 
-TODO
-
 Le programme qui exploite les données de navigation (l'interface de supervision SCADA) est écrit en utilisant le framework C++ Qt.
 
-Qt est : une API orientée objet et développée en C++, conjointement par The Qt Company et Qt Project. Qt offre des composants d'interface graphique, d'accès aux données, de connexions réseaux, de gestion des fils d'exécution, d'analyse XML, etc. Il s'agit d'un framework C++ complet pour le développement d'application cross-platform (voir : https://www.qt.io/) 
+Qt est une API orientée objet et développée en C++, conjointement par The Qt Company et Qt Project. Qt offre des composants d'interface graphique, d'accès aux données, de connexions réseaux, de gestion des fils d'exécution, d'analyse XML, etc. Il s'agit d'un framework C++ complet pour le développement d'application cross-platform (voir : https://www.qt.io/) 
 
-Afin de développer un logiciel utilisant les composants Qt, il est recommandé d'utiliser EDI (**E**nvironnement de **D**éveloppement **I**ntégré) Qt Creator. Cet outil offre, notamment, un éditeur de formulaire "wysiwyg" pour les composants Qt Widgets.
+Afin de développer un logiciel utilisant les composants Qt, il est recommandé d'utiliser l'EDI (**E**nvironnement de **D**éveloppement **I**ntégré) Qt Creator. Cet outil offre, notamment, un éditeur de formulaire "wysiwyg" pour les composants Qt Widgets.
 
 ![](./img/qt-editor.png)
 
 ![](./img/qt-wysiwyg.png)
+
+
+> Avant de commencer, il est recommandé d'utiliser un fichier RTZ dans le simulateur pour simuler une route plus "réaliste".
+> Vous pouvez télécharger une collection de fichier RTZ ici à utiliser dans le mode "Route File" de NMEA Simulator.
+
+Pour réaliser notre application nous avons choisi la version 6.8.3 (la version LTS)de Qt et le framework Qt Widgets pour construire l'interface graphique.
+
+_✍️ Téléchargez le projet Qt ici. Les modifications à apporter dans la suite du TP se font dans ce projet._
+
+_✍️ Ouvrez le projet dans l'EDI Qt Creator (suivre le guide [ici](https://doc.qt.io/qtcreator/fr/creator-project-opening.html) au besoin)._
+
+_✍️ Compilez et exécutez le projet en utilisant le bouton vert en bas à gauche (cf figure suivante)._
+
+![](./img/qtcreator-build-run.webp)
+
+>Vous devriez avoir le programme lancé avec une carte à gauche et un espace vide à droite. 
+
+### Structure du programme et architecture Vue-Modèle
+
+> Plus d'informations sur cette architecture : https://doc.qt.io/qt-6/fr/model-view-programming.html.
+
+### Récupération des données auprès du broker
+
+_✍️ Avec vos connaissances de MQTT et la documentation du module MQTT de Qt, adaptez le code de la classe `MainWindow` pour connecter notre programme au broker dès le démarrage de l'application._
+
+> Documentation du module MQTT de QT : https://doc.qt.io/qt-6.8/fr/qtmqtt-index.html.
+
+Les méthodes `OnMqttConnected`, `OnMqttDisconnected` et `OnMqttMessageReceived` sont des **slots**, il s'agit de méthodes à appeller lors d'evénements particuliers.
+
+_✍️ En utilisant la méthode `connect(Object *sender, Func1 signal, ContextType *context, Func2 &&slot)` connecté les **slots** aux signaux correspondant du client MQTT `QMqttClient *mClient` (n'hésitez pas à vous appuyer sur la documentation du module MQTT)._
+
+Le slot `OnMqttMessageReceived` est appellé lors de la reception d'un message correspondant aux topics auquels le client est abonné.
+
+_✍️ à partir du diagramme suivant, implémenté le contenu de la méthode `OnMqttMessageReceived` pour écrire les coordonnées reçus dans le modèle `FleetModel *fleet` (via la méthode `FleetModel::addWaypoint(const QString &vesselId, double latitude, double longitude)`, sur l'instance `FleetModel *fleet` de la classe `MainWindow`).
+
+[![](https://mermaid.ink/img/pako:eNpVj91OwkAQhV9lMjdeiKTUlkIvNApoYuJPwMREysXIDmVNu9ssuwoS3kefwxdzWzTqXs2Zc76Z2S3OtWBMcVHo1_mSjIX7YaYyBf6dTcefH3OurNQKSl6tKGc4BKsrOZ_B0dEJnG8bAbyycHk3vh7A6e6HPvcJuPFkHXycXkg1-2fdOtlYg-lobQ1Jw1AQFFrl0jrLwLbRZL0UDMLB1eT2ZrafMGjQ4R_0QApWVi4kKVuHn8gyubra37vnhg03mp49a7_DQMFQaanq6yfg46UWn----SIJSIgH2jT2Nz369xdsYW6kwNQaxy0s2ZRUS9zW6QztkkvOMPWl4AW5wmaYqZ3HKlKPWpc_pNEuX2K6oGLllauEP30oKTf0G2El2Ay0UxbTbtRpZmC6xTWmUdhpB90gSqLO8XEc1ObGd5N2PwjDOInCftwLkmTXwrdmadDuJT0fD6J-EMVxN0x2X8NKokM?type=png)](https://mermaid.live/edit#pako:eNpVj91OwkAQhV9lMjdeiKTUlkIvNApoYuJPwMREysXIDmVNu9ssuwoS3kefwxdzWzTqXs2Zc76Z2S3OtWBMcVHo1_mSjIX7YaYyBf6dTcefH3OurNQKSl6tKGc4BKsrOZ_B0dEJnG8bAbyycHk3vh7A6e6HPvcJuPFkHXycXkg1-2fdOtlYg-lobQ1Jw1AQFFrl0jrLwLbRZL0UDMLB1eT2ZrafMGjQ4R_0QApWVi4kKVuHn8gyubra37vnhg03mp49a7_DQMFQaanq6yfg46UWn----SIJSIgH2jT2Nz369xdsYW6kwNQaxy0s2ZRUS9zW6QztkkvOMPWl4AW5wmaYqZ3HKlKPWpc_pNEuX2K6oGLllauEP30oKTf0G2El2Ay0UxbTbtRpZmC6xTWmUdhpB90gSqLO8XEc1ObGd5N2PwjDOInCftwLkmTXwrdmadDuJT0fD6J-EMVxN0x2X8NKokM)
+
+
+> à ce stade vous devriez avoir un point rouge qui représente les bateaux sur la carte ainsi que le tracet en bleue.
+
+### Affichage de la liste des coordonnées
+
+Sur la partie de droite, nous souhaitons afficher une liste contenant les coordonnées GPS du bateau selectionné.
 
 ## Sécuriser la communication avec TLS
 
