@@ -90,7 +90,9 @@ class GPRMC(NMEAMessage):
             deg_len = 3
         elif hemi in ['N', 'S']:
             deg_len = 2
-
+        else:
+            raise ValueError()
+        
         deg = float(str(coord)[0:deg_len])
         min = float(str(coord)[deg_len:])
         angle = deg + min / 60

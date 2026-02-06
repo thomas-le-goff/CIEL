@@ -80,7 +80,7 @@ class Program:
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--vessel-id", dest="vessel_id", type=int, required=True)
+    parser.add_argument("--vessel-id", dest="vessel_id", type=str, required=True)
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
 
     args = parser.parse_args()
