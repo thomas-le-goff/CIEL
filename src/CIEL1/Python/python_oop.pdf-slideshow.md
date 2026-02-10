@@ -47,7 +47,7 @@ _BTS CIEL_
 
 ## Le paradigme objet
 
-La programmation orientée objet est un **paradigme de programmation** càd une manière de formaliser une solution logique dans un programme informatique.
+La programmation orientée objet est un **paradigme de programmation** c.-à-d une manière de formaliser une solution logique dans un programme informatique.
 
 Les principaux langages orientés objet (par ordre d'apparition):
 
@@ -68,9 +68,9 @@ Les principaux langages orientés objet (par ordre d'apparition):
 
 ### Principe
 
-La POO consiste à structurer le code autour d'objets qui représentent des **entités**, combinant **données** et **comportements**, et qui **interagissent** entre eux au travers de messages pour réaliser les fonctionnalités du programme.
+La POO consiste à structurer le code autour d'objets qui représentent des **entités**, combinant **données** et **comportements**, et qui **interagissent** entre eux à l'aide de messages pour réaliser les fonctionnalités du programme.
 
-![w:400 center](./img/python_oop_paradigm.png)
+![w:600 center](./img/oop_vs_pop.png)
 
 --------------------------------------------------------------------------------
 

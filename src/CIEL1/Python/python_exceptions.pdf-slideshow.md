@@ -2,7 +2,6 @@
 title: Python - Gestion des exceptions - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Python - Gestion des exceptions - BTS CIEL
 paginate: true
@@ -485,6 +484,12 @@ with open('fichier.txt', 'r') as fichier:
 ---
 
 ## Exceptions sur-mesures
+
+Une exception est une **instance** de la classe `BaseException`.
+
+En utilisant le principe d'héritage, il est possible de créer ses propres classes d'exceptions pour communiquer des erreurs ou des comportements anormaux aux autres développeurs. 
+
+> Nous verrons cela en détail avec le cours sur la programmation orientée objet.
 
 ---
 
