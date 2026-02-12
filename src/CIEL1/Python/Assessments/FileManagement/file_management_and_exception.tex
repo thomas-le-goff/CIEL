@@ -1,0 +1,187 @@
+\documentclass[12pt, a4paper]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\pagestyle{head}
+\firstpageheader{BTS CIEL1}{Evaluation pratique : Gestion des fichiers en Python}{13/02/2026}
+
+\begin{document}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\newpage
+
+\begin{center}
+  \includegraphics[width=200px]{firewall.jpg}
+\end{center}
+\begin{center}
+Nom et prénom:\enspace \hrulefill \hfill Note :\enspace \hrulefill
+\end{center}
+\section{Contexte}
+
+Un \textbf{WAF} pour \textbf{W}eb \textbf{A}pplication \textbf{F}irewall est un
+logiciel faisant office de pare-feu au niveau de la couche applicative du
+protocol \textbf{HTTP}. Le fonctionnement repose sur l'analyse de logs des
+requêtes qui arrivent sur un service web et l'application de règles pour
+déterminer si le trafic semble suspect ou non. Si le trafic est considéré
+suspect, l'adresse IP à l'origine de la requête doit être mise sur une liste
+noire pour tenter d'interrompre une potentielle attaque.
+
+L'objectif de ce TP est de réaliser un script Python mettant en place les bases
+de ce type d'application (inspecter un fichier de log, déterminer si le trafic
+est suspect, bannir l'adresse IP source).
+
+Les fichiers à votre disposition sont :
+
+\begin{itemize}
+  \item \texttt{http\_requests.log} contenant un échantillon de logs
+  \item \texttt{main.py} contenant une fonction pour extraire les données d'une ligne de log
+\end{itemize}
+
+\section{Exemple}
+
+Voici un exemple de logs à traiter (les dates et heures sont tronquées):
+
+\begin{verbatim}
+192.168.1.10 - [12/Feb/2026:09:00:14] "GET / HTTP/1.1" 200 512 "-" "Mozilla/5.0"
+192.168.1.11 - [...] "GET /products HTTP/1.1" 200 2048 "-" "Mozilla/5.0"
+192.168.1.12 - [...] "GET /product/42 HTTP/1.1" 200 1024 "-" "Mozilla/5.0"
+192.168.1.13 - [...] "POST /login HTTP/1.1" 401 256 "-" "Mozilla/5.0"
+192.168.1.13 - [...] "POST /login HTTP/1.1" 401 256 "-" "Mozilla/5.0"
+192.168.1.13 - [...] "POST /login HTTP/1.1" 401 256 "-" "Mozilla/5.0"
+192.168.1.13 - [...] "POST /login HTTP/1.1" 401 256 "-" "Mozilla/5.0"
+192.168.1.13 - [...] "POST /login HTTP/1.1" 401 256 "-" "Mozilla/5.0"
+45.83.12.4 - [...] "GET /index.php?id=1%20OR%201=1 HTTP/1.1" 500
+45.83.12.4 - [...] "GET /index.php?id=2%20UNION%20SELECT%20password HTTP/1.1" 500
+\end{verbatim}
+
+Dans cet exemple les IPs \texttt{192.168.1.13} et \texttt{45.83.12.4} doivent
+être bannies pour les raisons suivantes :
+\begin{itemize}
+  \item Trop de requêtes suspectes détectées sur \texttt{/login}
+  \item Tentatives d'injection SQL détectées sur \texttt{index.php}
+\end{itemize}
+
+\newpage
+\section{Etapes}
+
+\textit{\textbf{Vous devez faire valider chaque étape avant de passer à la suivante}}.
+
+\begin{questions}
+
+  \question[6]{Parsing des logs}
+
+  \textbf{Objectif :} Extraire les informations utiles de chaque ligne du fichier \texttt{http\_requests.log}.
+
+  \textbf{Étapes :}
+  \begin{itemize}
+    \item Initialisez un dictionnaire \texttt{suspiciousRequests} qui contiendra pour
+          chaque IP le nombre de requêtes suspectes détectées.
+    \item Ouvrez le fichier de log \texttt{http\_requests.log} en \textbf{mode lecture}      
+    \item Pour chaque ligne du fichier de logs, utilisez la fonction
+          \texttt{parse\_log\_line} afin de récupérer un \textbf{dictionnaire} contenant les
+          informations extraites de la requête.
+    \item Ce dictionnaire contient notamment :
+          \begin{itemize}
+            \item L'\textbf{IP source}
+            \item La \textbf{date et l'heure}
+            \item La \textbf{requête HTTP}
+            \item Un booléen indiquant si la requête est \textbf{suspecte}
+          \end{itemize}
+    \item Si la requête est considérée comme suspecte :
+          \begin{itemize}
+            \item Si l'IP n'est pas présente dans le dictionnaire \texttt{suspiciousRequests}, il
+                  faut l'ajouter et initialiser le compteur à 1.
+            \item Si l'IP est présente dans le dictionnaire, il faut incrémenter le nombre de
+                  requêtes suspectes.
+          \end{itemize}
+  \end{itemize}
+
+  \textbf{Note :} \texttt{parse\_log\_line} retourne les informations sous forme de \textbf{dictionnaire}.
+
+  \textbf{Exemple de dictionnaire a générer :}
+  \begin{verbatim}
+suspiciousRequests = {"192.168.1.100" : 6, "192.168.1.102" : 1}
+\end{verbatim}
+
+  \question[3]{Détection des IP à bannir}
+
+  \textbf{Objectif :} déterminer quelles IP dépassent le \textbf{seuil de requêtes suspectes} (\texttt{threshold = 4}).
+
+  \textbf{Étapes :}
+  \begin{itemize}
+    \item Créez un \textbf{ensemble} (\texttt{set}) \texttt{toBanIps} qui contiendra les
+          IP à bannir.
+    \item Parcourez les \textbf{entrées} du dictionnaire \texttt{suspiciousRequests}.
+    \item Si une IP a un nombre de requêtes suspectes \textbf{supérieur au seuil}, elle
+          est ajoutée à \texttt{toBanIps}.
+  \end{itemize}
+
+  \newpage
+
+  \question[3]{Génération de la liste noire}
+
+  \textbf{Objectif :} écrire les IP à bannir dans un fichier \texttt{blacklist}.
+
+  \textbf{Étapes :}
+  \begin{itemize}
+    \item Ouvrez un fichier nommé \texttt{blacklist} en \textbf{mode ajout}
+    \item Pour chaque IP de \texttt{toBanIps}, écrire une nouvelle ligne dans le fichier.
+  \end{itemize}
+
+  \textbf{Exemple de contenu final :}
+  \begin{verbatim}
+192.168.1.100
+192.168.1.102
+\end{verbatim}
+
+  \question[4]{Configuration du programme}
+
+  \textbf{Objectif :} configurer le programme à l'aide d'un fichier au format \texttt{ini} ou \texttt{json}.
+
+  \textbf{Étapes :}
+  \begin{itemize}
+    \item Au démarrage du programme, vérifier si un fichier \texttt{config.json} ou
+          \texttt{config.ini} existe dans le même dossier que le programme.
+    \item Ce fichier doit être chargé dans un dictionnaire (\texttt{dict}), chaque clé du
+          dictionnaire correspond à un paramètre modifiable :
+          \begin{itemize}
+            \item Le seuil (\texttt{threshold})
+            \item Le chemin d'export de la liste noire
+          \end{itemize}
+    \item Adapter le reste du code pour utiliser les valeurs présentes dans le
+          dictionnaire de configuration.
+    \item Le fichier de configuration étant optionnel, le programme ne doit pas lever
+          d'erreur s'il n'est pas présent et des valeurs par défaut adaptées doivent être
+          utilisées.
+  \end{itemize}
+
+  \textbf{Astuce :} vous pouvez vous aider des modules :
+  \begin{itemize}
+    \item \url{https://docs.python.org/fr/3.10/library/json.html#module-json}
+    \item \url{https://docs.python.org/fr/3.10/library/configparser.html}
+  \end{itemize}
+
+  \textbf{Exemple de fichier de configuration :}
+  \begin{verbatim}
+{
+  "threshold": 4,
+  "blacklist_file_path": "/tmp/blacklist.txt"
+}
+\end{verbatim}
+
+  \question[4]{Amélioration au choix}
+
+  \begin{itemize}
+    \item Vérifier le nombre de requêtes suspectes sur une plage de temps
+    \item Détecter les requêtes trop rapprochées
+    \item Produire, en plus du fichier liste noire, un fichier de log contenant la raison du banissement d'une IP
+  \end{itemize}
+
+\end{questions}
+
+\end{document}

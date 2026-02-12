@@ -1,14 +1,4 @@
----
-title: CIEL 1 - Gestion des fichiers et du système de fichiers avec Python
-author: Thomas Le Goff
-geometry: margin=1in
----
-
-## TP 3 - Gestion des fichiers et du système de fichiers avec Python
-
 Ce TP a pour objectif de vous faire découvrir la gestion des fichiers en utilisant la fonction `open` et le module `os`.
-
----
 
 ## Outils à votre disposition
 
@@ -16,17 +6,14 @@ Ce TP a pour objectif de vous faire découvrir la gestion des fichiers en utilis
 
 - [Documentation officielle de `open`](https://docs.python.org/fr/3/tutorial/inputoutput.html#reading-and-writing-files)
 - [Documentation officielle du module `os`](https://docs.python.org/fr/3/library/os.html)
-- [Tutoriel sur la gestion des fichiers en Python (OpenClassrooms)](https://openclassrooms.com/fr/courses/4464381-demarrez-votre-projet-avec-python/4464421-manipulez-des-fichiers-en-python)
 - [Documentation du module `csv`](https://docs.python.org/fr/3/library/csv.html)
 
 ### Éditeur de code
 
-Pour ce TP,il n'est pas nécessaire d'utiliser de carte MicroBit, vous pouvez utiliser l'éditeur de votre choix :
+Pour ce TP il n'est pas nécessaire d'utiliser de carte MicroBit, vous pouvez utiliser l'éditeur de votre choix :
 
 - Visual Studio Code
 - Geany
-
-\pagebreak
 
 ## 1 - Découverte de `open` et de `os`
 
@@ -66,7 +53,9 @@ Questions :
 
 ### Exercice 3 - Lire un fichier ligne par ligne
 
-```python
+Exemple de fichier : [data.text](/ciel1/s1-3-gestion-fichiers-python/data.text) (pensez à la renomme `data.txt`)
+
+```python[data.text](/ciel1/s1-3-gestion-fichiers-python/data.text)
 with open("data.txt", "r", encoding="utf-8") as f:
     for ligne in f:
         ligne = ligne.strip()
@@ -95,6 +84,8 @@ with open("log.txt", "a", encoding="utf-8") as f:
     f.write("Nouvelle entrée dans le fichier.\n")
 ```
 
+> Exécutez le programme plusieurs fois pour comprendre l'intérêt du mode `a`.
+
 Questions :
 
 - Quel est le rôle du mode `"a"` ?
@@ -102,6 +93,8 @@ Questions :
 - Comment faire pour ajouter une date et une heure à chaque entrée ?
 
 ### Exercice 5 - Lire un fichier CSV
+
+Exemple de fichier : [donnees.csv](/ciel1/s1-3-gestion-fichiers-python/donnees.csv)
 
 ```python
 with open("donnees.csv", "r", encoding="utf-8") as f:
@@ -167,8 +160,6 @@ Questions :
 - Comment faire pour que le fichier de sortie ait le même nom que le fichier d’entrée, mais avec le suffixe `_MAJ` ?
 - Comment adapter se code pour réécrire dans `entree.txt` plutôt que dans `sortie.txt` ?
 
-Voici deux exercices supplémentaires (8 et 9) axés sur la manipulation du système de fichiers avec le module **`os`** en Python. Ces exercices sont adaptés à des étudiants de BTS CIEL (niveau Licence) et couvrent la création, la suppression, la vérification et la navigation dans les dossiers.
-
 ### Exercice 8 - Création et gestion de dossiers
 
 Objectif : Créer une arborescence de dossiers, vérifier leur existence et les supprimer si nécessaire.
@@ -210,7 +201,7 @@ else:
     print(f"Le dossier '{chemin_docs}' n'existe pas.")
 ```
 
-#### Questions
+Questions :
 - Pourquoi utilise-t-on `os.path.exists` avant de créer un dossier ?
 - Quel est le rôle de `os.path.join` ?
 - Que se passe-t-il si on essaie de supprimer un dossier non vide avec `os.rmdir` ?
@@ -252,10 +243,160 @@ for element in os.listdir(os.path.join("mon_super_projet", "src")):
     print(f"- {element}")
 ```
 
-#### Questions
+Questions :
 - Pourquoi utilise-t-on `os.path.join` pour construire les chemins ?
 - Quelle est la différence entre `os.listdir` et `os.scandir` ?
 - Que se passe-t-il si le fichier de destination existe déjà lors de l’utilisation de `os.rename` ?
 - Comment gérer les erreurs si le dossier de destination n’existe pas ?
 
-## TODO exercice cumulant chargement d'un fichier et structure de données (JSON => dictionnaire) et (CSV => list /set)
+## 2 - fail2ban V2
+
+### Contexte du programme
+Ce programme simule un [mini-fail2ban](https://fr.wikipedia.org/wiki/Fail2ban) en analysant un fichier de logs SSH pour détecter les adresses IP ayant trop de tentatives de connexion échouées. Il génère ensuite une liste noire (`blacklist`) des IP à bloquer.
+
+### Fichiers manipulés par le programme
+
+#### Fichier d'entrée : `auth.log`
+Contenu :
+Un fichier de logs SSH au format classique, comme celui-ci :
+```
+May 15 10:30:45 server sshd[1234]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:31:00 server sshd[1235]: Accepted password for admin from 192.168.1.101 port 22 ssh2
+May 15 10:31:15 server sshd[1236]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:31:30 server sshd[1237]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:31:45 server sshd[1238]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:32:00 server sshd[1239]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:32:15 server sshd[1240]: Failed password for root from 192.168.1.100 port 22 ssh2
+May 15 10:32:30 server sshd[1241]: Failed password for guest from 192.168.1.102 port 22 ssh2
+```
+- Chaque ligne représente une tentative de connexion SSH.
+- Les lignes contiennent :
+  - La **date et l'heure** de la tentative.
+  - Le **statut** (`Accepted` ou `Failed`).
+  - Le **nom d'utilisateur** cible.
+  - L'**adresse IP** source.
+
+> Exemple de fichier : [auth.log](/ciel1/s1-3-gestion-fichiers-python/auth.log)
+
+##### Fichier de sortie : `blacklist`
+Contenu :
+Une liste d'adresses IP à bloquer, une par ligne :
+```
+192.168.1.100
+192.168.1.102
+```
+- Ce fichier peut ensuite être utilisé par un script ou un outil (comme `iptables`) pour bloquer les IP.
+
+### Étapes du programme
+
+Le code suivant vous est fourni : 
+
+```python
+import re
+from datetime import datetime
+
+
+def parse_log_line(line: str) -> tuple:
+    """
+    Parse une ligne de log SSH et extrait les informations suivantes :
+    - date_heure (objet datetime)
+    - ip (str)
+    - username (str)
+    - success (bool : True = succès, False = échec)
+
+    Exemple d'entrée :
+    "May 15 10:30:45 server sshd[1234]: Failed password for root from 192.168.1.100 port 22 ssh2"
+
+    Retourne un tuple : (date_heure, ip, username, success)
+    """
+    pattern = re.compile(
+        r"(?P<month>\w+)\s+(?P<day>\d+)\s+(?P<hour>\d+:\d+:\d+)\s+.+?\s+sshd\[\d+\]:\s+(?P<status>Accepted|Failed)\s+password\s+for\s+(?P<username>\w+)\s+from\s+(?P<ip>\d+\.\d+\.\d+\.\d+)"
+    )
+
+    match = pattern.match(line)
+    if not match:
+        raise ValueError(f"Format de log invalide : {line}")
+
+    month = match.group("month")
+    day = match.group("day")
+    hour = match.group("hour")
+    ip = match.group("ip")
+    username = match.group("username")
+    success = match.group("status") == "Accepted"
+
+    date_str = f"2026 {month} {day} {hour}"
+    date_heure = datetime.strptime(date_str, "%Y %b %d %H:%M:%S")
+
+    return (date_heure, ip, username, success)
+
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
+
+```
+
+#### 1. Parsing des logs
+Objectif : Extraire les informations utiles de chaque ligne du fichier `auth.log`.
+
+Etapes :
+- Initialisez un dictionnaire `failedConnections` qui contiendra pour chaque IP le nombre de tentatives en échec.
+- Pour chaque ligne du fichier de logs, utilisez la fonction `parse_log_line` afin de récupérer les informations suivantes :
+	- La **date et l'heure** (ex : `May 15 10:30:45`).
+  - L'**IP source** (ex : `192.168.1.100`).
+  - Le **nom d'utilisateur** (ex : `root`).
+  - Le **statut** de la connexion (`Accepted` ou `Failed`).
+- Si la connexion a échouée (statut = `Failed`)
+	- Si l'IP n'est pas présente dans le dictionnaire `failedConnections` il faut l'ajouter et initialiser le nombre de tentatives à 1.
+  - Si l'IP est présente dans le dictionnaire il faut incrémenter le nombre de tentatives.
+
+> `parse_log_line` retourne les informations sous forme de **tuple** : `(date_heure, ip, username, success)`.
+
+Exemple de dictionnaire généré : 
+
+```python
+failedConnections = {"192.168.1.100" : 6, "192.168.1.102" : 1}
+```
+#### 2. Détection des IP à bannir
+Objectif : déterminer quelles IP dépassent le **seuil d'échecs** (`threshold = 4`).
+
+Etapes :
+- Créez un **ensemble** (`set`) `toBanIps` qui contiendra les IP à bannir.
+- On parcourt les entrées du **dictionnaire** `failedConnections`.
+- Si une IP a un nombre d'échecs **supérieur au seuil**, elle est ajoutée à `toBanIps`.
+
+#### 3. Génération de la liste noire
+Objectif : écrire les IP à bannir dans un fichier `blacklist`.
+
+Etapes :
+- Ouvrez un fichier nommé `blacklist` en mode **ajout** (`"a"`) à l'aide de la fonction `open`.
+- Pour chaque IP de `toBanIps` écrire une nouvelle ligne dans le fichier.
+- Exemple de contenu final :
+```
+192.168.1.100
+192.168.1.102
+```
+
+#### 4. Configuration du programme
+Objectif: configurer le programme à l'aide d'un fichier au format `ini` ou `json`
+
+Etapes :
+- Au démarrage du programme vérifier si un fichier `config.json` ou `config.ini` existe dans le même dossier que le programme
+- Ce fichier doit être chargé dans un dictionnaire (`dict`), chaque clé du dictionnaire correspond à un paramètre que l'utilisateur pourra modifier : 
+	- Le seuil (`threshold`)
+  - Le chemin d'export de la liste noire
+- Adapter le reste du code pour utiliser les valeurs présente dans le dictionnaire de configuration
+- Le fichier de configuration étant optionnel, le programme ne doit pas lever d'erreur s'il n'est pas présent et des valeurs par défaut adaptées doivent être utilisées.
+
+> Astuce : vous pouvez vous aider des modules [`json`](https://docs.python.org/fr/3.10/library/json.html#module-json) et [`config-parser`](https://docs.python.org/fr/3.10/library/configparser.html)
+
+Exemple de fichier de configuration :
+
+```json
+{
+	"threshold": 4,
+  "blacklist_file_path": "/tmp/blacklist.txt"
+}
+```
