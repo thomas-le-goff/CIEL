@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  12 FEB 2026 15:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.2.12)  12 FEB 2026 16:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -296,51 +296,59 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen162
 \Gin@req@width=\dimen163
-) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+) (/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+Package: lastpage 2023/10/14 v2.0e lastpage: 2.09 or 2e? (HMM)
+ (/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+Package: lastpage2e 2023/10/14 v2.0e Decide which 2e lastpage version to use (HMM)
+ (/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpagemodern.sty
+Package: lastpagemodern 2023-10-14 v2.0e Refers to last page's name (HMM; JPG)
+\c@lastpagecount=\count332
+) 
+)) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count332
+\l__color_backend_stack_int=\count333
 \l__pdf_internal_box=\box54
 ) (./file_management_and_exception.aux)
 \openout1 = `file_management_and_exception.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Info: Redefining \degres on input line 13.
-LaTeX Info: Redefining \up on input line 13.
-\c@lstlisting=\count333
-Package hyperref Info: Link coloring OFF on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Info: Redefining \degres on input line 19.
+LaTeX Info: Redefining \up on input line 19.
+\c@lstlisting=\count334
+Package hyperref Info: Link coloring OFF on input line 19.
  (./file_management_and_exception.out) (./file_management_and_exception.out)
 \@outlinefile=\write3
 \openout3 = `file_management_and_exception.out'.
 
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count334
+\scratchcounter=\count335
 \scratchdimen=\dimen164
 \scratchbox=\box55
-\nofMPsegments=\count335
-\nofMParguments=\count336
+\nofMPsegments=\count336
+\nofMParguments=\count337
 \everyMPshowfont=\toks27
-\MPscratchCnt=\count337
+\MPscratchCnt=\count338
 \MPscratchDim=\dimen165
-\MPnumerator=\count338
-\makeMPintoPDFobject=\count339
+\MPnumerator=\count339
+\makeMPintoPDFobject=\count340
 \everyMPtoPDFconversion=\toks28
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -351,47 +359,49 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 <firewall.jpg, id=16, 737.75626pt x 548.0475pt>
 File: firewall.jpg Graphic file (type jpg)
 <use firewall.jpg>
-Package pdftex.def Info: firewall.jpg  used on input line 19.
+Package pdftex.def Info: firewall.jpg  used on input line 23.
 (pdftex.def)             Requested size: 200.75073pt x 149.12883pt.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 41.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 45.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-Overfull \hbox (40.91151pt too wide) in paragraph at lines 60--60
+Overfull \hbox (40.91151pt too wide) in paragraph at lines 64--64
 []\T1/cmtt/m/n/12 192.168.1.10 - [12/Feb/2026:09:00:14] "GET / HTTP/1.1" 200 512 "-" "Mozilla/5.0"[] 
  []
 
 
-Overfull \hbox (3.87056pt too wide) in paragraph at lines 60--60
+Overfull \hbox (3.87056pt too wide) in paragraph at lines 64--64
 []\T1/cmtt/m/n/12 192.168.1.12 - [...] "GET /product/42 HTTP/1.1" 200 1024 "-" "Mozilla/5.0"[] 
  []
 
 
-Overfull \hbox (47.085pt too wide) in paragraph at lines 60--60
+Overfull \hbox (47.085pt too wide) in paragraph at lines 64--64
 []\T1/cmtt/m/n/12 45.83.12.4 - [...] "GET /index.php?id=2%20UNION%20SELECT%20password HTTP/1.1" 500[] 
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 
  <./firewall.jpg>]
-Overfull \hbox (19.15288pt too wide) in paragraph at lines 78--79
+Overfull \hbox (19.15288pt too wide) in paragraph at lines 82--83
 []\T1/cmr/bx/n/12 Objectif : \T1/cmr/m/n/12 Ex-traire les in-for-ma-tions utiles de chaque ligne du fi-chier \T1/cmtt/m/n/12 http_requests.log\T1/cmr/m/n/12 . 
  []
 
 
-Overfull \hbox (13.9917pt too wide) in paragraph at lines 113--114
+Overfull \hbox (13.9917pt too wide) in paragraph at lines 117--118
 []\T1/cmr/bx/n/12 Objectif : \T1/cmr/m/n/12 dé-ter-mi-ner quelles IP dé-passent le \T1/cmr/bx/n/12 seuil de re-quêtes sus-pectes \T1/cmr/m/n/12 (\T1/cmtt/m/n/12 threshold
  []
 
 [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 165.
+(Font)              <12> on input line 169.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 165.
+(Font)              <8> on input line 169.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 165.
+(Font)              <6> on input line 169.
  [3]
 This exam contains 5 questions with 0 parts, 0 subparts, and 0 subsubparts.
+
+enddocument/afterlastpage: lastpage setting LastPage.
 (./file_management_and_exception.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -401,15 +411,15 @@ Package rerunfilecheck Info: File `file_management_and_exception.out' has not ch
 (rerunfilecheck)             Checksum: 8C6F23FBD88625ACD852558FFA69071A;234.
  ) 
 Here is how much of TeX's memory you used:
- 12866 strings out of 476153
- 199687 string characters out of 5794326
+ 12949 strings out of 476153
+ 201920 string characters out of 5794326
  1935975 words of memory out of 5000000
- 34747 multiletter control sequences out of 15000+600000
+ 34820 multiletter control sequences out of 15000+600000
  565586 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,10n,79p,354b,570s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on file_management_and_exception.pdf (3 pages, 321147 bytes).
+Output written on file_management_and_exception.pdf (3 pages, 321251 bytes).
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream
