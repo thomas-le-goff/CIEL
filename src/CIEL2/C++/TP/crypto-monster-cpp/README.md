@@ -1,8 +1,29 @@
-# CryptoMonsters
+# CIEL2 - TP CryptoMonsters (introduction à la POO en C++)
 
 ## Avant de commencer
 
-// Le projet doit compiler et s'executer sans erreur.
+> Le code source nécessaire pour ce TP est disponible ici : [crypto-monster-cpp.zip](/ciel2/s2-4_poo_cpp/crypto-monster-cpp.zip)
+
+Ce projet utilise la bibliothèque [Raylib](https://www.raylib.com/) pour faciliter l'utilisation des entrées (clavier) et sorties (dessins sur l'écran).
+
+Afin de télécharger et compiler la bibliothèque exécutez les commandes suivantes (à faire uniquement une fois):
+
+```c
+cd build
+./premake5 gmake
+cd ..
+make
+```
+
+Vous pourrez ensuite pour compiler et lancer votre programme utiliser la commande suivante :
+
+```c
+make && ./bin/Debug/crypto-monster-cpp
+```
+
+> ℹ️ Me solliciter si vous rencontrez une erreur liée à la compilation/exécution du programme.
+
+> Voici un document de référence des fonctions mises à disposition par Raylib <https://www.raylib.com/cheatsheet/cheatsheet.html>
 
 ## Introduction
 Ce TP a pour objectif d’introduire le concept de programmation orientée objet en langage C++.
@@ -19,13 +40,13 @@ L’idée est de réaliser un programme de génération de monstres dont la form
 Voici des exemples de monstres générés par le programme final, avec leur ADN associé :
 
 - **ADN : 133484642967201967**
-  ![Exemple de monstre](assets/133484642967201967.png)
+  ![Exemple de monstre](/ciel2/s2-4_poo_cpp/133484642967201967.png)
 
 - **ADN : 328765965610937671**
-  ![Exemple de monstre](assets/328765965610937671.png)
+  ![Exemple de monstre](/ciel2/s2-4_poo_cpp/328765965610937671.png)
 
 - **ADN : 389579223599235987**
-  ![Exemple de monstre](assets/389579223599235987.png)
+  ![Exemple de monstre](/ciel2/s2-4_poo_cpp/389579223599235987.png)
 
 Chaque segment de la séquence ADN est composé de **2 chiffres** et encode une caractéristique du monstre. Par exemple, pour la séquence **13 34 84 64 29 67 20 19 67** :
 - **13** → Type de bras (fichier `arm_13.png` dans le dossier `resources`).
@@ -79,7 +100,7 @@ Texture mouth_texture = part_manager.getPartTexture("mouth", my_monster.getMouth
 DrawTextureV(mouth_texture, Vector2Add(monster_origin, Vector2{(float)body_texture.width / 2 - mouth_texture.width / 2, (float)body_texture.height / 2}), WHITE);
 ```
 
-_🖥️ Copiez-collez ce code à la ligne 63 dans `main.cpp`, en lieu et place du commentaire `// TODO`._
+_🖥️ Copiez-collez ce code à la ligne 66 dans `main.cpp`, en lieu et place du commentaire `// TODO`._
 
 Comme vous pouvez le constater, le code précédent utilise une variable nommée `my_monster` qui n’est déclarée nulle part ailleurs.
 
@@ -103,7 +124,7 @@ _🖥️ Modifiez la méthode `describe` pour afficher dans la console l’ensem
 
 Maintenant que le code de rendu est opérationnel, nous allons nous concentrer sur la génération de la séquence ADN. Étant donné que le code de rendu utilise des méthodes pour accéder aux morceaux d’ADN du monstre, aucune modification ne sera nécessaire dans le programme de rendu. Ce principe s’appelle **l’encapsulation** : la classe `CryptoMonster` expose des méthodes permettant de connaître chaque membre du monstre. On peut modifier la manière dont les membres sont générés sans « casser » le code qui utilise ces méthodes.
 
-La fonction `static` dans la classe `CryptoMonster` permet de générer une séquence d’ADN.
+La fonction `static generateRandom18DigitNumber()` dans la classe `CryptoMonster` permet de générer une séquence d’ADN.
 
 _🖥️ Ajoutez un attribut dans la classe `CryptoMonster` nommé `dna`. Cet attribut doit être **privé** (il ne sera utilisé que depuis l’intérieur de `CryptoMonster`)._
 
@@ -157,7 +178,7 @@ _✍️ Essayez de comprendre en quoi cette classe illustre le principe RAII._
 
 ## Générer des nouveaux monstres
 
-Actuellement, la génération d'un monstre se fait au démarrage de l'application. Cela est dû au fait que la génération de l'ADN est fait au moment de la **construction** d'un objet `CryptoMonster` et que notre instance `my_monster` est créée au lancement du programme.
+Actuellement, la génération d'un monstre se fait au démarrage de l'application. Cela est dû au fait que la génération de l'ADN est faite au moment de la **construction** d'un objet `CryptoMonster` et que notre instance `my_monster` est créée au lancement du programme.
 
 Afin de générer un nouveau monstre à chaque appuie sur la touche `Espace` deux adaptations sont possibles : 
 
@@ -202,31 +223,67 @@ __En vous appuyant sur [la référence C++ concernant `std::unique_ptr`](https:/
 
 ## Exporter un monstre
 
-TODO
+Dans cette partie, nous allons ajouter une fonctionnalité d'export du CryptoMonster dans une image.
+
+Afin de correctement comprendre la suite, il est nécessaire de connaître la différence entre une texture et une image : 
+
+- Texture : une texture est un espace mémoire contenant les pixels qui permettent de représenter l'image à l'écran. Une texture est stockée au niveau de la mémoire de la carte graphique (VRAM).
+
+- Image : une image correspond aussi à un espace mémoire contenant des pixels, mais, présent au niveau de la mémoire du processeur (RAM). 
+
+Le programme actuel utilise un mode de rendu dit "buffered", le principe est le suivant : 
+
+![buffered_drawing.drawio.svg](/ciel2/s2-4_poo_cpp/buffered_drawing.drawio.svg)
+
+1. les instructions de dessins sont envoyées dans un tampon ("buffer" ou "texture")
+2. la texture est dessinée à l'écran
+
+Dans la version actuelle, notre scène contenant le CryptoMonster est dessinée dans une texture puis dessinée à l'écran. Pour en faire un fichier image, il faut : 
+- dessiner la texture dans une image via la fonction `LoadImageFromTexture` (transfert de la carte graphique vers le processeur)
+- exporter l'image dans un fichier via `ExportImage` (transfert de la RAM vers le HDD)
+
+_✍️ En vous appuyant sur la documentation de Raylib, adaptez le code suivant (dans main.cpp) pour exporter le CryptoMonster dans une image lors de l'appuie sur `Entrée`._
+
+```cpp
+// Export to image
+if (drawn && IsKeyPressed(KEY_ENTER))
+{
+	// TODO
+}
+```
 
 ## Améliorations orientées objets
 
-Afin de rendre le code plus modulaire et adaptable nous allons faire appelle à la programmation orientée objet.
+Afin de rendre le code **modulaire** et **adaptable**, nous allons recourir à la **programmation orientée objet**.
 
-Actuellement, notre programme possède 2 classes : 
+Actuellement, notre programme possède deux classes :
 
-- `CryptoMonster` qui encaspule l'ADN du monster et expose des méthodes (propriétés dérivées) pour accéder aux différents membres
-- `PartManager` qui charge les différentes textures qui compose un monstre et offre des méthodes pour accéder à la texture adaptée
-  
-Nous souhaitons ajouter 2 classes : 
+* `CryptoMonster`, qui **encapsule** l’ADN du monstre et expose des méthodes (propriétés dérivées) pour accéder à ses différents attributs ;
+* `PartManager`, qui charge les différentes textures d'un monstre et fournit des méthodes pour récupérer la texture appropriée.
 
-- `Game` une classe **abstraite** qui contiendra la logique dîte "métier" de notre programme (actuellement présente dans `main.cpp`) 
-- `RaylibGame` qui est un sous-type de `Game` contenant la logique propre à la bibliothèque Raylib.
+Nous souhaitons ajouter deux nouvelles classes :
 
-_✍️ Selon vous, quel est l'intêret de séparer le contenu de `main.cpp` en deux classes au lieu d'une ?_
+* `Game`, une classe **abstraite** qui contiendra la logique dite **métier** de notre programme (actuellement située dans `main.cpp`) ;
+* `RaylibGame`, une sous-classe de `Game` qui contiendra la logique spécifique à la bibliothèque **Raylib**.
 
+### Classe Game
 
-Voici le diagramme de classes de `Game` et `RaylibGame`
+Voici le diagramme de classe de `Game` :
 
-[![](https://mermaid.ink/img/pako:eNqlk91PwjAQwP-V5XxBGYSt2xgLIVE0xAcSY3wyS8hBCyzZ2qXrFET82-02PoZEE_Weer_76t21G5gJyiCAWYxZdhvhQmISckMLjSSbqUhw4-Yp5BV7xHUcTUeYMKPVeh8YxWlvKzOUxNhUpJB-H6eZkjhTg8GRtpL1JBE8U0wagTGU61SJcaXXnFKUapIgx0Xp9qDVcaXtaxbSLEo2LmvgY09qLE8pKg2NFxHRGqcSXw_0yC-WyGnM7lapkOq6HMNZ7M5nxDiTOvcXrzO_e57mame-qlmLG5xMoPHNZM5DWXm93wdvT3dW22ptc80jPp3uKf-xz7-3-Z8uD02CCQsZUQiUzJkJCZMJFiqUbYaglky_Xwj0kbI55rEKIeRbHZYifxYi2UdKkS-WEMwxzrRWvaXdZzlQyThlcihyriCwHKtbZoFgAysIiOe13Y7r-5bftW3PdYgJa-1mW23HJk7Ptx2fuMTytia8lYU77S7xXdt1vZ5D_B5xyPYTEe8kwg?type=png)](https://mermaid.live/edit#pako:eNqlk91PwjAQwP-V5XxBGYSt2xgLIVE0xAcSY3wyS8hBCyzZ2qXrFET82-02PoZEE_Weer_76t21G5gJyiCAWYxZdhvhQmISckMLjSSbqUhw4-Yp5BV7xHUcTUeYMKPVeh8YxWlvKzOUxNhUpJB-H6eZkjhTg8GRtpL1JBE8U0wagTGU61SJcaXXnFKUapIgx0Xp9qDVcaXtaxbSLEo2LmvgY09qLE8pKg2NFxHRGqcSXw_0yC-WyGnM7lapkOq6HMNZ7M5nxDiTOvcXrzO_e57mame-qlmLG5xMoPHNZM5DWXm93wdvT3dW22ptc80jPp3uKf-xz7-3-Z8uD02CCQsZUQiUzJkJCZMJFiqUbYaglky_Xwj0kbI55rEKIeRbHZYifxYi2UdKkS-WEMwxzrRWvaXdZzlQyThlcihyriCwHKtbZoFgAysIiOe13Y7r-5bftW3PdYgJa-1mW23HJk7Ptx2fuMTytia8lYU77S7xXdt1vZ5D_B5xyPYTEe8kwg)
+[![](https://mermaid.ink/img/pako:eNptkU1rwzAMhv-K0WljWcmX8-Hb1o2eCjvsNALF1GoaiO2gOFu70v325aMtgU0X-338SkLyCbZWIQjY1rJtXypZktSFYX2oinDrKmvY83thJja62EpqZKeJDPGojxttTeuQmGBLOjbOric9MzWS3EZLI8vR9tbL9aSu1Yd4GIrf3c_Az5XMWNco6XrIPm2lZlyR_LrRWe-9NKrG10NjyT2NQ_3JvXhWaJD62v-4zuBBSZUC4ahDDzSSloOEcRcFuD1qLED0V4U72dWugMIMaY00H9bqaybZrtyD2Mm67dU0zGX3N0poFNLSdsaBSOOxBogTHEBEPl_w1E_iLMijiOf94xFEmC3yIEg4j8PED3mUnz34Hpv6iyzNYh5mQZynceJHiQeoKmdpffn84Tj_AiOYnlE?type=png)](https://mermaid.live/edit#pako:eNptkU1rwzAMhv-K0WljWcmX8-Hb1o2eCjvsNALF1GoaiO2gOFu70v325aMtgU0X-338SkLyCbZWIQjY1rJtXypZktSFYX2oinDrKmvY83thJja62EpqZKeJDPGojxttTeuQmGBLOjbOric9MzWS3EZLI8vR9tbL9aSu1Yd4GIrf3c_Az5XMWNco6XrIPm2lZlyR_LrRWe-9NKrG10NjyT2NQ_3JvXhWaJD62v-4zuBBSZUC4ahDDzSSloOEcRcFuD1qLED0V4U72dWugMIMaY00H9bqaybZrtyD2Mm67dU0zGX3N0poFNLSdsaBSOOxBogTHEBEPl_w1E_iLMijiOf94xFEmC3yIEg4j8PED3mUnz34Hpv6iyzNYh5mQZynceJHiQeoKmdpffn84Tj_AiOYnlE)
 
-_✍️ à partir du diagramme écrivez les fichiers de déclarations correspondant._
+_✍️ À partir du diagramme écrivez le fichier de déclaration de la classe `Game`._
 
-_✍️ à partir du diagramme et du fichier `main.cpp` écrivez les déclarations des méthodes `Game::update` et `Game::draw`._
+_✍️ À partir du diagramme et du fichier `main.cpp` écrivez les déclarations des méthodes `Game::update` et `Game::draw`._
 
+### Un peu d'abstraction
 
+Afin de rendre le code indépendant de Raylib, nous allons utiliser les notions **d’héritage** et **d’abstraction** pour que le code de rendu (lié aux fonctions Raylib) soit exclusivement contenu dans la classe `RaylibGame`.
+
+Pour cette adaptation, il est nécessaire d’ajouter des méthodes dîtes **virtuelles** dans la classe `Game`.
+
+Voici le nouveau diagramme de classes des classes `Game` et `RaylibGame`:
+
+[![](https://mermaid.ink/img/pako:eNqlk91PwjAQwP-V5XxBGWQbdBsNIVE0xAcSY3wyS8hBCyzZ2qXrFET8290HH0OiiXov7f3uq3dtNzCTjAOFWYRpehviQmEcCCMXFio-06EUxs1TICr2iOsonI4w5kar9T4wit3eVmYoibGpSCH9Pk5TrXCmB4MjbcXrSSxFqrkyqDFU60TLcaXXnBJUehKjwEXp9pCr40rb1yykWZRsXNbAx57UWJYw1Dk0XmTIapwpfD3QWu0lChbxu1Uilb4ux3AWu_MZccFVnvuL19HvovK7F0mmd-armrU4wckEGt9M5jyUl8f7ffD29M5qt1q7ueYRn073lP_Y59_b_E-XhybBhIUKGVCtMm5CzFWMhQplmwHoJc_fL9B8y_gcs0gHEIhtHpageJYy3kcqmS2WQOcYpblWvaXdZzlQxQXjaigzoYH2vDIH0A2sgHZct00s4vs9v-cQz7dNWAO1HbvddTrEsizXtjrEdrcmvJVVrbbX8YlDiNfreq5PbMcEzkIt1Xj3XYtl-wn3XirP?type=png)](https://mermaid.live/edit#pako:eNqlk91PwjAQwP-V5XxBGWQbdBsNIVE0xAcSY3wyS8hBCyzZ2qXrFET8290HH0OiiXov7f3uq3dtNzCTjAOFWYRpehviQmEcCCMXFio-06EUxs1TICr2iOsonI4w5kar9T4wit3eVmYoibGpSCH9Pk5TrXCmB4MjbcXrSSxFqrkyqDFU60TLcaXXnBJUehKjwEXp9pCr40rb1yykWZRsXNbAx57UWJYw1Dk0XmTIapwpfD3QWu0lChbxu1Uilb4ux3AWu_MZccFVnvuL19HvovK7F0mmd-armrU4wckEGt9M5jyUl8f7ffD29M5qt1q7ueYRn073lP_Y59_b_E-XhybBhIUKGVCtMm5CzFWMhQplmwHoJc_fL9B8y_gcs0gHEIhtHpageJYy3kcqmS2WQOcYpblWvaXdZzlQxQXjaigzoYH2vDIH0A2sgHZct00s4vs9v-cQz7dNWAO1HbvddTrEsizXtjrEdrcmvJVVrbbX8YlDiNfreq5PbMcEzkIt1Xj3XYtl-wn3XirP)
+
+_✍️ Ajoutez les nouvelles méthodes dans la classe `Game` et ajoutez les fichiers nécessaires à la déclaration de la classe `RaylibGame`._

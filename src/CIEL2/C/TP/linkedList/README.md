@@ -6,6 +6,8 @@
 
 L'objectif de ce TP est de vous faire implémenter une liste chaînée en utilisant les structures et des fonctions associées.
 
+> Le code source nécessaire pour ce TP est disponible ici : [tplinkedlist.zip](/ciel2/s2-1_langage_c/tplinkedlist.zip)
+
 ### Liste chaînée
 
 La liste chaînée est une structure de données fondamentale en informatique, souvent utilisée dans l'implémentation d'autres structures de données.<br>

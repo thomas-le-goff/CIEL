@@ -27,7 +27,7 @@ Pour mener à bien ce projet, l’architecture suivante a été retenue :
 
 Le diagramme suivant illustre l’architecture globale du projet :
 
-![](./img/scada_mqtt_diagram.drawio.svg)
+![scada_mqtt_diagram.drawio.svg](/ciel2/s2-2_mqtt/scada_mqtt_diagram.drawio.svg)
 
 ### Protocole NMEA 0183
 
@@ -87,12 +87,14 @@ Chaque étudiant doit installer un simulateur sur son poste, ainsi, la classe pe
 [Les sources du projet sur GitHub - nmea-sim](https://github.com/pturner1989/nmea-sim)
 
 **Étapes**
-1. Téléchargez l’exécutable (disponible ici : TODO).
+1. Téléchargez l’exécutable ([disponible ici](https://saintjosephlasalle-my.sharepoint.com/:u:/g/personal/legoff_t1_stjolorient_fr/IQDMtY5cvUgASYnpZg60bYj6AQctEBmPeQ3HqFFH53QTzdM?e=zaAs60)).
 2. Lancez-le avec la commande (après l’avoir rendu exécutable) :
    ```shell
    ./route-sim
    ```
 3. Choisissez le mode **« Manual »** et utilisez les paramètres par défaut (vous pourrez les modifier par la suite afin d'avoir des données plus cohérentes).
+![route-sim.png](/ciel2/s2-2_mqtt/route-sim.png)
+![route-sim-3.png](/ciel2/s2-2_mqtt/route-sim-3.png)
 4. Le simulateur émet des trames **NMEA 0183** sur le port **10110**.
 
 **Test de fonctionnement**
@@ -245,64 +247,84 @@ if __name__ == "__main__":
 
 _✍️ En vous appuyant sur les deux programmes, écrivez un programme Python qui correspond au cahier des charges et aux normes de développement industrielles_
 
-> Documentation sur l'utilisation des socket en Python : https://docs.python.org/3/library/socket.html.
+> Documentation sur l'utilisation des socket en Python : https://docs.python.org/3/library/socket.html
 > 
-> Documentation de paho-mqtt : https://pypi.org/project/paho-mqtt/.
+> Documentation de paho-mqtt : https://pypi.org/project/paho-mqtt/
+
+Fonction pour convertir les coordonnées `dddmm.mmmm` en degrés décimaux :
+
+```python
+    @staticmethod
+    def _format_coordinate(coord: float, hemi: str) -> float:
+        if hemi in ['W', 'E']:
+            deg_len = 3
+        elif hemi in ['N', 'S']:
+            deg_len = 2
+        else:
+            raise ValueError()
+
+        deg = float(str(coord)[0:deg_len])
+        min = float(str(coord)[deg_len:])
+        angle = deg + min / 60
+
+        if hemi in ['W', 'S']:
+            angle = -angle
+
+        return angle
+```
 
 ## Valorisation des données de navigation
 
 Le programme qui exploite les données de navigation (l'interface de supervision SCADA) est écrit en utilisant le framework C++ Qt.
 
-Qt est une API orientée objet et développée en C++, conjointement par The Qt Company et Qt Project. Qt offre des composants d'interface graphique, d'accès aux données, de connexions réseaux, de gestion des fils d'exécution, d'analyse XML, etc. Il s'agit d'un framework C++ complet pour le développement d'application cross-platform (voir : https://www.qt.io/) 
+Qt est une API orientée objet et développée en C++, conjointement par The Qt Company et le Qt Project. Qt offre des composants d'interface graphique, d'accès aux données, de connexions réseau, de gestion des fils d'exécution, d'analyse XML, etc. Il s'agit d'un framework C++ complet pour le développement d'applications cross-platform (voir : [https://www.qt.io/](https://www.qt.io/))
 
 Afin de développer un logiciel utilisant les composants Qt, il est recommandé d'utiliser l'EDI (**E**nvironnement de **D**éveloppement **I**ntégré) Qt Creator. Cet outil offre, notamment, un éditeur de formulaire "wysiwyg" pour les composants Qt Widgets.
 
-![](./img/qt-editor.png)
+![qt-editor.png](/ciel2/s2-2_mqtt/qt-editor.png)
 
-![](./img/qt-wysiwyg.png)
-
+![qt-wysiwyg.png](/ciel2/s2-2_mqtt/qt-wysiwyg.png)
 
 > Avant de commencer, il est recommandé d'utiliser un fichier RTZ dans le simulateur pour simuler une route plus "réaliste".
-> Vous pouvez télécharger une collection de fichier RTZ ici à utiliser dans le mode "Route File" de NMEA Simulator.
+> Vous pouvez télécharger une collection de [fichiers RTZ](https://saintjosephlasalle-my.sharepoint.com/:u:/g/personal/legoff_t1_stjolorient_fr/IQBEqhqZvHgpSJIdfSLxf4VDAcVEp3W7AO8DPrnH94mugXo?e=skoxt6) ici à utiliser dans le mode "Route File" de NMEA Simulator.
 
-Pour réaliser notre application nous avons choisi la version 6.8.3 (la version LTS)de Qt et le framework Qt Widgets pour construire l'interface graphique.
+Pour réaliser notre application, nous avons choisi la version 6.8.3 (la version LTS) de Qt et le framework Qt Widgets pour construire l'interface graphique.
 
-_✍️ Téléchargez le projet Qt ici. Les modifications à apporter dans la suite du TP se font dans ce projet._
+*✍️ Téléchargez [le projet Qt ici](/ciel2/s2-2_mqtt/qt-nmea-fleet-visualizer.zip). Les modifications à apporter dans la suite du TP se font dans ce projet.*
 
-_✍️ Ouvrez le projet dans l'EDI Qt Creator (suivre le guide [ici](https://doc.qt.io/qtcreator/fr/creator-project-opening.html) au besoin)._
+*✍️ Ouvrez le projet dans l'EDI Qt Creator (suivre le guide [ici](https://doc.qt.io/qtcreator/fr/creator-project-opening.html) au besoin).*
 
-_✍️ Compilez et exécutez le projet en utilisant le bouton vert en bas à gauche (cf figure suivante)._
+*✍️ Compilez et exécutez le projet en utilisant le bouton vert en bas à gauche (cf. figure suivante).*
 
-![](./img/qtcreator-build-run.webp)
+![qtcreator-build-run.webp](/ciel2/s2-2_mqtt/qtcreator-build-run.webp)
 
->Vous devriez avoir le programme lancé avec une carte à gauche et un espace vide à droite. 
+> Vous devriez avoir le programme lancé avec une carte à gauche et un espace vide à droite.
 
 ### Structure du programme et architecture Vue-Modèle
 
-> Plus d'informations sur cette architecture : https://doc.qt.io/qt-6/fr/model-view-programming.html.
+> Plus d'informations sur cette architecture : [https://doc.qt.io/qt-6/fr/model-view-programming.html](https://doc.qt.io/qt-6/fr/model-view-programming.html).
 
 ### Récupération des données auprès du broker
 
-_✍️ Avec vos connaissances de MQTT et la documentation du module MQTT de Qt, adaptez le code de la classe `MainWindow` pour connecter notre programme au broker dès le démarrage de l'application._
+*✍️ Avec vos connaissances de MQTT et la documentation du module MQTT de Qt, adaptez le code de la classe `MainWindow` pour connecter notre programme au broker dès le démarrage de l'application.*
 
-> Documentation du module MQTT de QT : https://doc.qt.io/qt-6.8/fr/qtmqtt-index.html.
+> Documentation du module MQTT de Qt : [https://doc.qt.io/qt-6.8/fr/qtmqtt-index.html](https://doc.qt.io/qt-6.8/fr/qtmqtt-index.html).
 
-Les méthodes `OnMqttConnected`, `OnMqttDisconnected` et `OnMqttMessageReceived` sont des **slots**, il s'agit de méthodes à appeller lors d'evénements particuliers.
+Les méthodes `OnMqttConnected`, `OnMqttDisconnected` et `OnMqttMessageReceived` sont des **slots**, il s'agit de méthodes à appeler lors d'événements particuliers.
 
-_✍️ En utilisant la méthode `connect(Object *sender, Func1 signal, ContextType *context, Func2 &&slot)` connecté les **slots** aux signaux correspondant du client MQTT `QMqttClient *mClient` (n'hésitez pas à vous appuyer sur la documentation du module MQTT)._
+*✍️ En utilisant la méthode `connect(Object *sender, Func1 signal, ContextType *context, Func2 &&slot)`, connectez les **slots** aux signaux correspondants du client MQTT `QMqttClient *mClient` (n'hésitez pas à vous appuyer sur la documentation du module MQTT).*
 
-Le slot `OnMqttMessageReceived` est appellé lors de la reception d'un message correspondant aux topics auquels le client est abonné.
+Le slot `OnMqttMessageReceived` est appelé lors de la réception d'un message correspondant aux topics auxquels le client est abonné.
 
-_✍️ à partir du diagramme suivant, implémenté le contenu de la méthode `OnMqttMessageReceived` pour écrire les coordonnées reçus dans le modèle `FleetModel *fleet` (via la méthode `FleetModel::addWaypoint(const QString &vesselId, double latitude, double longitude)`, sur l'instance `FleetModel *fleet` de la classe `MainWindow`).
+*✍️ À partir du diagramme suivant, implémentez le contenu de la méthode `OnMqttMessageReceived` pour écrire les coordonnées reçues dans le modèle `FleetModel *fleet` (via la méthode `FleetModel::addWaypoint(const QString &vesselId, double latitude, double longitude)`, sur l'instance `FleetModel *fleet` de la classe `MainWindow`).*
 
-[![](https://mermaid.ink/img/pako:eNpVj91OwkAQhV9lMjdeiKTUlkIvNApoYuJPwMREysXIDmVNu9ssuwoS3kefwxdzWzTqXs2Zc76Z2S3OtWBMcVHo1_mSjIX7YaYyBf6dTcefH3OurNQKSl6tKGc4BKsrOZ_B0dEJnG8bAbyycHk3vh7A6e6HPvcJuPFkHXycXkg1-2fdOtlYg-lobQ1Jw1AQFFrl0jrLwLbRZL0UDMLB1eT2ZrafMGjQ4R_0QApWVi4kKVuHn8gyubra37vnhg03mp49a7_DQMFQaanq6yfg46UWn----SIJSIgH2jT2Nz369xdsYW6kwNQaxy0s2ZRUS9zW6QztkkvOMPWl4AW5wmaYqZ3HKlKPWpc_pNEuX2K6oGLllauEP30oKTf0G2El2Ay0UxbTbtRpZmC6xTWmUdhpB90gSqLO8XEc1ObGd5N2PwjDOInCftwLkmTXwrdmadDuJT0fD6J-EMVxN0x2X8NKokM?type=png)](https://mermaid.live/edit#pako:eNpVj91OwkAQhV9lMjdeiKTUlkIvNApoYuJPwMREysXIDmVNu9ssuwoS3kefwxdzWzTqXs2Zc76Z2S3OtWBMcVHo1_mSjIX7YaYyBf6dTcefH3OurNQKSl6tKGc4BKsrOZ_B0dEJnG8bAbyycHk3vh7A6e6HPvcJuPFkHXycXkg1-2fdOtlYg-lobQ1Jw1AQFFrl0jrLwLbRZL0UDMLB1eT2ZrafMGjQ4R_0QApWVi4kKVuHn8gyubra37vnhg03mp49a7_DQMFQaanq6yfg46UWn----SIJSIgH2jT2Nz369xdsYW6kwNQaxy0s2ZRUS9zW6QztkkvOMPWl4AW5wmaYqZ3HKlKPWpc_pNEuX2K6oGLllauEP30oKTf0G2El2Ay0UxbTbtRpZmC6xTWmUdhpB90gSqLO8XEc1ObGd5N2PwjDOInCftwLkmTXwrdmadDuJT0fD6J-EMVxN0x2X8NKokM)
+[![](https://mermaid.ink/img/pako:eNpVkttOIzEMhl_F8g0XDNVMT3O4WARtd6WVgBUgIdHphbdxp1nNJKM0WQ5V32d5Dl6MTAbQkiv_9v_ZjuQ9rrVgLHBT64f1loyF23mpSgX-nS2vX1_W3FqpFTS821HFcAxWt3K9gpOTb3C-DwJ4Z-HHr-uLGZwePuhz74BLT3bG--V3qVZfSldOhtJsuXi0hqRhqAlqrSppnWBgGzTZXgoHP2-uLld9h1lA5_-hR1KwsnIjSdnO_Jssk-uift-emwdusTz7o51lAzVDq6Xqtr8Bb2-0eP3nk38lAQlxR0-h_E4vvvwFI6yMFFhY4zjChk1DncR95y7RbrnhEgsfCt6Qq22JpTp4rCV1r3XzQRrtqi0WG6p3XrlW-NXnkipDzWfWsBJsZtopi0UyCj2w2OMjFuNhMoin8TibZKM8G4_SSYRPPp0O8ng4nEzjJMmnwyw_RPgcpsaDLM3icRpncT7NklGSRshCWm0u-mMIN3F4A06BqSY?type=png)](https://mermaid.live/edit#pako:eNpVkttOIzEMhl_F8g0XDNVMT3O4WARtd6WVgBUgIdHphbdxp1nNJKM0WQ5V32d5Dl6MTAbQkiv_9v_ZjuQ9rrVgLHBT64f1loyF23mpSgX-nS2vX1_W3FqpFTS821HFcAxWt3K9gpOTb3C-DwJ4Z-HHr-uLGZwePuhz74BLT3bG--V3qVZfSldOhtJsuXi0hqRhqAlqrSppnWBgGzTZXgoHP2-uLld9h1lA5_-hR1KwsnIjSdnO_Jssk-uift-emwdusTz7o51lAzVDq6Xqtr8Bb2-0eP3nk38lAQlxR0-h_E4vvvwFI6yMFFhY4zjChk1DncR95y7RbrnhEgsfCt6Qq22JpTp4rCV1r3XzQRrtqi0WG6p3XrlW-NXnkipDzWfWsBJsZtopi0UyCj2w2OMjFuNhMoin8TibZKM8G4_SSYRPPp0O8ng4nEzjJMmnwyw_RPgcpsaDLM3icRpncT7NklGSRshCWm0u-mMIN3F4A06BqSY)
 
-
-> à ce stade vous devriez avoir un point rouge qui représente les bateaux sur la carte ainsi que le tracet en bleue.
+> À ce stade, vous devriez avoir un point rouge qui représente les bateaux sur la carte ainsi que le tracé en bleu.
 
 ### Affichage de la liste des coordonnées
 
-Sur la partie de droite, nous souhaitons afficher une liste contenant les coordonnées GPS du bateau selectionné.
+TODO
 
 ## Sécuriser la communication avec TLS
 

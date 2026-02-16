@@ -4,6 +4,8 @@ Ce TP a pour objectif de vous faire comprendre le lien entre la pile (stack) mé
 
 Une fois cette notion maîtrisée, vous pourrez exploiter la faille d'un programme que vous découvrirez à l'aide du débogueur GDB.
 
+> Le code source nécessaire pour ce TP est disponible ici : [tpstack.zip](/ciel2/s2-1_langage_c/tpstack.zip)
+
 ## Avant de commencer
 
 Ce TP ne propose pas de fichier `makefile` pour que vous preniez conscience de l'intéret de ce type d'outil et des options du compilateur GCC.
@@ -70,31 +72,42 @@ _Retirez les mots clés `volatile` de la déclaration des variables et exécutez
 
 ### 3 - Locking door failed
 
+<br>
 <center>
-  <img src="./img/locking-door-fail-sliding-door.gif" alt="locking-door-fail-sliding-door" width="130">
+  <img src="/ciel2/s2-1_langage_c/locking-door-fail-sliding-door.gif" alt="locking-door-fail-sliding-door" width="130">
 </center>
 
 > Cet exercice fait appel à l'outil GDB (**G**NU **D**e**b**ugger). Un débogueur permet (notamment) d'analyser la mémoire d'un programme.
 
 > Le programme à étudier est le suivant (binaire uniquement)
 
-**3.1** 💻 - Exécutez le programme `pwn-normal` (en CLI). _Que vous demande ce programme ?_
+**3.1** 💻 - Exécutez le programme `pwd-normal` (en CLI). _Que vous demande ce programme ?_
 
-**3.2** 💻 - Exécutez le programme `pwn-normal` à l'aide de `gdb`
+**3.2** 💻 - Exécutez le programme `pwd-normal` à l'aide de `gdb`
 
 ```shell
-gdb pwn-normal
+gdb pwd-normal
 ```
 
 Une fois dans l'outil GDB vous avez à disposition des commandes qui permettent de dérouler l'exécution du programme :
 
 ```shell
-break main # positionner un point d'arrêt lors de l'appel à la fonction main
+start # démarre le programme et s'arrete sur la procédure principale (main)
 
-next # permet d'exécuter une ligne par une ligne
+nexti # permet d'exécuter une instruction
 info locals # affiche les variables locales
 info variables # affiche toutes les variables de la stack
+
+frame # ou bt vous permez de savoir ou vous êtes dans le programme
+
+break printf # permet de positionner un breakpoint sur les appels à la fonction printf
+continue # permet d'avancer jusqu'au prochain breakpoint
+finish # permet d'executer le programme jusqu'à la sortie de la fonction courante
+info break # permet d'avoir la liste des breakpoints actif
+del 1 # permet de supprimer un breakpoint
 ```
+
+> ℹ️ Combinez `nexti` et `info locals` pour visualiser le déroulé du programme.
 
 > ℹ️ Utilisez le fichier `gdb-refcard.pdf` pour trouver les autres commandes de bases de GDB.
 
@@ -116,6 +129,9 @@ _Notez la valeur utilisée pour effectuer cette attaque._
 <br>
 
 **3.5** ✍️ - Quelle option(s) intégrée(s) au compilateur permettent d'éviter ce genre de faille ? Quelle modification de ce code permettrait d'éviter ce problème "by design".
+
+<br>
+<br>
 
 ## Crédits
 

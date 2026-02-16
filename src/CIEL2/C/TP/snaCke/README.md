@@ -1,10 +1,12 @@
 # CIEL 2 - TP allocation dynamique de la mémoire 🐍🍎
 
 Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intérêt en vous faisant programmer un jeu de Snake.
-
 <center>
-  <img src="./resources/snake.gif" alt="nokia-snake" width="280">
+  <img src="/ciel2/s2-1_langage_c/snake.gif" alt="nokia-snake" width="280">
 </center>
+
+> Le code source nécessaire pour ce TP est disponible ici : [snacke.zip](/ciel2/s2-1_langage_c/snacke.zip)
+> (partie 1 et 2 complétées : [snacke_3_4.zip](/ciel2/s2-1_langage_c/snacke_3_4.zip)).
 
 ## Avant de commencer
 
@@ -33,7 +35,7 @@ make && ./bin/Debug/snaCke
 
 ### 1 - Déplacer le serpent 🐍
 
-**1.1** 💻 - Sachant `IsKeyDown(KEY_UP)` permet de savoir quand la touche "flêche du haut" est appuyée adaptez les premières instructions de la fonction `update` pour permettre au serpent de descendre et d'aller à gauche.
+**1.1** 💻 - Sachant `IsKeyDown(KEY_UP)` permet de savoir quand la touche "flêche du haut" est appuyée, adaptez les premières instructions de la fonction `update` pour permettre au serpent de descendre et d'aller à gauche.
 
 <br>
 <br>

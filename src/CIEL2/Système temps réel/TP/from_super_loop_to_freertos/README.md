@@ -134,10 +134,10 @@ void TaskRed(void* pv) {
 }
 
 void setup(void) {
-    auto cfg = M5.config();
-    M5.begin(cfg);
+	auto cfg = M5.config();
+	M5.begin(cfg);
 
-    display = M5.Display;
+	display = M5.Display;
 
   display.begin();
   display.clear();
@@ -146,7 +146,7 @@ void setup(void) {
 }
 
 void loop(void) {
-    M5.update();
+	M5.update();
   // loop est aussi vu comme une "tâche" on peut l'ignorer pour le moment 
 }
 ```
@@ -194,9 +194,9 @@ Sur FreeRTOS il est possible de passer des arguments à une tâche pour modifier
 
 ***3.2** - Quels sont les paramètres nécessaires ? Définissez une structure de données permettant de contenir ces paramétres.*
 
-Exemple de tâche paramétrable avec FreeRTOS :
+Exemple de tâche paramétrable avec FreeRTOS : 
 
-```c++
+```cpp
 #include <Arduino.h>
 #include <M5Unified.h>
 
@@ -262,7 +262,9 @@ L'objectif de cette partie et de mettre en place une structure "producteur-conso
 
 Pour la mise en place de cette structure il est nécessaire de créer une file d'attente partagée entre la tâche `TaskColor` et la tâche `TaskDraw`.
 
-![](./img/colored-square-producer-consumer.png)
+<center>
+  <img src="/ciel2/s2-2_system_temps_reel/colored-square-producer-consumer.png" alt="nokia-snake" width="480">
+</center>
 
 ***4.1** - Avant de commencer à coder, demandez-vous quelles données vont transiter dans la file d'attente (quelle sera la structure d'un message)*
 
@@ -280,7 +282,7 @@ static void vTaskTempSensor(void *pvParameters) {
 
       xQueueSend(
         xTempQueue, 
-        &temp, 
+        temp, 
         pdMS_TO_TICKS(10)
       );
 
