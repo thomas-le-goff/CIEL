@@ -4,7 +4,7 @@
   "description": "This GitHub repository contains all the sources for the courses, TDs and TPs I teach in BTS CIEL.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx @11ty/eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -14,10 +14,6 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/thewrath/CIEL/issues"
-  },
-  "homepage": "https://github.com/thewrath/CIEL#readme",
   "dependencies": {
     "@11ty/eleventy": "^3.1.2"
   }

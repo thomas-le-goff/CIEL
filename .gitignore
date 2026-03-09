@@ -77,3 +77,6 @@ dmypy.json
 
 # Profiling
 .profnode_modules/
+
+# Ignore rendered html
+/src/*.html

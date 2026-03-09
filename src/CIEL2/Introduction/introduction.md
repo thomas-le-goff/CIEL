@@ -7,7 +7,7 @@ footer: Thomas Le Goff - 2025
 header: BTS CIEL 2ème année
 paginate: true
 marp: true
-style: |
+style: |-
   section {
     font-size: 1.6em;
   }
@@ -58,60 +58,59 @@ _BTS CIEL_
 
 ![bg right:33%](./img/cover.png)
 
----
+--------------------------------------------------------------------------------
 
 ## Thomas Le Goff
 
 <div class="image-grid">
-
-<div>
+  <div>
   <figure>
-    <img width=128 src="./img/stjo-lorient.jpg" alt="Image 1">
-    <figcaption>BTS SNIR</figcaption>
-  </figure>
+  <img width="128" src="./img/stjo-lorient.jpg" alt="Image 1">
+  <figcaption>BTS SNIR</figcaption>
+</figure>
 </div>
-
-<div>
+  <div>
   <figure>
-    <img width=128 src="./img/enssat.png" alt="Image 1">
-    <figcaption>Diplôme ingénieur IMR</figcaption>
-  </figure>
+  <img width="128" src="./img/enssat.png" alt="Image 1">
+  <figcaption>Diplôme ingénieur IMR</figcaption>
+</figure>
 </div>
-
-<div>
+  <div>
   <figure>
-    <img width=128 src="./img/azimut.svg" alt="Image 1">
-    <figcaption>Ingénieur logiciel</figcaption>
-  </figure>
+  <img width="128" src="./img/azimut.svg" alt="Image 1">
+  <figcaption>Ingénieur logiciel</figcaption>
+</figure>
 </div>
-
-<div>
+  <div>
   <figure>
-    <img width=128 src="./img/videor.png" alt="Image 1">
-    <figcaption>Lead Developer solutions SaaS et Mobile</figcaption>
-  </figure>
+  <img width="128" src="./img/videor.png" alt="Image 1">
+  <figcaption>Lead Developer solutions SaaS et Mobile</figcaption>
+</figure>
+</div>
+  <p>
+</p>
 </div>
 
-</div>
 
 
-> Pour me contacter : *legoff.t1@stjolorient.fr*
+> Pour me contacter : _legoff.t1@stjolorient.fr_
 
----
+--------------------------------------------------------------------------------
 
-## Aujourd'hui : Enseignant en informatique 
+## Aujourd'hui : Enseignant en informatique
 
 Développement et programmation :
+
 - Programmation réseaux
 - Programmation sur système embarqué
 - Développement et sécurité logicielle
 - IoT & Cloud computing
 
----
+--------------------------------------------------------------------------------
 
 ## Différence entre développement et programmation ?
 
----
+--------------------------------------------------------------------------------
 
 ## Différence entre développement et programmation ?
 
@@ -125,14 +124,14 @@ Programmation :
 - Style de programmation
 - Programmation web / réseau / système / ...
 
----
+--------------------------------------------------------------------------------
 
 ## Différence entre développement et programmation ?
 
-Développement : 
+Développement :
 
 - Génie logiciel
-- Test et qualité logicielle 
+- Test et qualité logicielle
 - Chaîne d'outils Devops
 - Industrialisation
 - Logiciel métier
@@ -140,36 +139,36 @@ Développement :
 - Besoin utilisateur
 - Produit
 
----
+--------------------------------------------------------------------------------
 
-## Demain : Développement sans programmation 🤖 ? 
+## Demain : Développement sans programmation 🤖 ?
 
 - Croissance de l'IA
 - IHM simplifiée
 - Disparition du logiciel ?
 
----
+--------------------------------------------------------------------------------
 
 # Cybersécurité ?
 
 ![bg right:60%](./img/cybersecurity.webp)
 
----
+--------------------------------------------------------------------------------
 
 ## 🔗 Connexion croissante
 
-- Les **systèmes embarqués** (capteurs, automates, objets intelligents...)  
-- **Se connectent entre eux** → **IoT (Internet of Things)**  
+- Les **systèmes embarqués** (capteurs, automates, objets intelligents...)
+- **Se connectent entre eux** → **IoT (Internet of Things)**
 
----
+--------------------------------------------------------------------------------
 
 ## ⚠️ Risques accrus
 
-- Plus d’**interconnexion**  
-- Plus de **surfaces d’attaque**  
+- Plus d'**interconnexion**
+- Plus de **surfaces d'attaque**
 - → **CyberSécurité devient critique !** 🔐
 
----
+--------------------------------------------------------------------------------
 
 # Informatique de confiance
 

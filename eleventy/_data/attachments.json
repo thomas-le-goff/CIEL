@@ -1,1 +1,31 @@
-{"CIEL2": {"C": ["c_memory.pdf-slideshow.pdf", "c_introduction.pdf-slideshow.pdf"], "Introduction": [], "Programmation temps réel": ["free_rtos_task.pdf-slideshow.pdf", "cityval.pdf-slideshow.pdf", "free_rtos_cybersecurity.pdf-slideshow.pdf", "scheduling_exercice.pdf-slideshow.pdf", "free_rtos_queue.pdf-slideshow.pdf", "free_rtos_introduction.pdf-slideshow.pdf"], "C++": ["c++_oop.pdf-slideshow.pdf", "lvgl_introduction.pdf-slideshow.pdf", "c++_raii.pdf-slideshow.pdf", "c++_introduction.pdf-slideshow.pdf"], "Cybersecurity": []}, "CIEL1": {"Python": ["python_data_structures.pdf-slideshow.pdf", "python_qt_quick_ui.pdf-slideshow.pdf", "python_oop.pdf-slideshow.pdf", "python_introduction.pdf-slideshow.pdf", "python_entrees_sorties.pdf-slideshow.pdf", "python_exceptions.pdf-slideshow.pdf", "python_venv.pdf-slideshow.pdf", "python_pip.pdf-slideshow.pdf", "python_file_management.pdf-slideshow.pdf", "python_advanced_data_structures.pdf-slideshow.pdf"]}}
+{
+  "CIEL1": {
+    "Python": [
+      "python_oop_introduction.pdf-slideshow.pdf",
+      "python_data_structures.pdf-slideshow.pdf",
+      "python_exceptions.pdf-slideshow.pdf",
+      "python_introduction.pdf-slideshow.pdf",
+      "python_file_management.pdf-slideshow.pdf",
+      "python_pip.pdf-slideshow.pdf",
+      "python_oop.pdf-slideshow.pdf"
+    ]
+  },
+  "CIEL2": {
+    "C": ["c_memory.pdf-slideshow.pdf", "c_introduction.pdf-slideshow.pdf"],
+    "Système temps réel": [
+      "free_rtos_queue.pdf-slideshow.pdf",
+      "free_rtos_task.pdf-slideshow.pdf",
+      "cityval.pdf-slideshow.pdf",
+      "free_rtos_introduction.pdf-slideshow.pdf"
+    ],
+    "C++": [
+      "lvgl_introduction.pdf-slideshow.pdf",
+      "c++_qt_introduction.pdf-slideshow.pdf",
+      "c++_raii.pdf-slideshow.pdf",
+      "c++_oop.pdf-slideshow.pdf",
+      "c++_introduction.pdf-slideshow.pdf"
+    ],
+    "Introduction": [],
+    "Cybersecurity": []
+  }
+}
