@@ -2,26 +2,36 @@
 layout: base.njk
 ---
 
-<h1>Thomas Le Goff</h1>
-<p>Cours de programmation informatique en BTS CIEL</p>
 <nav class="attachments-menu">
     {% for className, classData in attachments | dictsort %}
-        <section class="attachments-class">
-            <h3>{{ className }}</h2>
-            {% for topicName, files in classData %}
-                <div class="attachments-topic">
-                    <h4>{{ topicName }}</h3>
-                    <ul>
-                        {% for file in files %}
-                            <li>
-                                <a href="/attachments/{{ className }}/{{ topicName | url }}/{{ file }}" target="_blank" rel="noopener">
-                                    {{ file }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
-        </section>
+        {% set classMeta = metadata[className] %}
+        {% if not (classMeta and classMeta.ignore) %}
+            <section class="attachments-class">
+                <h3>{{ classMeta.title if classMeta else className }}</h3>
+                {% if classMeta and classMeta.description %}
+                    <p>{{ classMeta.description }}</p>
+                {% endif %}
+                {% for topicName, files in classData | dictsort %}
+                    {% set topicMeta = metadata[className + "/" + topicName] %}
+                    {% if not (topicMeta and topicMeta.ignore) %}
+                        <div class="attachments-topic">
+                            <h4>{{ topicMeta.title if topicMeta else topicName }}</h4>
+                            {% if topicMeta and topicMeta.description %}
+                                <p>{{ topicMeta.description }}</p>
+                            {% endif %}
+                            <ul>
+                                {% for file in files %}
+                                    <li>
+                                        <a href="/attachments/{{ className }}/{{ topicName | url }}/{{ file }}" target="_blank" rel="noopener">
+                                            {{ file }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </section>
+        {% endif %}
     {% endfor %}
 </nav>
