@@ -2,7 +2,6 @@
 title: Python - POO - BTS CIEL
 version: 1.0.0
 theme: default
-_class: invert
 footer: Thomas Le Goff - 2025
 header: Python - POO - BTS CIEL
 paginate: true
@@ -35,9 +34,7 @@ _BTS CIEL_
 - Le paradigme objet
 - La POO en Python
 - Classe et instance
-- Encapsulation
-- Héritage et polymorphisme
-- Todo: propriété dérivée (single state)
+- Diagramme de classes
 
 ![bg right:33%](./img/summary.png)
 
@@ -259,16 +256,16 @@ fichier4 = Fichier("cours_reseau", "pdf", 1048576)
 
 ### Éléments d'une classe
 
-Élément                   | Description                                     | Exemple
-------------------------- | ----------------------------------------------- | ------------------------------------------
-Attribut d'instance       | Variable propre à chaque objet                  | `self.nom = "Alice"`
-Méthode d'instance        | Fonction liée à un objet, accède à `self`       | `def afficher(self):`
-Constructeur (`__init__`) | Appelé à la création d'une instance             | `def __init__(self, nom):`
-Héritage                  | Classe qui hérite d'une autre                   | `class Fille(Parent):`
-Surcharge (override)      | Redéfinition d'une méthode héritée              | `def afficher(self):` dans une sous-classe
-Attribut de classe        | Variable partagée par toutes les instances      | `nb_instances = 0`
-Méthode de classe         | Reçoit `cls`, agit au niveau de la classe       | `@classmethod def creer(cls):`
-Méthode statique          | Méthode indépendante de l'objet et de la classe | `@staticmethod def est_pair(x):`
+Élément                       | Description                                     | Exemple
+----------------------------- | ----------------------------------------------- | ------------------------------------------
+**Attribut** d'instance       | Variable propre à chaque objet                  | `self.nom = "Alice"`
+**Méthode** d'instance        | Fonction liée à un objet, accède à `self`       | `def afficher(self):`
+**Constructeur** (`__init__`) | Appelé à la création d'une instance             | `def __init__(self, nom):`
+Héritage                      | Classe qui hérite d'une autre                   | `class Fille(Parent):`
+Surcharge (override)          | Redéfinition d'une méthode héritée              | `def afficher(self):` dans une sous-classe
+Attribut de classe            | Variable partagée par toutes les instances      | `nb_instances = 0`
+Méthode de classe             | Reçoit `cls`, agit au niveau de la classe       | `@classmethod def creer(cls):`
+Méthode statique              | Méthode indépendante de l'objet et de la classe | `@staticmethod def est_pair(x):`
 
 --------------------------------------------------------------------------------
 
@@ -298,13 +295,20 @@ class Compteur:
 
     def decrementer(self, pas: int = 1):
         pass
+
+# Création d'instances de la classe Compteur
+cpt1 = Compteur("Le compteur n°1", 0)
+cpt2 = Compteur("Le compteur n°2", 10)
+
+cpt1.incrementer()
+cpt2.decrementer()
 ```
 
 --------------------------------------------------------------------------------
 
 <style scoped="">section{font-size:20px;}</style>
 
-### Classe et instance
+## Classe et instance
 
 ### Éléments d'une classe (suite)
 
@@ -316,3 +320,37 @@ Méthodes spéciales      | Méthodes magiques : comportement intégré (`__str_
 Destructeur (`__del__`) | Appelé à la destruction de l'objet (peu courant)                     | `def __del__(self):`
 Polymorphisme           | Méthodes communes à plusieurs classes                                | `obj.afficher()` sur divers objets
 Docstring               | Documentation intégrée de la classe ou méthode                       | `"""Classe représentant un utilisateur."""`
+
+--------------------------------------------------------------------------------
+
+## Diagramme de classes
+
+Le diagramme de classes est un schéma utilisé en **génie logiciel** pour représenter les **classes** et les **interfaces** d'un système, ainsi que leurs **relations**.
+
+Cet **ensemble de règles** permet de comprendre la structure d'un programme orienté objet sans nécessairement connaître les détails propres au langage de programmation utilisé pour son développement.
+
+Il s'agit d'un outil généralement employé lors de la **phase de conception** d'un logiciel.
+
+--------------------------------------------------------------------------------
+
+## Diagramme de classes
+
+### Cycle en V
+
+![center](img/cycle_v.png)
+
+--------------------------------------------------------------------------------
+
+## Diagramme de classes
+
+### Exemple : classe Compteur
+
+![center](https://mermaid.ink/img/pako:eNp9UctOwzAQ_BVrT1SEKmkedXwtHOHCDVmqTLxtI_kROXZFqfLvOKEtOaDuxd7ZnZld-wyNlQgMGiX6_rkVeyc0NyTGhJCN1Z3H4Mj5Fx3jkfTeEWP1H_REWuPJ9ihU7J3Dn9Yqst0e0TkbWqWQm7lQaxqHGo1H97Agb9bgvCrxXnXO7UTPxhHua_zXNXADCexdK4F5FzABjU6LMYVpZw7-EAU4sHiVuBNBeQ7cDJHWCfNhrb4y44r7A7CdUH3MQieFx8ub3lARvH0_meYGRA1gZ_gCVtJlUZZ5VdRZtcrrIoETsKJepmlKVzWlGc2yOh8S-J480yXNKxrxNF9naZ2vy6vni2y9dTcHnNLXy0ePRxwVjUS3scH4aFyVww8C45-J?type=png)
+
+--------------------------------------------------------------------------------
+
+## Diagramme de classes
+
+### Exemple : classe Bot
+
+![center](https://mermaid.ink/img/pako:eNqNk0FvozAQhf8KmhOrTSMoSQo-pltpL9vD9lCpQkIOHohVY0dm3ISN8t9rSNOmQm3WF5hv3puHLbOH0ggEBqXibftL8tryJteBXwMJloaC_RH06yqolOEU7MaoGyMhLZYkjR632g2iGOOG74ovWqjR1j7ko_MzsE6HP4J7o_GcVsZuuRWhkC1xXSI7ThgLV7x8vqwiZ3WhsKKQ61pd0FlZry8JK38s4cZs0X4paUv-sbPzhtFF39MoCmtWhkJ8QU0seDjCvz2769F4preuJRVbrtTJ9VvSoy-_N3zK8Y7_yFh1xcophee2Zbcc0Mh5yDVMoLZSACPrcAIN2ob3JQxXLwdaY4M5MP8qsOJOUQ65PnjbhusnY5qT0xpXr4FVXLW-chvBCd9u9UnCHZmHTpfvKj8C2B52wObpdDafJ4tZFi-uk2w2gQ7YLJtGUZReZ2kap3GcJYcJ_Bsio2maLFLPo-QmjrLkZn6KvBOSjH1PwKH88_an9Q__pagF2lvjNPngwyvY2haM?type=png)
