@@ -23,7 +23,7 @@ class AirportDepartureDelay:
     
     def __repr__(self):
         # Question 1
-        return f'En {self.from_month}/{self.from_year} {self.airport} a opéré {0} vols et cumulé {0} minutes de retard.'
+        return f'Du {self.from_month}/{self.from_year} au {self.to_month}/{self.to_year}, {self.airport} a opéré {0} vols et cumulé {0} minutes de retard.'
 
     def __lt__(self, other):
         # Question 4
