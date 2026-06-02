@@ -11,7 +11,7 @@ layout: base.njk
                 {% if classMeta and classMeta.description %}
                     <p>{{ classMeta.description }}</p>
                 {% endif %}
-                {% for topicName, files in classData | dictsort %}
+                {% for topicName, documentTypes in classData | dictsort %}
                     {% set topicMeta = metadata[className + "/" + topicName] %}
                     {% if not (topicMeta and topicMeta.ignore) %}
                         <div class="attachments-topic">
@@ -19,15 +19,21 @@ layout: base.njk
                             {% if topicMeta and topicMeta.description %}
                                 <p>{{ topicMeta.description }}</p>
                             {% endif %}
-                            <ul>
-                                {% for file in files %}
-                                    <li>
-                                        <a href="/attachments/{{ className }}/{{ topicName | url }}/{{ file }}" target="_blank" rel="noopener">
-                                            {{ file }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                            {% for documentType, files in documentTypes %}
+                                <h5>{{ documentType }}</h4>
+                                <ul>
+                                    {% for file in files %}
+                                        <li>
+                                            <a
+                                                href="/attachments/{{ className }}/{{ topicName }}/{{ documentType | url }}/{{ file }}"
+                                                target="_blank"
+                                                rel="noopener">
+                                                {{ file }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
                         </div>
                     {% endif %}
                 {% endfor %}

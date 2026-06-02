@@ -1,0 +1,262 @@
+\documentclass[11pt,a4paper]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,main=french]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{margin=2cm}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  showstringspaces=false,
+  tabsize=2
+}
+
+\firstpageheader{BTS CIEL1}{Python}{Date : 02/12/2025}
+\runningheader{Python}{}{Page \thepage/\numpages}
+
+\begin{document}
+
+\begin{center}
+  \Large\textbf{Algorithmes et structures de données en Python}\\[0.5em]
+  \normalsize Durée : 1h \\
+  \vspace{1em}
+  \textbf{Nom :} \rule{6cm}{0.4pt} \hfill
+  \textbf{Prénom :} \rule{6cm}{0.4pt}\\[1em]
+\end{center}
+
+\vspace{1em}
+
+\section*{Exercice 1 — QCM (10 questions)}
+
+Cochez la bonne réponse pour chaque question. \textbf{Une seule} réponse correcte par question.
+
+\begin{questions}
+
+\question[1] Python est un langage :
+\begin{checkboxes}
+  \choice Seulement dédié au web
+  \choice Interprété et polyvalent (GPL)
+  \choice Réservé aux data scientists
+  \choice Basé sur une compilation stricte
+\end{checkboxes}
+
+\question[1] Quelle structure permet de stocker une séquence modifiable d'éléments ?
+\begin{checkboxes}
+  \choice Tuple
+  \choice Dictionnaire
+  \choice Liste
+  \choice String
+\end{checkboxes}
+
+\question[1] Que signifie « immuable » pour un tuple ?
+\begin{checkboxes}
+  \choice Les éléments ne peuvent pas être modifiés après la création
+  \choice On ne peut jamais accéder aux éléments
+  \choice Les éléments doivent être de même type
+  \choice Il ne peut pas contenir plus de 3 éléments
+\end{checkboxes}
+
+\question[1] Dans un dictionnaire Python, l’accès à une valeur se fait via :
+\begin{checkboxes}
+  \choice Un indice entier
+  \choice Une clé unique
+  \choice Une position aléatoire
+  \choice Une étiquette numérique
+\end{checkboxes}
+
+\question[1] L’instruction \texttt{in} dans un dictionnaire vérifie :
+\begin{checkboxes}
+  \choice L’existence d’une valeur
+  \choice L’existence d’une clé
+  \choice Le type du dictionnaire
+  \choice Le nombre d’éléments
+\end{checkboxes}
+
+\question[1] Quelle structure ne permet \textbf{pas} les doublons ?
+\begin{checkboxes}
+  \choice Liste
+  \choice String
+  \choice Ensemble (set)
+  \choice Tuple
+\end{checkboxes}
+
+\question[1] En Python, la fonction qui permet d’obtenir une entrée utilisateur est :
+\begin{checkboxes}
+  \choice \texttt{scanf()}
+  \choice \texttt{read()}
+  \choice \texttt{input()}
+  \choice \texttt{enter()}
+\end{checkboxes}
+
+\newpage
+
+\question[1] La borne supérieure de \texttt{range(a, b)} est :
+\begin{checkboxes}
+  \choice Incluse
+  \choice Toujours 0
+  \choice Exclue
+  \choice Dépend de l’indentation
+\end{checkboxes}
+
+\question[1] On veut tester la présence d’un élément rapidement. Quel type est le plus adapté ?
+\begin{checkboxes}
+  \choice Liste
+  \choice Tuple
+  \choice Set
+  \choice String
+\end{checkboxes}
+
+\question[1] Quel type de structure est le plus adapté pour stocker et modifier les informations d’un étudiant (nom, prénom, âge, formation) ?
+\begin{checkboxes}
+  \choice Tuple
+  \choice Liste
+  \choice Dictionnaire
+  \choice Ensemble
+\end{checkboxes}
+
+\end{questions}
+
+\section*{Exercice 2 — Programme Python à trous}
+
+\begin {questions}
+
+\question[2] Complétez le programme Python (Micro:bit) ci-dessous :
+
+\begin{lstlisting}[language=Python]
+from microbit import *
+
+import ________
+
+MAX = ________
+
+number_to_guess = random.________(1, MAX)
+answer = 0
+
+display.________()
+
+while True:
+    display.show(question_mark_image)
+            
+    if ________.is_pressed():
+        answer = (answer + 1) % (MAX + 1)
+        display.scroll(answer, delay=50, wait=True)
+
+    if ________.was_pressed():
+        if answer > number_to_guess:
+            display.show(Image.SAD)
+            display.show(Image.LESS)
+            answer = 0
+        if answer < number_to_guess:
+            display.show(Image.SAD)
+            display.show(Image.PLUS)
+        else:
+            display.show(Image.HAPPY)
+            answer = 0
+        sleep(_______)
+
+\end{lstlisting}
+
+\question[0.5] Expliquez l'instruction suivante : \verb|(answer + 1) % (MAX + 1)|
+
+\end {questions}
+
+\newpage
+
+\section*{Exercice 3 — Traduction de C vers Python}
+
+\begin{questions}
+\question On donne le programme C suivant :
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int e = 0;
+    int nbOcc = 0;
+    int posOcc = -1;
+
+    int n = -1;
+    int tab[100] = {0};
+
+    for (int i = 0; i < n; i++) scanf("%d", &tab[i]);
+
+    printf("Quel element souhaitez-vous rechercher :");
+    scanf("%d", &e);
+
+    for (int i = 0; i < n; i++) {
+        if (tab[i] == e) {
+            nbOcc++;
+            posOcc = i;
+        }
+    }
+
+    printf("Nombre d'occurences : %d, position : %d \n", nbOcc, posOcc);
+}
+\end{lstlisting}
+
+\begin{parts}
+  \part[0.5] Expliquez en quelques mots ce que fait ce programme.
+  \vspace{3cm}
+
+  \part[2] Transcrivez ce programme en langage \textbf{Python} ci-dessous :
+
+  \vspace{0.5cm}
+  \begin{solutionbox}{8cm}
+  \end{solutionbox}
+\end{parts}
+\end{questions}
+
+\newpage
+
+\section*{Exercice 4 — Programme Micro:bit}
+
+La carte \textbf{micro:bit} possède une \textbf{matrice de 25 LED} (5 colonnes × 5 lignes).  
+
+Chaque LED est identifiée par ses coordonnées :
+
+\begin{itemize}
+    \item \texttt{x} : numéro de la colonne (0 à 4)
+    \item \texttt{y} : numéro de la ligne (0 à 4)
+\end{itemize}
+
+Pour lire ou modifier l'état d'une LED, on peut utiliser :
+
+\begin{itemize}
+    \item \verb|display.get_pixel(x, y)| : renvoie l'état actuel (0 = éteinte, 9 = allumée)
+    \item \verb|display.set_pixel(x, y, valeur)| : modifie l'état
+\end{itemize}
+
+\begin{questions}
+
+\question[5] \textbf{Ecrivez un programme Python qui :}
+\begin{itemize}
+    \item parcourt les \textbf{25 LED} de la matrice (de gauche à droite et de haut en bas),
+    \item inverse l'état de chaque LED :
+    \begin{itemize}
+        \item si elle est éteinte → elle s'allume,
+        \item si elle est allumée → elle s'éteint,
+    \end{itemize}
+    \item passe ensuite à la LED suivante,
+    \item recommence indéfiniment pour former une animation de serpentin.
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent\textbf{Votre programme Python :}
+
+\begin{solutionbox}{15cm}
+\end{solutionbox}
+
+\end{questions}
+
+
+\end{document}

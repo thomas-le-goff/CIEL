@@ -1,0 +1,263 @@
+\documentclass[11pt,a4paper]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english,main=french]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{margin=2cm}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  columns=fullflexible,
+  keepspaces=true,
+  frame=single,
+  showstringspaces=false,
+  tabsize=2
+}
+
+\firstpageheader{BTS CIEL1}{Python}{Date : 02/12/2025}
+\runningheader{Python}{}{Page \thepage/\numpages}
+
+\begin{document}
+
+\begin{center}
+  \Large\textbf{Algorithmes et structures de données en Python}\\[0.5em]
+  \normalsize Durée : 1h \\
+  \vspace{1em}
+  \textbf{Nom :} \rule{6cm}{0.4pt} \hfill
+  \textbf{Prénom :} \rule{6cm}{0.4pt}\\[1em]
+\end{center}
+
+\vspace{1em}
+
+\section*{Exercice 1 — QCM (10 questions)}
+
+Cochez la bonne réponse pour chaque question. \textbf{Une seule} réponse correcte par question.
+
+\begin{questions}
+
+\question[1] Quel type de langage est Python ?
+\begin{checkboxes}
+  \choice Un langage compilé
+  \choice Un langage interprété
+  \choice Un langage matériel
+  \choice Un langage dépendant du système
+\end{checkboxes}
+
+\question[1] Dans une liste Python, que permet \texttt{append()} ?
+\begin{checkboxes}
+  \choice Trier la liste
+  \choice Supprimer un élément
+  \choice Ajouter un élément à la fin
+  \choice Copier la liste
+\end{checkboxes}
+
+\question[1] Une liste se différencie d'un tuple car :
+\begin{checkboxes}
+  \choice Elle est immuable
+  \choice Elle peut être modifiée
+  \choice Elle contient un seul type d’élément
+  \choice Elle ne peut pas être parcourue en boucle
+\end{checkboxes}
+
+\question[1] Dans un dictionnaire, la condition \texttt{"nom" in d} vérifie :
+\begin{checkboxes}
+  \choice Si la valeur existe
+  \choice Si la clé existe
+  \choice Si le dictionnaire est vide
+  \choice Si la longueur du dictionnaire est supérieure à 1
+\end{checkboxes}
+
+\question[1] Qu’est-ce qu’un élément d’un ensemble (set) ?
+\begin{checkboxes}
+  \choice Un élément identifié par un indice
+  \choice Un élément qui peut être dupliqué
+  \choice Un élément unique, sans ordre particulier
+  \choice Une paire clé-valeur
+\end{checkboxes}
+
+\question[1] Quelle valeur est considérée comme \texttt{False} en Python ?
+\begin{checkboxes}
+  \choice 10
+  \choice \texttt{''} (chaîne vide)
+  \choice \texttt{"Hello"}
+  \choice 3.14
+\end{checkboxes}
+
+\question[1] La boucle \texttt{for} en Python permet :
+\begin{checkboxes}
+  \choice D’exécuter un code tant qu’une condition est vraie
+  \choice De parcourir les éléments d’un objet itérable
+  \choice De définir une fonction
+  \choice De gérer les erreurs
+\end{checkboxes}
+\newpage
+
+\question[1] La fonction \texttt{range(2, 7)} génère :
+\begin{checkboxes}
+  \choice 2, 3, 4, 5, 6
+  \choice 2, 3, 4, 5, 6, 7
+  \choice 3, 4, 5, 6, 7
+  \choice 2, 7
+\end{checkboxes}
+
+\question[1] Parmi les opérations ci-dessous, laquelle modifie une liste en place ?
+\begin{checkboxes}
+  \choice \texttt{sorted(lst)}
+  \choice \texttt{lst.copy()}
+  \choice \texttt{lst.sort()}
+  \choice \texttt{lst + lst}
+\end{checkboxes}
+
+\question[1] Laquelle de ces structures est la plus adaptée pour associer un prix à chaque produit ?
+\begin{checkboxes}
+  \choice Liste
+  \choice Tuple
+  \choice Ensemble
+  \choice Dictionnaire
+\end{checkboxes}
+
+\end{questions}
+
+\section*{Exercice 2 — Programme Python à trous}
+
+\begin {questions}
+
+\question[2] Complétez le programme Python (Micro:bit) ci-dessous :
+
+\begin{lstlisting}[language=Python]
+from microbit import *
+
+import ________
+
+MAX = ________
+
+number_to_guess = random.________(1, MAX)
+answer = 0
+
+display.________()
+
+while True:
+    display.show(question_mark_image)
+            
+    if ________.is_pressed():
+        answer = (answer + 1) % (MAX + 1)
+        display.scroll(answer, delay=50, wait=True)
+
+    if ________.was_pressed():
+        if answer > number_to_guess:
+            display.show(Image.SAD)
+            display.show(Image.LESS)
+            answer = 0
+        if answer < number_to_guess:
+            display.show(Image.SAD)
+            display.show(Image.PLUS)
+        else:
+            display.show(Image.HAPPY)
+            answer = 0
+        sleep(_______)
+
+\end{lstlisting}
+
+\question[0.5] Expliquez l'instruction suivante : \verb|(answer + 1) % (MAX + 1)|
+
+\end {questions}
+
+\newpage
+
+\section*{Exercice 3 — Traduction de C vers Python}
+
+\begin{questions}
+\question On donne le programme C suivant :
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main(int argc, char const *argv[]) {
+  int e = 0;
+  int nbOcc = 0;
+  int posOcc = -1;
+  int n = -1;
+  int tab[100] = {0};
+
+  printf("Combien d'elements souhaitez-vous saisir :");
+  scanf("%d", &n);
+
+  for (int i = 0; i < n; i++) scanf("%d", &tab[i]);
+
+  printf("Quel element souhaitez-vous rechercher :");
+  scanf("%d", &e);
+
+  for (int i = 0; i < n; i++) {
+      if (tab[i] == e) {
+          nbOcc++;
+          posOcc = i;
+      }
+  }
+  printf("Nombre d'occurences : %d, position : %d \n", nbOcc, posOcc);
+}
+\end{lstlisting}
+
+\begin{parts}
+  \part[0.5] Expliquez en quelques mots ce que fait ce programme.
+  \vspace{3cm}
+
+  \part[2] Transcrivez ce programme en langage \textbf{Python} ci-dessous :
+
+  \vspace{0.5cm}
+  \begin{solutionbox}{8cm}
+  \end{solutionbox}
+\end{parts}
+\end{questions}
+
+\newpage
+
+\section*{Exercice 4 — Programme Micro:bit}
+
+La carte \textbf{micro:bit} possède une \textbf{matrice de 25 LED} (5 colonnes × 5 lignes).  
+
+Chaque LED est identifiée par ses coordonnées :
+
+\begin{itemize}
+    \item \texttt{x} : numéro de la colonne (0 à 4)
+    \item \texttt{y} : numéro de la ligne (0 à 4)
+\end{itemize}
+
+Pour lire ou modifier l'état d'une LED, on peut utiliser :
+
+\begin{itemize}
+    \item \verb|display.get_pixel(x, y)| : renvoie l'état actuel (0 = éteinte, 9 = allumée)
+    \item \verb|display.set_pixel(x, y, valeur)| : modifie l'état
+\end{itemize}
+
+\begin{questions}
+
+\question[5] \textbf{Ecrivez un programme Python qui :}
+\begin{itemize}
+    \item génère une liste de nombres aléatoires (entre 0 et 4 inclus),
+    \item dessine sur la matrice de LED une colonne:
+    \begin{itemize}
+        \item l'indice dans liste correspond à position de la colonne (la coordonée x),
+        \item la valeur dans la liste correspond à la hauteur de la colonne (la coordonée y)
+    \end{itemize}
+    \item lors de l'appuie sur le bouton A :
+    \begin{itemize}
+      \item efface l'écran et re-génére la liste.
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\noindent\textbf{Votre programme Python :}
+
+\begin{solutionbox}{15cm}
+\end{solutionbox}
+
+\end{questions}
+
+
+\end{document}
