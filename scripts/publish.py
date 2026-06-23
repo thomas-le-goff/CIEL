@@ -1,3 +1,7 @@
+# Local Variables:
+# compile-command: "python publish.py ../eleventy/"
+# End:
+
 import argparse
 import json
 import os
@@ -151,21 +155,19 @@ class PandocNodeHandler(AbstractNodeHandler):
         destination_dir: Path = file_dst_path.parent.resolve()
         workdir: Path = file_src_path.parent.resolve()
 
-        print(workdir)
-        print(destination_dir)
         _ = subprocess.run(
             [
                 "podman",
                 "run",
-                "--rm",
                 "--userns=keep-id",
+                "--rm",
                 "-v",
                 f"{workdir}:/data:Z",
                 "-v",
                 f"{destination_dir}:/out:Z",
-                "-u",
+                "--user",
                 f"{os.getuid()}:{os.getgid()}",
-                "docker.io/pandoc/extra",
+                "localhost/pandoc-extra-font:latest",
                 file_src_path.name,
                 "-o",
                 f"/out/{publish_file_path.name}",

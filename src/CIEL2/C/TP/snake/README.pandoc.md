@@ -1,3 +1,8 @@
+---
+mainfont: "Source Sans 3"
+mainfontfallback: "Noto Color Emoji"
+---
+
 # CIEL 2 - TP allocation dynamique de la mémoire 🐍🍎
 
 Ce TP a pour objectif de vous faire comprendre la notion d'allocation dynamique et son intérêt en vous faisant programmer un jeu de Snake.
